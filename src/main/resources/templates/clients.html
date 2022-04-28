@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Client</title>
+</head>
+<body>
+<h1>Page Client</h1>
+<table>
+    <thead>
+    <th>Nom de famille</th>
+    <th>Prenom</th>
+    <th>Rue</th>
+    <th>Ville</th>
+    <th>Code Postal</th>
+    <th>Numero de telephone</th>
+    <th>Date d'inscription</th>
+    </thead>
+    <tbody>
+    <th:block th:each="client, stat : ${clients}">
+        <tr>
+            <td th:text="${client.getNom()}">Lac</td>
+            <td th:text="${client.getPrenom()}">Lina</td>
+            <td th:text="${client.getRue()}">Lac</td>
+            <td th:text="${client.getVille()}">Lina</td>
+            <td th:text="${client.getCodePostal()}">Lac</td>
+            <td th:text="${client.getNumeroTelephone()}">Lina</td>
+            <td th:text="${client.getDateInscription()}">Lac</td>
+        </tr>
+    </th:block>
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${pageTitle}">Title</title>
+</head>
+<body>
+<h1 th:text="${h1Text}">Page index</h1>
+<ul>
+    <li><a th:href="@{'/clients'}">Clients</a></li>
+    <li><a th:href="@{'/livres'}">Livres</a></li>
+    <li><a th:href="@{'/clientcreate'}">Enregistrer client</a></li>
+    <li><a th:href="@{'/livrecreate'}">Enregistrer livre</a></li>
+    <li><a th:href="@{'/empruntcreate'}">Faire un emprunt</a></li>
+</ul>
+</body>
+</html>
