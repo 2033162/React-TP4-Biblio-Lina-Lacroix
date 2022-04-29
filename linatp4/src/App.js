@@ -1,5 +1,7 @@
+import {useState, useEffect} from 'react'
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
 import './App.css';
-import {useState} from "react";
 import Header from "./components/Header";
 import Clients from "./components/client/Clients";
 import AddClient from "./components/client/AddClient";
@@ -9,88 +11,71 @@ import AddDocument from "./components/document/AddDocument";
 function App() {
 
     const [showAddClient, setShowAddClient] = useState(false)
-
-    const [clients, setClients] = useState(
-      [
-        {
-          id: 1,
-          nom: "John",
-          prenom: "Smith",
-          rue: "Daragon",
-          ville: "Montreal",
-          codePostal: "H05C42",
-          numeroTelephone: "514-900-5698",
-          dateInscription: "2022/02/20",
-        },
-        {
-          id: 2,
-          nom: "Marvin",
-          prenom: "Stewart",
-          rue: "LaSale",
-          ville: "Montreal",
-          codePostal: "H05C53",
-          numeroTelephone: "514-900-7643",
-          dateInscription: "2022/02/22",
-        }
-      ]
-    )
-
-    const addClient = (client) => {
-        const id = Math.floor(Math.random() * 10000) + 1
-        const newClient = {id, ...client}
-        setClients([...clients, newClient])
+    const [clients, setClients] = useState([])
+    const fetchClients = async () => {
+        const res = await fetch('http://localhost:8080/clients')
+        const data = await res.json()
+        return data
     }
-
-    const deleteClient = (id) => {
-        setClients(clients.filter((client) => client.id !== id))
+    const addClient = async (client) => {
+        const res = await fetch('http://localhost:8080/clients',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify(client)
+            })
+            const data = await res.json()
+            setClients([...clients, data])
+    }
+    const deleteClient = async (id) => {
+        await fetch(`http://localhost:8080/clients/${id}`,
+            {
+                method: 'DELETE'
+            })
+            setClients(clients.filter((client) => client.id !== id))
     }
 
     const [showAddDocument, setShowAddDocument] = useState(false)
+    const [documents, setDocuments] = useState([])
+    const fetchDocuments = async () => {
+        const res = await fetch('http://localhost:8080/documents')
+        const data = await res.json()
+        return data
+    }
+    const addDocument = async (document) => {
+        const res = await fetch('http://localhost:8080/documents',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify(document)
+            })
+        const data = await res.json()
+        setDocuments([...documents, data])
+    }
+    const deleteDocument = async (id) => {
+        await fetch(`http://localhost:8080/documents/${id}`,
+            {
+                method: 'DELETE'
+            })
+            setDocuments(documents.filter((document) => document.id !== id))
+    }
 
-    const [documents, setDocuments] = useState(
-      [
-        {
-          id: 1,
-          etatDocument: "DISPONIBLE",
-          genreDocument: "CD",
-          titre: "harry potter",
-          auteur: "JK. Rolling",
-          editeur: "maison edition",
-          anneePublication: "2000",
-          nbrExemplaire: "3",
-        },
-        {
-          id: 2,
-          etatDocument: "ENDOMMAGE",
-          genreDocument: "DVD",
-          titre: "bobby bob",
-          auteur: "lilo lee",
-          editeur: "edition bop",
-          anneePublication: "2018",
-          nbrExemplaire: "5",
-        },
-        {
-          id: 3,
-          etatDocument: "EMPRUNTE",
-          genreDocument: "livre",
-          titre: "avengers",
-          auteur: "Josh whedon",
-          editeur: "marvel",
-          anneePublication: "2020",
-          nbrExemplaire: "2",
+    useEffect(() => {
+        const getClients = async () => {
+            const clientsFromServer = await fetchClients()
+            setClients(clientsFromServer)
         }
-      ]
-    )
-
-    const addDocument = (document) => {
-        const id = Math.floor(Math.random() * 10000) + 1
-        const newDocument = {id, ...document}
-        setDocuments([...documents, newDocument])
-    }
-
-    const deleteDocument = (id) => {
-        setDocuments(documents.filter((document) => document.id !== id))
-    }
+        const getDocuments = async () => {
+            const documentsFromServer = await fetchDocuments()
+            setDocuments(documentsFromServer)
+        }
+        getClients()
+        getDocuments()
+    }, [])
 
     return (
         <div className='container'>
@@ -98,20 +83,28 @@ function App() {
                     onAdd={() =>
                         setShowAddClient(!showAddClient)}
                     showAdd={showAddClient}/>
-            {showAddClient && <AddClient onAdd={addClient} />}
-            {clients.length > 0 ?
-                <Clients clients={clients}
-                         onDelete={deleteClient}/>
-                : 'No Clients'}
+            <Route path='/' exact render={(props) => (
+                <>
+                    {showAddClient && <AddClient onAdd={addClient} />}
+                    {clients.length > 0 ?
+                        <Clients clients={clients}
+                                 onDelete={deleteClient}/>
+                        : 'No Clients'}
+                </>
+            )} />
             <Header title='Document'
                     onAdd={() =>
                         setShowAddDocument(!showAddDocument)}
                     showAdd={showAddDocument}/>
-            {showAddDocument && <AddDocument onAdd={addDocument} />}
-            {documents.length > 0 ?
-                <Documents documents={documents}
-                           onDelete={deleteDocument} />
-                : 'No Documents'}
+            <Route path='/' exact render={(props) => (
+                <>
+                    {showAddDocument && <AddDocument onAdd={addDocument} />}
+                    {documents.length > 0 ?
+                        <Documents documents={documents}
+                                   onDelete={deleteDocument} />
+                        : 'No Documents'}
+                </>
+            )} />
         </div>
     );
 }
