@@ -3,6 +3,8 @@ import {useState} from "react";
 import Header from "./components/Header";
 import Clients from "./components/client/Clients";
 import AddClient from "./components/client/AddClient";
+import Documents from "./components/document/Documents";
+import AddDocument from "./components/document/AddDocument";
 
 function App() {
 
@@ -43,7 +45,9 @@ function App() {
         setClients(clients.filter((client) => client.id !== id))
     }
 
-  const [documents, setDocuments] = useState(
+    const [showAddDocument, setShowAddDocument] = useState(false)
+
+    const [documents, setDocuments] = useState(
       [
         {
           id: 1,
@@ -76,7 +80,17 @@ function App() {
           nbrExemplaire: "2",
         }
       ]
-  )
+    )
+
+    const addDocument = (document) => {
+        const id = Math.floor(Math.random() * 10000) + 1
+        const newDocument = {id, ...document}
+        setDocuments([...documents, newDocument])
+    }
+
+    const deleteDocument = (id) => {
+        setDocuments(documents.filter((document) => document.id !== id))
+    }
 
     return (
         <div className='container'>
@@ -89,6 +103,15 @@ function App() {
                 <Clients clients={clients}
                          onDelete={deleteClient}/>
                 : 'No Clients'}
+            <Header title='Document'
+                    onAdd={() =>
+                        setShowAddDocument(!showAddDocument)}
+                    showAdd={showAddDocument}/>
+            {showAddDocument && <AddDocument onAdd={addDocument} />}
+            {documents.length > 0 ?
+                <Documents documents={documents}
+                           onDelete={deleteDocument} />
+                : 'No Documents'}
         </div>
     );
 }
