@@ -1,9 +1,14 @@
-import logo from './logo.svg';
 import './App.css';
+import {useState} from "react";
+import Header from "./components/Header";
+import Clients from "./components/client/Clients";
+import AddClient from "./components/client/AddClient";
 
 function App() {
 
-  const [clients, setClients] = useState(
+    const [showAddClient, setShowAddClient] = useState(false)
+
+    const [clients, setClients] = useState(
       [
         {
           id: 1,
@@ -26,7 +31,17 @@ function App() {
           dateInscription: "2022/02/22",
         }
       ]
-  )
+    )
+
+    const addClient = (client) => {
+        const id = Math.floor(Math.random() * 10000) + 1
+        const newClient = {id, ...client}
+        setClients([...clients, newClient])
+    }
+
+    const deleteClient = (id) => {
+        setClients(clients.filter((client) => client.id !== id))
+    }
 
   const [documents, setDocuments] = useState(
       [
@@ -63,24 +78,19 @@ function App() {
       ]
   )
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <div className='container'>
+            <Header title='Client'
+                    onAdd={() =>
+                        setShowAddClient(!showAddClient)}
+                    showAdd={showAddClient}/>
+            {showAddClient && <AddClient onAdd={addClient} />}
+            {clients.length > 0 ?
+                <Clients clients={clients}
+                         onDelete={deleteClient}/>
+                : 'No Clients'}
+        </div>
+    );
 }
 
 export default App;
