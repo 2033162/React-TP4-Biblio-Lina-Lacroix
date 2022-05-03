@@ -2,8 +2,8 @@
   "clients": [
     {
       "id": 1,
-      "nom": "John",
-      "prenom": "Smith",
+      "nom": "Smith",
+      "prenom": "John",
       "rue": "Daragon",
       "ville": "Montreal",
       "codePostal": "H05C42",
@@ -12,8 +12,8 @@
     },
     {
       "id": 2,
-      "nom": "Marvin",
-      "prenom": "Stewart",
+      "nom": "Stewart",
+      "prenom": "Marvin",
       "rue": "LaSale",
       "ville": "Montreal",
       "codePostal": "H05C53",

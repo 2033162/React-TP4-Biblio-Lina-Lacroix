@@ -12,7 +12,15 @@ const AddClient = ({onAdd}) => {
     const onSubmit = (e) => {
         e.preventDefault()
 
-        if (!nom) {
+        if (
+            !nom &&
+            !prenom &&
+            !rue &&
+            !ville &&
+            !codePostal &&
+            !numeroTelephone &&
+            !dateInscription
+        ) {
             alert('Please add client')
             return
         }
@@ -75,7 +83,7 @@ const AddClient = ({onAdd}) => {
             </div>
             <div className='form-control'>
                 <label>Date de l'inscription</label>
-                <input type='text' placeholder='Date inscription'
+                <input type='text' placeholder='Date inscription aaaa/mm/jj'
                        value={dateInscription}
                        onChange={(e) => setDateInscription(e.target.value)}/>
             </div>

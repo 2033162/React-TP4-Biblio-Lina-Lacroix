@@ -5,11 +5,11 @@ import Button from './Button'
 const Header2 = ({title, onAdd, showAdd}) => {
 
     return (
-        <header2 className='header2'>
+        <header className='header2'>
             <h1>{title}</h1>
             <Button color={showAdd ? 'red' : 'green'}
                     text={showAdd ? 'Close' : 'Add'} onClick={onAdd}/>
-        </header2>
+        </header>
     )
 }
 

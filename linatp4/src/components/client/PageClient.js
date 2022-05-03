@@ -6,7 +6,26 @@ import Header2 from "../Header2";
 const PageClient = () => {
 
     const [showAddClient, setShowAddClient] = useState(false)
-    const [clients, setClients] = useState([])
+    const [clients, setClients] = useState([{
+        id: 1,
+        nom: "Smith",
+        prenom: "John",
+        rue: "5417 Daragon",
+        ville: "Montreal",
+        codePostal: "H05C42",
+        numeroTelephone: "514-900-5698",
+        dateInscription: "2022/02/20",
+    },
+        {
+            id: 2,
+            nom: "Stewart",
+            prenom: "Marvin",
+            rue: "7251 LaSale",
+            ville: "Montreal",
+            codePostal: "H05C53",
+            numeroTelephone: "514-900-7643",
+            dateInscription: "2022/02/22",
+        }])
 
     const addClient = (client) => {
         const id = Math.floor(Math.random() * 10000) + 1
