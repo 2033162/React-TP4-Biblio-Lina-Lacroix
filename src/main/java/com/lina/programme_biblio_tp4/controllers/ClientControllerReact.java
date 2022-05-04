@@ -1,7 +1,6 @@
 package com.lina.programme_biblio_tp4.controllers;
 
 import com.lina.programme_biblio_tp4.forms.ClientForm;
-import com.lina.programme_biblio_tp4.repository.ClientRepository;
 import com.lina.programme_biblio_tp4.service.ServiceClient;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,7 +16,6 @@ import java.util.List;
 public class ClientControllerReact {
 
     private ServiceClient serviceClient;
-    private ClientRepository clientRepository;
 
     @GetMapping
     public List<ClientForm> getAllClients() {
@@ -31,12 +29,13 @@ public class ClientControllerReact {
 
     @PostMapping
     public ResponseEntity<ClientForm> addClient(@RequestBody ClientForm clientForm) {
-        return new ResponseEntity<>(serviceClient.saveClient(clientForm.toClient()).toClientForm(), HttpStatus.CREATED);
+        return new ResponseEntity<>(serviceClient.saveClient(clientForm.toClient()).toClientForm(),
+                HttpStatus.CREATED);
     }
 
     @PatchMapping("/{id}")
     public ClientForm updateClient(@PathVariable long id, @RequestBody ClientForm clientFormDetail) {
-        ClientForm client = clientRepository.getById(id).toClientForm();
+        ClientForm client = serviceClient.getClient(id).orElseThrow(RuntimeException::new).toClientForm();
 
         client.setNom(clientFormDetail.getNom());
         client.setPrenom(clientFormDetail.getPrenom());
@@ -46,13 +45,12 @@ public class ClientControllerReact {
         client.setNumeroTelephone(clientFormDetail.getNumeroTelephone());
         client.setDateInscription(clientFormDetail.getDateInscription());
 
-        return clientRepository.save(client.toClient()).toClientForm();
+        return serviceClient.saveClient(client.toClient()).toClientForm();
     }
 
     @DeleteMapping("/{id}")
     public void deleteClient(@PathVariable long id) {
-        ClientForm client = clientRepository.getById(id).toClientForm();
-
+        ClientForm client = serviceClient.getClient(id).orElseThrow(RuntimeException::new).toClientForm();
         serviceClient.removeClient(client.toClient());
     }
 }
