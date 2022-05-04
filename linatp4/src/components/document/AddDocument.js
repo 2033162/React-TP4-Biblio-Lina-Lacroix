@@ -12,8 +12,65 @@ const AddDocument = ({onAdd}) => {
     const onSubmit = (e) => {
         e.preventDefault()
 
-        if (!titre) {
+        if (
+            !etatDocument &&
+            !genreDocument &&
+            !titre &&
+            !auteur &&
+            !editeur &&
+            !anneePublication &&
+            !nbrExemplaire
+        ) {
             alert('Please add document')
+            return
+        }
+
+        if (
+            !etatDocument
+        ) {
+            alert('Please add etatDocument')
+            return
+        }
+
+        if (
+            !genreDocument
+        ) {
+            alert('Please add genreDocument')
+            return
+        }
+
+        if (
+            !titre
+        ) {
+            alert('Please add titre')
+            return
+        }
+
+        if (
+            !auteur
+        ) {
+            alert('Please add auteur')
+            return
+        }
+
+        if (
+            !editeur
+        ) {
+            alert('Please add editeur')
+            return
+        }
+
+        if (
+            !anneePublication
+        ) {
+            alert('Please add anneePublication')
+            return
+        }
+
+        if (
+            !nbrExemplaire
+        ) {
+            alert('Please add nbrExemplaire')
             return
         }
 
@@ -39,13 +96,13 @@ const AddDocument = ({onAdd}) => {
         <form className='add-form' onSubmit={onSubmit}>
             <div className='form-control'>
                 <label>Etat du document</label>
-                <input type='text' placeholder='Etat du document'
+                <input type='text' placeholder='Etat du document (DISPONIBLE, RESERVE, EMPRUNTE, ENDOMMAGE)'
                        value={etatDocument}
                        onChange={(e) => setEtatDocument(e.target.value)}/>
             </div>
             <div className='form-control'>
                 <label>Genre du document</label>
-                <input type='text' placeholder='Genre du document'
+                <input type='text' placeholder='Genre du document (CD, DVD, livre)'
                        value={genreDocument}
                        onChange={(e) => setGenreDocument(e.target.value)}/>
             </div>
