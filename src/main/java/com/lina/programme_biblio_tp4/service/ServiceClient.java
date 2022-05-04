@@ -61,8 +61,8 @@ public class ServiceClient {
         List<Client> clientList = clientRepository.findAll();
         List<ClientForm> clientFormList = new ArrayList<>();
 
-        for(int i = 0; i < clientList.size(); i++) {
-            clientFormList.add(clientList.get(i).toClientForm());
+        for (Client client : clientList) {
+            clientFormList.add(client.toClientForm());
         }
 
         return clientFormList;

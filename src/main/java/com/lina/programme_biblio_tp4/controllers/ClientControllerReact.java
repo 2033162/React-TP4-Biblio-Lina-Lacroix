@@ -1,7 +1,6 @@
 package com.lina.programme_biblio_tp4.controllers;
 
 import com.lina.programme_biblio_tp4.forms.ClientForm;
-import com.lina.programme_biblio_tp4.modele.Client;
 import com.lina.programme_biblio_tp4.repository.ClientRepository;
 import com.lina.programme_biblio_tp4.service.ServiceClient;
 import lombok.AllArgsConstructor;
@@ -25,35 +24,35 @@ public class ClientControllerReact {
     }
 
     @GetMapping("/{id}")
-    public Client getClient(@PathVariable long id) {
-        return serviceClient.getClient(id).orElseThrow(RuntimeException::new);
+    public ClientForm getClient(@PathVariable long id) {
+        return serviceClient.getClient(id).orElseThrow(RuntimeException::new).toClientForm();
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Client addClient(@RequestBody Client client) {
-        return serviceClient.saveClient(client);
+    public ClientForm addClient(@RequestBody ClientForm clientForm) {
+        return serviceClient.saveClient(clientForm.toClient()).toClientForm();
     }
 
     @PatchMapping("/{id}")
-    public Client updateClient(@PathVariable long id, @RequestBody Client clientDetail) {
-        Client client = clientRepository.getById(id);
+    public ClientForm updateClient(@PathVariable long id, @RequestBody ClientForm clientFormDetail) {
+        ClientForm client = clientRepository.getById(id).toClientForm();
 
-        client.setNom(clientDetail.getNom());
-        client.setPrenom(clientDetail.getPrenom());
-        client.setRue(clientDetail.getRue());
-        client.setVille(clientDetail.getVille());
-        client.setCodePostal(clientDetail.getCodePostal());
-        client.setNumeroTelephone(clientDetail.getNumeroTelephone());
-        client.setDateInscription(clientDetail.getDateInscription());
+        client.setNom(clientFormDetail.getNom());
+        client.setPrenom(clientFormDetail.getPrenom());
+        client.setRue(clientFormDetail.getRue());
+        client.setVille(clientFormDetail.getVille());
+        client.setCodePostal(clientFormDetail.getCodePostal());
+        client.setNumeroTelephone(clientFormDetail.getNumeroTelephone());
+        client.setDateInscription(clientFormDetail.getDateInscription());
 
-        return clientRepository.save(client);
+        return clientRepository.save(client.toClient()).toClientForm();
     }
 
     @DeleteMapping("/{id}")
     public void deleteClient(@PathVariable long id) {
-        Client client = clientRepository.getById(id);
+        ClientForm client = clientRepository.getById(id).toClientForm();
 
-        serviceClient.removeClient(client);
+        serviceClient.removeClient(client.toClient());
     }
 }
