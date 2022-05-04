@@ -25,6 +25,55 @@ const AddClient = ({onAdd}) => {
             return
         }
 
+        if (
+            !nom
+        ) {
+            alert('Please add nom')
+            return
+        }
+
+        if (
+            !prenom
+        ) {
+            alert('Please add prenom')
+            return
+        }
+
+        if (
+            !rue
+        ) {
+            alert('Please add rue')
+            return
+        }
+
+        if (
+            !ville
+        ) {
+            alert('Please add ville')
+            return
+        }
+
+        if (
+            !codePostal
+        ) {
+            alert('Please add codePostal')
+            return
+        }
+
+        if (
+            !numeroTelephone
+        ) {
+            alert('Please add numeroTelephone')
+            return
+        }
+
+        if (
+            !dateInscription
+        ) {
+            alert('Please add dateInscription')
+            return
+        }
+
         onAdd({
             nom,
             prenom,
