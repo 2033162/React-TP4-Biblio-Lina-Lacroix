@@ -52,7 +52,7 @@ public class ClientForm {
             oldId = Long.parseLong(id);
             if (oldId > 0)
                 client.setId(oldId);
-        } catch (NumberFormatException e) {}
+        } catch (NumberFormatException ignored) {}
         return client;
     }
 }

@@ -8,7 +8,7 @@
       "ville": "Montreal",
       "codePostal": "H05C42",
       "numeroTelephone": "514-900-5698",
-      "dateInscription": "2022/02/20"
+      "dateInscription": "2022-02-20"
     },
     {
       "id": 2,
@@ -18,7 +18,7 @@
       "ville": "Montreal",
       "codePostal": "H05C53",
       "numeroTelephone": "514-900-7643",
-      "dateInscription": "2022/02/22"
+      "dateInscription": "2022-02-22"
     }
   ],
 

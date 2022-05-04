@@ -5,6 +5,7 @@ import com.lina.programme_biblio_tp4.repository.ClientRepository;
 import com.lina.programme_biblio_tp4.service.ServiceClient;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,9 +30,8 @@ public class ClientControllerReact {
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public ClientForm addClient(@RequestBody ClientForm clientForm) {
-        return serviceClient.saveClient(clientForm.toClient()).toClientForm();
+    public ResponseEntity<ClientForm> addClient(@RequestBody ClientForm clientForm) {
+        return new ResponseEntity<>(serviceClient.saveClient(clientForm.toClient()).toClientForm(), HttpStatus.CREATED);
     }
 
     @PatchMapping("/{id}")

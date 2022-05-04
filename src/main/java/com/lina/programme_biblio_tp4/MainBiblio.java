@@ -68,17 +68,17 @@ public class MainBiblio implements CommandLineRunner {
                 "carmier",
                 Fonction.GESTIONNAIRE);
         final Client client = serviceClient.saveClient(
-                "John",
                 "Smith",
+                "John",
                 "Daragon",
                 "Montreal",
                 "H05C42",
                 "514-900-5698",
                 getDateFromLocalDate(2022, 2, 20));
         final Client client2 = serviceClient.saveClient(
+                "Stewart",
                 "Marvin",
-                "stuwart",
-                "Lasalle",
+                "LaSale",
                 "Montreal",
                 "H05C42",
                 "514-900-5698",

@@ -1,4 +1,5 @@
 import {useState} from 'react'
+import isMatch from 'date-fns/isMatch'
 
 const AddClient = ({onAdd}) => {
     const [nom, setNom] = useState('')
@@ -74,6 +75,11 @@ const AddClient = ({onAdd}) => {
             return
         }
 
+        if (!isMatch(dateInscription, 'yyyy-MM-dd')) {
+            alert('Please make dateInscription in format yyyy-MM-dd')
+            return
+        }
+
         onAdd({
             nom,
             prenom,
@@ -132,7 +138,7 @@ const AddClient = ({onAdd}) => {
             </div>
             <div className='form-control'>
                 <label>Date de l'inscription</label>
-                <input type='text' placeholder='Date inscription aaaa/mm/jj'
+                <input type='text' placeholder='Date inscription yyyy-MM-dd'
                        value={dateInscription}
                        onChange={(e) => setDateInscription(e.target.value)}/>
             </div>

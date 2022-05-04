@@ -60,7 +60,7 @@ public class Client {
                 codePostal,
                 numeroTelephone,
                 DateTimeFormatter.ofPattern("yyyy-MM-dd").format(dateInscription)
-                );
+        );
     }
 
     @Override

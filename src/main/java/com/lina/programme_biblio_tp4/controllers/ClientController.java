@@ -19,7 +19,7 @@ import java.util.Optional;
 
 @Controller
 public class ClientController {
-    Logger logger = LoggerFactory.getLogger(ClientController.class);
+    /*Logger logger = LoggerFactory.getLogger(ClientController.class);
 
     private ServiceClient serviceClient;
 
@@ -86,5 +86,5 @@ public class ClientController {
             return Long.parseLong(id);
         } catch(NumberFormatException e) {}
         return 0;
-    }
+    }*/
 }
