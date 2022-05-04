@@ -1,5 +1,6 @@
 package com.lina.programme_biblio_tp4.service;
 
+import com.lina.programme_biblio_tp4.forms.ClientForm;
 import com.lina.programme_biblio_tp4.modele.Amende;
 import com.lina.programme_biblio_tp4.modele.Client;
 import com.lina.programme_biblio_tp4.modele.EmpruntDocuments;
@@ -9,6 +10,7 @@ import com.lina.programme_biblio_tp4.repository.EmpruntDocumentRepository;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
@@ -55,8 +57,15 @@ public class ServiceClient {
         clientRepository.delete(client);
     }
 
-    public List<Client> findAllClients() {
-        return clientRepository.findAll();
+    public List<ClientForm> findAllClients() {
+        List<Client> clientList = clientRepository.findAll();
+        List<ClientForm> clientFormList = new ArrayList<>();
+
+        for(int i = 0; i < clientList.size(); i++) {
+            clientFormList.add(clientList.get(i).toClientForm());
+        }
+
+        return clientFormList;
     }
 
     public Optional<Client> getClient(long id) {

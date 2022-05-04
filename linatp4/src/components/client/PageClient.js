@@ -1,21 +1,51 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Clients from "./Clients";
 import AddClient from "./AddClient";
 import Header2 from "../Header2";
 
 const PageClient = () => {
 
+    useEffect(() => {
+        const getClients = async () => {
+            const clientsFromServer = await fetchClients()
+            setClients(clientsFromServer)
+        }
+        getClients()
+    }, [])
+
+    const fetchClients = async () => {
+        const res = await fetch('http://localhost:8080/clients')
+        const data = await res.json()
+        return data
+    }
+
     const [showAddClient, setShowAddClient] = useState(false)
     const [clients, setClients] = useState([])
 
-    const addClient = (client) => {
-        const id = Math.floor(Math.random() * 10000) + 1
+    const addClient = async (client) => {
+        const res = await fetch('http://localhost:8080/clients',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify(client)
+            })
+        const data = await res.json()
+        setClients([...clients, data])
+
+        /*const id = Math.floor(Math.random() * 10000) + 1
         const newClient = {id, ...client}
-        setClients([...clients, newClient])
+        setClients([...clients, newClient])*/
     }
 
-    const deleteClient = (id) => {
+    const deleteClient = async (id) => {
+        await fetch(`http://localhost:8080/clients/${id}`, {
+            method: 'DELETE'
+        })
         setClients(clients.filter((client) => client.id !== id))
+
+        //setClients(clients.filter((client) => client.id !== id))
     }
 
     return (

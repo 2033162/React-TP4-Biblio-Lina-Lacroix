@@ -1,10 +1,12 @@
 package com.lina.programme_biblio_tp4.modele;
 
+import com.lina.programme_biblio_tp4.forms.ClientForm;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +48,19 @@ public class Client {
         this.codePostal = codePostal;
         this.numeroTelephone = numeroTelephone;
         this.dateInscription = dateInscription;
+    }
+
+    public ClientForm toClientForm() {
+        return new ClientForm(
+                Long.toString(id),
+                nom,
+                prenom,
+                rue,
+                ville,
+                codePostal,
+                numeroTelephone,
+                DateTimeFormatter.ofPattern("yyyy-MM-dd").format(dateInscription)
+                );
     }
 
     @Override

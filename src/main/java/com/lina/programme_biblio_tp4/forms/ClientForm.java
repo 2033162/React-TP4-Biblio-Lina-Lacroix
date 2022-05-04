@@ -1,12 +1,16 @@
 package com.lina.programme_biblio_tp4.forms;
 
 import com.lina.programme_biblio_tp4.modele.Client;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ClientForm {
     private static DateTimeFormatter DATETIMEFORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private String id;
@@ -17,28 +21,6 @@ public class ClientForm {
     private String codePostal;
     private String numeroTelephone;
     private String dateInscription;
-
-    public ClientForm(String id,
-                      String nom,
-                      String prenom,
-                      String rue,
-                      String ville,
-                      String codePostal,
-                      String numeroTelephone,
-                      String dateInscription) {
-        this.id = id;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.rue = rue;
-        this.ville = ville;
-        this.codePostal = codePostal;
-        this.numeroTelephone = numeroTelephone;
-        this.dateInscription = dateInscription;
-    }
-
-    public ClientForm() {
-        this(new Client());
-    }
 
     public ClientForm(Client client) {
         this(Long.toString(client.getId()),

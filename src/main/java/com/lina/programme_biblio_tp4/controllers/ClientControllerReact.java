@@ -1,5 +1,6 @@
 package com.lina.programme_biblio_tp4.controllers;
 
+import com.lina.programme_biblio_tp4.forms.ClientForm;
 import com.lina.programme_biblio_tp4.modele.Client;
 import com.lina.programme_biblio_tp4.repository.ClientRepository;
 import com.lina.programme_biblio_tp4.service.ServiceClient;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/clients")
 public class ClientControllerReact {
 
@@ -18,8 +20,7 @@ public class ClientControllerReact {
     private ClientRepository clientRepository;
 
     @GetMapping
-    @CrossOrigin(origins = "http://localhost:3000")
-    public List<Client> getAllClients() {
+    public List<ClientForm> getAllClients() {
         return serviceClient.findAllClients();
     }
 
@@ -30,7 +31,6 @@ public class ClientControllerReact {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    @CrossOrigin(origins = "http://localhost:3000")
     public Client addClient(@RequestBody Client client) {
         return serviceClient.saveClient(client);
     }

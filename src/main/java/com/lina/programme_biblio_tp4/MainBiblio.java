@@ -192,7 +192,7 @@ public class MainBiblio implements CommandLineRunner {
         System.out.println(serviceClient.listeFrais(client));
 
 
-        System.out.println("\nDelete cd");
+        /*System.out.println("\nDelete cd");
         System.out.println(cd);
         serviceDocument.removeCD(cd);
 
@@ -225,7 +225,7 @@ public class MainBiblio implements CommandLineRunner {
 
         System.out.println("\nDelete employe");
         System.out.println(employe);
-        serviceEmploye.removeEmploye(employe);
+        serviceEmploye.removeEmploye(employe);*/
     }
 
     private LocalDate getDateFromLocalDate(int year, int month, int day) {
