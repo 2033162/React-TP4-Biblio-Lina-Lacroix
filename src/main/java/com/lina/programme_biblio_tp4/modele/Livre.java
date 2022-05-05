@@ -1,5 +1,7 @@
 package com.lina.programme_biblio_tp4.modele;
 
+import com.lina.programme_biblio_tp4.forms.document.DocumentForm;
+import com.lina.programme_biblio_tp4.forms.document.LivreForm;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -32,5 +34,21 @@ public class Livre extends Document {
                 "nbrPages=" + nbrPages +
                 ", genreLivre='" + genreLivre + '\'' +
                 '}';
+    }
+
+    @Override
+    public DocumentForm toDocumentForm() {
+        return new LivreForm(
+                id,
+                etatDocument.toString(),
+                genreDocument,
+                titre,
+                auteur,
+                editeur,
+                anneePublication,
+                nbrExemplaire,
+                nbrPages,
+                genreLivre.toString()
+        );
     }
 }
