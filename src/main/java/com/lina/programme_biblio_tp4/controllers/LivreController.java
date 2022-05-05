@@ -19,7 +19,7 @@ import java.util.Optional;
 
 @Controller
 public class LivreController {
-    Logger logger = LoggerFactory.getLogger(LivreController.class);
+    /*Logger logger = LoggerFactory.getLogger(LivreController.class);
 
     private ServiceDocument serviceDocument;
 
@@ -79,5 +79,5 @@ public class LivreController {
             return Long.parseLong(id);
         } catch(NumberFormatException e) {}
         return 0;
-    }
+    }*/
 }

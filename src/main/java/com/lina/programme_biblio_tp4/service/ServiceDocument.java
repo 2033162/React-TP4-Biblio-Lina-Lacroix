@@ -1,5 +1,6 @@
 package com.lina.programme_biblio_tp4.service;
 
+import com.lina.programme_biblio_tp4.forms.DocumentForm;
 import com.lina.programme_biblio_tp4.modele.*;
 import com.lina.programme_biblio_tp4.repository.CdRepository;
 import com.lina.programme_biblio_tp4.repository.DocumentRepository;
@@ -7,6 +8,7 @@ import com.lina.programme_biblio_tp4.repository.DvdRepository;
 import com.lina.programme_biblio_tp4.repository.LivreRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -140,5 +142,16 @@ public class ServiceDocument {
                 auteur,
                 anneePublication,
                 genreDocument);
+    }
+
+    public List<DocumentForm> findAllDocuments() {
+        List<Document> documentList = documentRepository.findAll();
+        List<DocumentForm> documentFormList = new ArrayList<>();
+
+        for (Document document : documentList) {
+            documentFormList.add(document.toDocumentForm());
+        }
+
+        return documentFormList;
     }
 }

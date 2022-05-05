@@ -26,7 +26,7 @@ import java.util.Optional;
 
 @Controller
 public class EmpruntController {
-    Logger logger = LoggerFactory.getLogger(EmpruntController.class);
+    /*Logger logger = LoggerFactory.getLogger(EmpruntController.class);
 
     private ServiceEmpruntDocuments serviceEmpruntDocuments;
     private ServiceClient serviceClient;
@@ -102,5 +102,5 @@ public class EmpruntController {
             return Long.parseLong(id);
         } catch(NumberFormatException e) {}
         return 0;
-    }
+    }*/
 }

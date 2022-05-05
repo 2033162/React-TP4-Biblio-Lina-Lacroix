@@ -7,23 +7,6 @@ import PageClient from "./components/client/PageClient";
 import PageDocument from "./components/document/PageDocument";
 
 function App() {
-
-    /*const [clients, setClients] = useState([])
-
-    useEffect(() => {
-        const getClients = async () => {
-            const clientsFromServer = await fetchClients()
-            setClients(clientsFromServer)
-        }
-        getClients()
-    }, [])
-
-    const fetchClients = async () => {
-        const res = await fetch('http://localhost:8080/clients')
-        const data = await res.json()
-        return data
-    }*/
-
     return (
         <div >
             <h1>Bibliotheque de JavaTown</h1>
