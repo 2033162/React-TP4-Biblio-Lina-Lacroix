@@ -1,5 +1,7 @@
 package com.lina.programme_biblio_tp4.modele;
 
+import com.lina.programme_biblio_tp4.forms.document.DocumentForm;
+import com.lina.programme_biblio_tp4.forms.document.DvdForm;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -32,5 +34,21 @@ public class DVD extends Document {
                 "duree=" + duree +
                 ", genreFilm='" + genreFilm + '\'' +
                 '}';
+    }
+
+    @Override
+    public DocumentForm toDocumentForm() {
+        return new DvdForm(
+                id,
+                etatDocument.toString(),
+                genreDocument,
+                titre,
+                auteur,
+                editeur,
+                anneePublication,
+                nbrExemplaire,
+                duree,
+                genreFilm
+        );
     }
 }
