@@ -64,4 +64,8 @@ public abstract class Document {
                 ", nbrExemplaire=" + nbrExemplaire +
                 '}';
     }
+
+    public DocumentForm toDocumentForm() {
+        return null;
+    }
 }
