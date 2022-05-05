@@ -50,7 +50,8 @@ public class LivreForm extends DocumentForm {
             bEtatDocument = null;
             bGenreLivre = null;
         }
-        final Livre livre = new Livre(bEtatDocument,
+        final Livre livre = new Livre(
+                bEtatDocument,
                 genreDocument,
                 titre,
                 auteur,
@@ -58,7 +59,8 @@ public class LivreForm extends DocumentForm {
                 anneePublication,
                 nbrExemplaire,
                 nbrPages,
-                bGenreLivre);
+                bGenreLivre
+        );
         long oldId;
         try {
             oldId = id;
