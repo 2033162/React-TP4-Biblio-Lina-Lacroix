@@ -170,4 +170,12 @@ public class ServiceDocument {
         }
         return documentResult;
     }
+
+    public Document saveDocument(Document document) {
+        return documentRepository.save(document);
+    }
+
+    public void removeDocument(Document document) {
+        documentRepository.delete(document);
+    }
 }
