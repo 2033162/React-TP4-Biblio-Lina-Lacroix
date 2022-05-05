@@ -17,18 +17,18 @@ import java.util.List;
 public abstract class Document {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    protected long id;
     public static final String C_LIVRE = "livre";
     public static final String C_CD = "CD";
     public static final String C_DVD = "DVD";
 
-    private String genreDocument;
-    private EtatDocument etatDocument;
-    private String titre;
-    private String auteur;
-    private String editeur;
-    private int anneePublication;
-    private int nbrExemplaire;
+    protected String genreDocument;
+    protected EtatDocument etatDocument;
+    protected String titre;
+    protected String auteur;
+    protected String editeur;
+    protected int anneePublication;
+    protected int nbrExemplaire;
 
     @OneToMany(mappedBy = "document")
     List<Reservation> reservations = new ArrayList<>();
@@ -65,7 +65,5 @@ public abstract class Document {
                 '}';
     }
 
-    public DocumentForm toDocumentForm() {
-        return null;
-    }
+    public abstract DocumentForm toDocumentForm();
 }

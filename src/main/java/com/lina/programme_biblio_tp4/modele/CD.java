@@ -1,5 +1,7 @@
 package com.lina.programme_biblio_tp4.modele;
 
+import com.lina.programme_biblio_tp4.forms.document.CdForm;
+import com.lina.programme_biblio_tp4.forms.document.DocumentForm;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -35,5 +37,22 @@ public class CD extends Document {
                 ", compositeur='" + compositeur + '\'' +
                 ", interprete='" + interprete + '\'' +
                 '}';
+    }
+
+    @Override
+    public DocumentForm toDocumentForm() {
+        return new CdForm(
+                id,
+                etatDocument.toString(),
+                genreDocument,
+                titre,
+                auteur,
+                editeur,
+                anneePublication,
+                nbrExemplaire,
+                genreMusique,
+                compositeur,
+                interprete
+        );
     }
 }

@@ -52,7 +52,7 @@ public class Client {
 
     public ClientForm toClientForm() {
         return new ClientForm(
-                Long.toString(id),
+                id,
                 nom,
                 prenom,
                 rue,
