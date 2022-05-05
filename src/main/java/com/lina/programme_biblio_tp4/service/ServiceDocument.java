@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Component
@@ -153,5 +154,20 @@ public class ServiceDocument {
         }
 
         return documentFormList;
+    }
+
+    public Document getDocument(long documentId) {
+        Document document = documentRepository.findById(documentId).orElseThrow(RuntimeException::new);
+        Document documentResult = null;
+        if (Objects.equals(document.getGenreDocument(), "livre")) {
+            documentResult = getLivre(documentId).orElseThrow(RuntimeException::new);
+        }
+        if (Objects.equals(document.getGenreDocument(), "CD")) {
+            documentResult = getCD(documentId).orElseThrow(RuntimeException::new);
+        }
+        if (Objects.equals(document.getGenreDocument(), "DVD")) {
+            documentResult = getDVD(documentId).orElseThrow(RuntimeException::new);
+        }
+        return documentResult;
     }
 }
