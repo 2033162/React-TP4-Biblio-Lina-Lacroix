@@ -1,26 +1,21 @@
-package com.lina.programme_biblio_tp4.forms;
+package com.lina.programme_biblio_tp4.forms.document;
 
+import com.lina.programme_biblio_tp4.modele.Document;
 import com.lina.programme_biblio_tp4.modele.EtatDocument;
 import com.lina.programme_biblio_tp4.modele.GenreLivre;
 import com.lina.programme_biblio_tp4.modele.Livre;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-public class LivreForm {
+@NoArgsConstructor
+public class LivreForm extends DocumentForm {
     private static EtatDocument ETATDOCUMENT;
     private static GenreLivre GENRELIVRE;
-    private String id;
-    private String etatDocument;
-    private String genreDocument;
-    private String titre;
-    private String auteur;
-    private String editeur;
-    private int anneePublication;
-    private int nbrExemplaire;
     private int nbrPages;
     private String genreLivre;
 
-    public LivreForm(String id,
+    public LivreForm(long id,
                      String etatDocument,
                      String genreDocument,
                      String titre,
@@ -30,36 +25,22 @@ public class LivreForm {
                      int nbrExemplaire,
                      int nbrPages,
                      String genreLivre) {
-        this.id = id;
-        this.etatDocument = etatDocument;
-        this.genreDocument = genreDocument;
-        this.titre = titre;
-        this.auteur = auteur;
-        this.editeur = editeur;
-        this.anneePublication = anneePublication;
-        this.nbrExemplaire = nbrExemplaire;
+        super(
+                id,
+                etatDocument,
+                genreDocument,
+                titre,
+                auteur,
+                editeur,
+                anneePublication,
+                nbrExemplaire
+        );
         this.nbrPages = nbrPages;
         this.genreLivre = genreLivre;
     }
 
-    public LivreForm() {
-        this(new Livre());
-    }
-
-    public LivreForm(Livre livre) {
-        this(Long.toString(livre.getId()),
-                livre.getEtatDocument() == null ? null : String.valueOf(EtatDocument.valueOf(livre.getEtatDocument().toString())),
-                livre.getGenreDocument(),
-                livre.getTitre(),
-                livre.getAuteur(),
-                livre.getEditeur(),
-                livre.getAnneePublication(),
-                livre.getNbrExemplaire(),
-                livre.getNbrPages(),
-                livre.getGenreLivre() == null ? null : String.valueOf(GenreLivre.valueOf(livre.getGenreLivre().toString())));
-    }
-
-    public Livre toLivre() {
+    @Override
+    public Document toDocument() {
         EtatDocument bEtatDocument;
         GenreLivre bGenreLivre;
         try {
@@ -80,10 +61,10 @@ public class LivreForm {
                 bGenreLivre);
         long oldId;
         try {
-            oldId = Long.parseLong(id);
+            oldId = id;
             if (oldId > 0)
                 livre.setId(oldId);
-        } catch (NumberFormatException e) {}
+        } catch (NumberFormatException ignored) {}
 
         return livre;
     }

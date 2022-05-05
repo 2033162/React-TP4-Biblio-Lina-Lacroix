@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 @AllArgsConstructor
 public class ClientForm {
     private static DateTimeFormatter DATETIMEFORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    private String id;
+    private long id;
     private String nom;
     private String prenom;
     private String rue;
@@ -21,17 +21,6 @@ public class ClientForm {
     private String codePostal;
     private String numeroTelephone;
     private String dateInscription;
-
-    public ClientForm(Client client) {
-        this(Long.toString(client.getId()),
-                client.getNom(),
-                client.getPrenom(),
-                client.getRue(),
-                client.getVille(),
-                client.getCodePostal(),
-                client.getNumeroTelephone(),
-                client.getDateInscription() == null ? null : DATETIMEFORMATTER.format(client.getDateInscription()));
-    }
 
     public Client toClient() {
         LocalDate bDate;
@@ -49,7 +38,7 @@ public class ClientForm {
                 bDate);
         long oldId;
         try {
-            oldId = Long.parseLong(id);
+            oldId = id;
             if (oldId > 0)
                 client.setId(oldId);
         } catch (NumberFormatException ignored) {}

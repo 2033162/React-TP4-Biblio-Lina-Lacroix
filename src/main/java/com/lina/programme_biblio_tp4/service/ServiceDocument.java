@@ -1,6 +1,6 @@
 package com.lina.programme_biblio_tp4.service;
 
-import com.lina.programme_biblio_tp4.forms.DocumentForm;
+import com.lina.programme_biblio_tp4.forms.document.DocumentForm;
 import com.lina.programme_biblio_tp4.modele.*;
 import com.lina.programme_biblio_tp4.repository.CdRepository;
 import com.lina.programme_biblio_tp4.repository.DocumentRepository;

@@ -1,6 +1,6 @@
 package com.lina.programme_biblio_tp4.controllers;
 
-import com.lina.programme_biblio_tp4.forms.DocumentForm;
+import com.lina.programme_biblio_tp4.forms.document.DocumentForm;
 import com.lina.programme_biblio_tp4.service.ServiceDocument;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;

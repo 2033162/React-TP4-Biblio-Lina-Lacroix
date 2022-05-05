@@ -1,6 +1,6 @@
 package com.lina.programme_biblio_tp4.modele;
 
-import com.lina.programme_biblio_tp4.forms.DocumentForm;
+import com.lina.programme_biblio_tp4.forms.document.DocumentForm;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -63,10 +63,5 @@ public abstract class Document {
                 ", anneePublication=" + anneePublication + '\'' +
                 ", nbrExemplaire=" + nbrExemplaire +
                 '}';
-    }
-
-    public DocumentForm toDocumentForm() {
-        return new DocumentForm(
-        );
     }
 }
