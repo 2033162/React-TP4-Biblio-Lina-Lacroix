@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Component
@@ -127,14 +126,6 @@ public class ServiceDocument {
         return livreRepository.findById(livreId);
     }
 
-    public List<Livre> findAllLivres() {
-        return livreRepository.findAll();
-    }
-
-    public Optional<Livre> findLivreById(long id) {
-        return livreRepository.findById(id);
-    }
-
     public List<Document> searchDocument(String titre,
                                          String auteur,
                                          int anneePublication,
@@ -159,23 +150,41 @@ public class ServiceDocument {
     public Document getDocument(long documentId) {
         Document document = documentRepository.findById(documentId).orElseThrow(RuntimeException::new);
         Document documentResult = null;
-        if (Objects.equals(document.getGenreDocument(), "livre")) {
+        if (document.getGenreDocument().equalsIgnoreCase(Document.C_LIVRE)) {
             documentResult = getLivre(documentId).orElseThrow(RuntimeException::new);
         }
-        if (Objects.equals(document.getGenreDocument(), "CD")) {
+        else if (document.getGenreDocument().equalsIgnoreCase(Document.C_CD)) {
             documentResult = getCD(documentId).orElseThrow(RuntimeException::new);
         }
-        if (Objects.equals(document.getGenreDocument(), "DVD")) {
+        else if (document.getGenreDocument().equalsIgnoreCase(Document.C_DVD)) {
             documentResult = getDVD(documentId).orElseThrow(RuntimeException::new);
         }
         return documentResult;
     }
 
     public Document saveDocument(Document document) {
-        return documentRepository.save(document);
+        Document documentResult = null;
+        if (document.getGenreDocument().equalsIgnoreCase(Document.C_LIVRE)) {
+            documentResult = saveLivre((Livre) document);
+        }
+        else if (document.getGenreDocument().equalsIgnoreCase(Document.C_CD)) {
+            documentResult = saveCD((CD) document);
+        }
+        else if (document.getGenreDocument().equalsIgnoreCase(Document.C_DVD)) {
+            documentResult = saveDVD((DVD) document);
+        }
+        return documentResult;
     }
 
     public void removeDocument(Document document) {
-        documentRepository.delete(document);
+        if (document.getGenreDocument().equalsIgnoreCase(Document.C_LIVRE)) {
+            removeLivre((Livre) document);
+        }
+        else if (document.getGenreDocument().equalsIgnoreCase(Document.C_CD)) {
+            removeCD((CD) document);
+        }
+        else if (document.getGenreDocument().equalsIgnoreCase(Document.C_DVD)) {
+            removeDVD((DVD) document);
+        }
     }
 }

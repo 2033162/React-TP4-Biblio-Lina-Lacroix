@@ -96,13 +96,13 @@ const AddDocument = ({onAdd}) => {
         <form className='add-form' onSubmit={onSubmit}>
             <div className='form-control'>
                 <label>Etat du document</label>
-                <input type='text' placeholder='Etat du document (DISPONIBLE, RESERVE, EMPRUNTE, ENDOMMAGE)'
+                <input type='text' placeholder='DISPONIBLE, RESERVE, EMPRUNTE, ENDOMMAGE'
                        value={etatDocument}
                        onChange={(e) => setEtatDocument(e.target.value)}/>
             </div>
             <div className='form-control'>
                 <label>Genre du document</label>
-                <input type='text' placeholder='Genre du document (CD, DVD, livre)'
+                <input type='text' placeholder='CD, DVD, livre'
                        value={genreDocument}
                        onChange={(e) => setGenreDocument(e.target.value)}/>
             </div>
