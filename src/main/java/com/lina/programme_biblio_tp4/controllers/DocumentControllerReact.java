@@ -4,11 +4,9 @@ import com.lina.programme_biblio_tp4.forms.document.CdForm;
 import com.lina.programme_biblio_tp4.forms.document.DocumentForm;
 import com.lina.programme_biblio_tp4.forms.document.DvdForm;
 import com.lina.programme_biblio_tp4.forms.document.LivreForm;
-import com.lina.programme_biblio_tp4.modele.Livre;
 import com.lina.programme_biblio_tp4.service.ServiceDocument;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -52,7 +50,17 @@ public class DocumentControllerReact {
         return serviceDocument.saveDocument(livreForm.toDocument());
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/cds")
+    public DocumentForm addCd(@RequestBody CdForm cdForm) {
+        return serviceDocument.saveDocument(cdForm.toDocument());
+    }
 
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/dvds")
+    public DocumentForm addDvd(@RequestBody DvdForm dvdForm) {
+        return serviceDocument.saveDocument(dvdForm.toDocument());
+    }
 
     @PatchMapping("/{id}")
     public DocumentForm updateDocument(@PathVariable long id, @RequestBody DocumentForm documentFormDetail) {
