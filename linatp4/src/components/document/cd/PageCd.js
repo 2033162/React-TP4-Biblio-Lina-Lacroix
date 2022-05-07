@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import Header2 from "../../Header2";
 import AddCd from "./AddCd";
+import Cds from "./Cds";
 
 const PageCd = () => {
     useEffect(() => {
