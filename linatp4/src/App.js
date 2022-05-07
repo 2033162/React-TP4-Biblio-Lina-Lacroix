@@ -17,9 +17,9 @@ function App() {
             <Routes>
                 <Route path="/" element={<HomePage/>} />
                 <Route path="/clients" element={<PageClient/>} />
-                <Route path="/documents/livres" element={<PageLivre/>} />
-                <Route path="/documents/cds" element={<PageCd/>} />
-                <Route path="/documents/dvds" element={<PageDvd/>} />
+                <Route path="/livres" element={<PageLivre/>} />
+                <Route path="/cds" element={<PageCd/>} />
+                <Route path="/dvds" element={<PageDvd/>} />
                 <Route path="*" element={<PageNotFound/>} />
             </Routes>
         </div>

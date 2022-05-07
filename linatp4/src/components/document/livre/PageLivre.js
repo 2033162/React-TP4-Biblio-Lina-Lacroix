@@ -47,7 +47,7 @@ const PageLivre = () => {
             <Header2 title='Document livre'
                      onAdd={() =>
                      setShowAddLivre(!showAddLivre)}
-                     showAdd={setShowAddLivre}/>
+                     showAdd={showAddLivre}/>
             {showAddLivre && <AddLivre onAdd={addLivre} />}
             {livres.length > 0 ?
             <Livres livres={livres}

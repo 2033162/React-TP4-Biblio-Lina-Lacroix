@@ -46,7 +46,7 @@ const PageCd = () => {
             <Header2 title='Document cd'
                      onAdd={() =>
                      setShowAddCd(!showAddCd)}
-                     showAdd={setShowAddCd}/>
+                     showAdd={showAddCd}/>
             {showAddCd && <AddCd onAdd={addCd} />}
             {cds.length > 0 ?
             <Cds cds={cds}

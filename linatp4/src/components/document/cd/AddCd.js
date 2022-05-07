@@ -187,7 +187,7 @@ const AddCd = ({onAdd}) => {
                        value={interprete}
                        onChange={(e) => setInterprete(e.target.value)}/>
             </div>
-            <input type='submit' value='Save document cd' className='btn btn-block'/>
+            <input type='submit' value='Save document cd' className='btn btn-block bg-black text-light'/>
         </form>
     )
 }

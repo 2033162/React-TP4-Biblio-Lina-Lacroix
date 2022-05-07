@@ -170,7 +170,7 @@ const AddDvd = ({onAdd}) => {
                        value={genreFilm}
                        onChange={(e) => setGenreFilm(e.target.value)}/>
             </div>
-            <input type='submit' value='Save document dvd' className='btn btn-block'/>
+            <input type='submit' value='Save document dvd' className='btn btn-block bg-black text-light'/>
         </form>
     )
 }

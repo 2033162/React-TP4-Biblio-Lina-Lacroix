@@ -47,7 +47,7 @@ const PageDvd = () => {
             <Header2 title='Document dvd'
                      onAdd={() =>
                      setShowAddDvd(!showAddDvd)}
-                     showAdd={setShowAddDvd}/>
+                     showAdd={showAddDvd}/>
             {showAddDvd && <AddDvd onAdd={addDvd} />}
             {dvds.length > 0 ?
             <Dvds dvds={dvds}

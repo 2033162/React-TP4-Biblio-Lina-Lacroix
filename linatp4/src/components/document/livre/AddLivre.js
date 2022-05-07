@@ -170,7 +170,7 @@ const AddLivre = ({onAdd}) => {
                         value={genreLivre}
                         onChange={(e) => setGenreLivre(e.target.value)}/>
             </div>
-            <input type='submit' value='Save document livre' className='btn btn-block'/>
+            <input type='submit' value='Save document livre' className='btn btn-block bg-black text-light'/>
         </form>
     )
 }

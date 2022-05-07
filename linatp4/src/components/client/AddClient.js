@@ -142,7 +142,7 @@ const AddClient = ({onAdd}) => {
                        value={dateInscription}
                        onChange={(e) => setDateInscription(e.target.value)}/>
             </div>
-            <input type='submit' value='Save Client' className='btn btn-block'/>
+            <input type='submit' value='Save Client' className='btn btn-block bg-black text-light'/>
         </form>
     )
 }

@@ -1,4 +1,4 @@
-package com.lina.programme_biblio_tp4.controllers;
+package com.lina.programme_biblio_tp4.controllers.document;
 
 import com.lina.programme_biblio_tp4.forms.document.CdForm;
 import com.lina.programme_biblio_tp4.forms.document.DocumentForm;
