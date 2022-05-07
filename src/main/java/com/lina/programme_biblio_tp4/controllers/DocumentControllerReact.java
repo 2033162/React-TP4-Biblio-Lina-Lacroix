@@ -1,6 +1,10 @@
 package com.lina.programme_biblio_tp4.controllers;
 
+import com.lina.programme_biblio_tp4.forms.document.CdForm;
 import com.lina.programme_biblio_tp4.forms.document.DocumentForm;
+import com.lina.programme_biblio_tp4.forms.document.DvdForm;
+import com.lina.programme_biblio_tp4.forms.document.LivreForm;
+import com.lina.programme_biblio_tp4.modele.Livre;
 import com.lina.programme_biblio_tp4.service.ServiceDocument;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,11 +31,28 @@ public class DocumentControllerReact {
         return serviceDocument.getDocument(id).toDocumentForm();
     }
 
-    @PostMapping
-    public ResponseEntity<DocumentForm> addDocument(@RequestBody DocumentForm documentForm) {
-        return new ResponseEntity<>(serviceDocument.saveDocument(documentForm.toDocument()).toDocumentForm(),
-                HttpStatus.CREATED);
+    @GetMapping("/livres")
+    public List<LivreForm> getAllLivres() {
+        return serviceDocument.findAllLivres();
     }
+
+    @GetMapping("/cds")
+    public List<CdForm> getAllCds() {
+        return serviceDocument.findAllCds();
+    }
+
+    @GetMapping("/dvds")
+    public List<DvdForm> getAllDvds() {
+        return serviceDocument.findAllDvds();
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/livres")
+    public DocumentForm addLivre(@RequestBody LivreForm livreForm) {
+        return serviceDocument.saveDocument(livreForm.toDocument());
+    }
+
+
 
     @PatchMapping("/{id}")
     public DocumentForm updateDocument(@PathVariable long id, @RequestBody DocumentForm documentFormDetail) {
@@ -45,11 +66,11 @@ public class DocumentControllerReact {
         document.setAnneePublication(documentFormDetail.getAnneePublication());
         document.setNbrExemplaire(documentFormDetail.getNbrExemplaire());
 
-        return serviceDocument.saveDocument(document.toDocument()).toDocumentForm();
+        return serviceDocument.saveDocument(document.toDocument());
     }
 
     @DeleteMapping("/{id}")
-    public void deleteClient(@PathVariable long id) {
+    public void deleteDocument(@PathVariable long id) {
         DocumentForm document = serviceDocument.getDocument(id).toDocumentForm();
 
         serviceDocument.removeDocument(document.toDocument());
