@@ -17,7 +17,7 @@ public class LivreControllerReact {
 
     private ServiceDocument serviceDocument;
 
-    @GetMapping("/livres")
+    @GetMapping
     public List<LivreForm> getAllLivres() {
         return serviceDocument.findAllLivres();
     }
@@ -28,12 +28,12 @@ public class LivreControllerReact {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/livres")
+    @PostMapping
     public DocumentForm addLivre(@RequestBody LivreForm livreForm) {
         return serviceDocument.saveDocument(livreForm.toDocument());
     }
 
-    @PatchMapping("/livres/{id}")
+    @PatchMapping("/{id}")
     public DocumentForm updateLivre(@PathVariable long id,
                                     @RequestBody LivreForm livreFormDetail) {
         LivreForm livre = (LivreForm) serviceDocument.getLivre(id).orElseThrow(RuntimeException::new).toDocumentForm();
@@ -51,7 +51,7 @@ public class LivreControllerReact {
         return serviceDocument.saveDocument(livre.toDocument());
     }
 
-    @DeleteMapping("/livres/{id}")
+    @DeleteMapping("/{id}")
     public void deleteLivre(@PathVariable long id) {
         LivreForm livre = (LivreForm) serviceDocument.getDocument(id).toDocumentForm();
         serviceDocument.removeDocument(livre.toDocument());

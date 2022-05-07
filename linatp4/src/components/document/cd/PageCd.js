@@ -13,7 +13,7 @@ const PageCd = () => {
     }, [])
 
     const fetchCds = async () => {
-        const res = await fetch('http://localhost:8080/documents/cds')
+        const res = await fetch('http://localhost:8080/cds')
         const data = await res.json()
         return data
     }
@@ -22,7 +22,7 @@ const PageCd = () => {
     const [cds, setCds] = useState([])
 
     const addCd = async (cd) => {
-        const res = await fetch('http://localhost:8080/documents/cds',
+        const res = await fetch('http://localhost:8080/cds',
             {
                 method: 'POST',
                 headers: {
@@ -35,7 +35,7 @@ const PageCd = () => {
     }
 
     const deleteCd = async (id) => {
-        await fetch(`http://localhost:8080/documents/cds/${id}`, {
+        await fetch(`http://localhost:8080/cds/${id}`, {
             method: 'DELETE'
         })
         setCds(cds.filter((cd) => cd.id !== id))

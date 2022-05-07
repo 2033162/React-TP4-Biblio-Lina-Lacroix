@@ -17,7 +17,7 @@ public class DvdControllerReact {
 
     private ServiceDocument serviceDocument;
 
-    @GetMapping("/dvds")
+    @GetMapping
     public List<DvdForm> getAllDvds() {
         return serviceDocument.findAllDvds();
     }
@@ -28,12 +28,12 @@ public class DvdControllerReact {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/dvds")
+    @PostMapping
     public DocumentForm addDvd(@RequestBody DvdForm dvdForm) {
         return serviceDocument.saveDocument(dvdForm.toDocument());
     }
 
-    @PatchMapping("/dvds/{id}")
+    @PatchMapping("/{id}")
     public DocumentForm updateDvd(@PathVariable long id,
                                   @RequestBody DvdForm dvdFormDetail) {
         DvdForm dvd = (DvdForm) serviceDocument.getDVD(id).orElseThrow(RuntimeException::new).toDocumentForm();
@@ -51,7 +51,7 @@ public class DvdControllerReact {
         return serviceDocument.saveDocument(dvd.toDocument());
     }
 
-    @DeleteMapping("/dvds/{id}")
+    @DeleteMapping("/{id}")
     public void deleteDvd(@PathVariable long id) {
         DvdForm dvd = (DvdForm) serviceDocument.getDocument(id).toDocumentForm();
         serviceDocument.removeDocument(dvd.toDocument());

@@ -1,3 +1,4 @@
+/*
 import React, {useEffect, useState} from 'react';
 import Header2 from "../Header2";
 import Documents from "./Documents";
@@ -33,10 +34,6 @@ const PageDocument = () => {
             })
         const data = await res.json()
         setDocuments([...documents, data])
-
-        /*const id = Math.floor(Math.random() * 10000) + 1
-        const newDocument = {id, ...document}
-        setDocuments([...documents, newDocument])*/
     }
 
     const deleteDocument = async (id) => {
@@ -44,8 +41,6 @@ const PageDocument = () => {
             method: 'DELETE'
         })
         setDocuments(documents.filter((document) => document.id !== id))
-
-        //setDocuments(documents.filter((document) => document.id !== id))
     }
 
     return (
@@ -63,4 +58,4 @@ const PageDocument = () => {
     );
 }
 
-export default PageDocument
+export default PageDocument*/

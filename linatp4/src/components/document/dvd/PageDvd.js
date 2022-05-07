@@ -14,7 +14,7 @@ const PageDvd = () => {
     }, [])
 
     const fetchDvds = async () => {
-        const res = await fetch('http://localhost:8080/documents/dvds')
+        const res = await fetch('http://localhost:8080/dvds')
         const data = await res.json()
         return data
     }
@@ -23,7 +23,7 @@ const PageDvd = () => {
     const [dvds, setDvds] = useState([])
 
     const addDvd = async (dvd) => {
-        const res = await fetch('http://localhost:8080/documents/dvds',
+        const res = await fetch('http://localhost:8080/dvds',
             {
                 method: 'POST',
                 headers: {
@@ -36,7 +36,7 @@ const PageDvd = () => {
     }
 
     const deleteDvd = async (id) => {
-        await fetch(`http://localhost:8080/documents/dvds/${id}`, {
+        await fetch(`http://localhost:8080/dvds/${id}`, {
             method: 'DELETE'
         })
         setDvds(dvds.filter((dvd) => dvd.id !== id))

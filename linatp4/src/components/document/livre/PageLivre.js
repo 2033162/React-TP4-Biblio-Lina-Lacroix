@@ -14,7 +14,7 @@ const PageLivre = () => {
     }, [])
 
     const fetchLivres = async () => {
-        const res = await fetch('http://localhost:8080/documents/livres')
+        const res = await fetch('http://localhost:8080/livres')
         const data = await res.json()
         return data
     }
@@ -23,7 +23,7 @@ const PageLivre = () => {
     const [livres, setLivres] = useState([])
 
     const addLivre = async (livre) => {
-        const res = await fetch('http://localhost:8080/documents/livres',
+        const res = await fetch('http://localhost:8080/livres',
             {
                 method: 'POST',
                 headers: {
@@ -36,7 +36,7 @@ const PageLivre = () => {
     }
 
     const deleteLivre = async (id) => {
-        await fetch(`http://localhost:8080/documents/livres/${id}`, {
+        await fetch(`http://localhost:8080/livres/${id}`, {
             method: 'DELETE'
         })
         setLivres(livres.filter((livre) => livre.id !== id))

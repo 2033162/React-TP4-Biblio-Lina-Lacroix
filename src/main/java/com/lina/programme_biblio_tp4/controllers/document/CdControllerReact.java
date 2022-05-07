@@ -17,7 +17,7 @@ public class CdControllerReact {
 
     private ServiceDocument serviceDocument;
 
-    @GetMapping("/cds")
+    @GetMapping
     public List<CdForm> getAllCds() {
         return serviceDocument.findAllCds();
     }
@@ -28,12 +28,12 @@ public class CdControllerReact {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/cds")
+    @PostMapping
     public DocumentForm addCd(@RequestBody CdForm cdForm) {
         return serviceDocument.saveDocument(cdForm.toDocument());
     }
 
-    @PatchMapping("/cds/{id}")
+    @PatchMapping("/{id}")
     public DocumentForm updateCd(@PathVariable long id,
                                  @RequestBody CdForm cdFormDetail) {
         CdForm cd = (CdForm) serviceDocument.getCD(id).orElseThrow(RuntimeException::new).toDocumentForm();
@@ -52,7 +52,7 @@ public class CdControllerReact {
         return serviceDocument.saveDocument(cd.toDocument());
     }
 
-    @DeleteMapping("/cds/{id}")
+    @DeleteMapping("/{id}")
     public void deleteCd(@PathVariable long id) {
         CdForm cd = (CdForm) serviceDocument.getDocument(id).toDocumentForm();
         serviceDocument.removeDocument(cd.toDocument());
