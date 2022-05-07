@@ -123,4 +123,22 @@ public class DocumentControllerReact {
 
         serviceDocument.removeDocument(document.toDocument());
     }
+
+    @DeleteMapping("/livres/{id}")
+    public void deleteLivre(@PathVariable long id) {
+        LivreForm livre = (LivreForm) serviceDocument.getDocument(id).toDocumentForm();
+        serviceDocument.removeDocument(livre.toDocument());
+    }
+
+    @DeleteMapping("/cds/{id}")
+    public void deleteCd(@PathVariable long id) {
+        CdForm cd = (CdForm) serviceDocument.getDocument(id).toDocumentForm();
+        serviceDocument.removeDocument(cd.toDocument());
+    }
+
+    @DeleteMapping("/dvds/{id}")
+    public void deleteDvd(@PathVariable long id) {
+        DvdForm dvd = (DvdForm) serviceDocument.getDocument(id).toDocumentForm();
+        serviceDocument.removeDocument(dvd.toDocument());
+    }
 }

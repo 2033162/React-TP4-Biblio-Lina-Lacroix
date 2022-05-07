@@ -61,6 +61,6 @@ const PageDocument = () => {
                 : 'No Documents'}
         </div>
     );
-};
+}
 
-export default PageDocument;
+export default PageDocument
