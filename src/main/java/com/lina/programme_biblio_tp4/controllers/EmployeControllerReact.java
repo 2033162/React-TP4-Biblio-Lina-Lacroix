@@ -46,5 +46,9 @@ public class EmployeControllerReact {
     }
 
 
-
+    @DeleteMapping("/{id}")
+    public void deleteEmploye(@PathVariable long id) {
+        EmployeForm employe = serviceEmploye.getEmploye(id).orElseThrow(RuntimeException::new).toEmployeForm();
+        serviceEmploye.removeEmploye(employe.toEmploye());
+    }
 }
