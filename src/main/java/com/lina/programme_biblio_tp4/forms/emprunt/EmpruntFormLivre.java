@@ -7,7 +7,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -84,9 +86,15 @@ public class EmpruntFormLivre extends LivreForm {
             bEtatDocument = null;
             bGenreLivre = null;
         }
+
+        assert bDateInitial != null;
+        Date dateI = Date.from(bDateInitial.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        assert bDateExpire != null;
+        Date dateE = Date.from(bDateExpire.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
         final EmpruntDocuments empruntDocuments = new EmpruntDocuments(
-                bDateInitial,
-                bDateExpire,
+                dateI,
+                dateE,
                 nbrRappel,
                 clientForm.toClient(),
                 new Livre(
