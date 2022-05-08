@@ -2,13 +2,13 @@ import {useState} from 'react'
 
 const AddLivre = ({onAdd}) => {
     const [etatDocument, setEtatDocument] = useState('')
-    const [genreDocument, setGenreDocument] = useState('')
+    const [genreDocument, setGenreDocument] = useState('livre')
     const [titre, setTitre] = useState('')
     const [auteur, setAuteur] = useState('')
     const [editeur, setEditeur] = useState('')
-    const [anneePublication, setAnneePublication] = useState('')
-    const [nbrExemplaire, setNbrExemplaire] = useState('')
-    const [nbrPages, setNbrPages] = useState('')
+    const [anneePublication, setAnneePublication] = useState(0)
+    const [nbrExemplaire, setNbrExemplaire] = useState(0)
+    const [nbrPages, setNbrPages] = useState(0)
     const [genreLivre, setGenreLivre] = useState('')
 
     const onSubmit = (e) => {
@@ -104,13 +104,13 @@ const AddLivre = ({onAdd}) => {
             genreLivre
         })
         setEtatDocument('')
-        setGenreDocument('')
+        setGenreDocument('livre')
         setTitre('')
         setAuteur('')
         setEditeur('')
-        setAnneePublication('')
-        setNbrExemplaire('')
-        setNbrPages('')
+        setAnneePublication(0)
+        setNbrExemplaire(0)
+        setNbrPages(0)
         setGenreLivre('')
     }
 
@@ -118,15 +118,18 @@ const AddLivre = ({onAdd}) => {
         <form className='add-form' onSubmit={onSubmit}>
             <div className='form-control'>
                 <label>Etat du document</label>
-                <input type='text' placeholder='DISPONIBLE, RESERVE, EMPRUNTE, ENDOMMAGE'
-                       value={etatDocument}
-                       onChange={(e) => setEtatDocument(e.target.value)}/>
+                <select defaultValue={etatDocument}
+                        onChange={(e) => setEtatDocument(e.target.value)}>
+                    <option value="DISPONIBLE">DISPONIBLE</option>
+                    <option value="RESERVE">RESERVE</option>
+                    <option value="EMPRUNTE">EMPRUNTE</option>
+                    <option value="ENDOMMAGE">ENDOMMAGE</option>
+                </select>
             </div>
             <div className='form-control'>
                 <label>Genre du document</label>
-                <input type='text' placeholder='livre'
-                       value={genreDocument}
-                       onChange={(e) => setGenreDocument(e.target.value)}/>
+                <input type='text' defaultValue={genreDocument}
+                       disabled="disabled"/>
             </div>
             <div className='form-control'>
                 <label>Titre</label>
@@ -148,27 +151,31 @@ const AddLivre = ({onAdd}) => {
             </div>
             <div className='form-control'>
                 <label>Annee de publication</label>
-                <input type='text' placeholder='Annee de publication'
+                <input type='number' placeholder='Annee de publication'
                        value={anneePublication}
                        onChange={(e) => setAnneePublication(e.target.value)}/>
             </div>
             <div className='form-control'>
                 <label>Nombre d'exemplaire</label>
-                <input type='text' placeholder='Nombre exemplaire'
+                <input type='number' placeholder='Nombre exemplaire'
                        value={nbrExemplaire}
                        onChange={(e) => setNbrExemplaire(e.target.value)}/>
             </div>
             <div className='form-control'>
                 <label>Nombre de pages</label>
-                <input type='text' placeholder='Nombre de pages'
+                <input type='number' placeholder='Nombre de pages'
                         value={nbrPages}
                         onChange={(e) => setNbrPages(e.target.value)}/>
             </div>
             <div className='form-control'>
                 <label>Genre du livre</label>
-                <input type='text' placeholder='Genre du livre'
-                        value={genreLivre}
-                        onChange={(e) => setGenreLivre(e.target.value)}/>
+                <select defaultValue={genreLivre}
+                onChange={(e) => setGenreLivre(e.target.value)}>
+                    <option value="ROMAN">ROMAN</option>
+                    <option value="MANUEL">MANUEL</option>
+                    <option value="ETUDE">ETUDE</option>
+                    <option value="MAGAZINE">MAGAZINE</option>
+                </select>
             </div>
             <input type='submit' value='Save document livre' className='btn btn-block bg-black text-light'/>
         </form>

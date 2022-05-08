@@ -2,12 +2,12 @@ import {useState} from "react";
 
 const AddCd = ({onAdd}) => {
     const [etatDocument, setEtatDocument] = useState('')
-    const [genreDocument, setGenreDocument] = useState('')
+    const [genreDocument, setGenreDocument] = useState('cd')
     const [titre, setTitre] = useState('')
     const [auteur, setAuteur] = useState('')
     const [editeur, setEditeur] = useState('')
-    const [anneePublication, setAnneePublication] = useState('')
-    const [nbrExemplaire, setNbrExemplaire] = useState('')
+    const [anneePublication, setAnneePublication] = useState(0)
+    const [nbrExemplaire, setNbrExemplaire] = useState(0)
     const [genreMusique, setGenreMusique] = useState('')
     const [compositeur, setCompositeur] = useState('')
     const [interprete, setInterprete] = useState('')
@@ -114,12 +114,12 @@ const AddCd = ({onAdd}) => {
             interprete
         })
         setEtatDocument('')
-        setGenreDocument('')
+        setGenreDocument('cd')
         setTitre('')
         setAuteur('')
         setEditeur('')
-        setAnneePublication('')
-        setNbrExemplaire('')
+        setAnneePublication(0)
+        setNbrExemplaire(0)
         setGenreMusique('')
         setCompositeur('')
         setInterprete('')
@@ -129,15 +129,18 @@ const AddCd = ({onAdd}) => {
         <form className='add-form' onSubmit={onSubmit}>
             <div className='form-control'>
                 <label>Etat du document</label>
-                <input type='text' placeholder='DISPONIBLE, RESERVE, EMPRUNTE, ENDOMMAGE'
-                       value={etatDocument}
-                       onChange={(e) => setEtatDocument(e.target.value)}/>
+                <select defaultValue={etatDocument}
+                        onChange={(e) => setEtatDocument(e.target.value)}>
+                    <option value="DISPONIBLE">DISPONIBLE</option>
+                    <option value="RESERVE">RESERVE</option>
+                    <option value="EMPRUNTE">EMPRUNTE</option>
+                    <option value="ENDOMMAGE">ENDOMMAGE</option>
+                </select>
             </div>
             <div className='form-control'>
                 <label>Genre du document</label>
-                <input type='text' placeholder='cd'
-                       value={genreDocument}
-                       onChange={(e) => setGenreDocument(e.target.value)}/>
+                <input type='text' defaultValue={genreDocument}
+                       disabled="disabled"/>
             </div>
             <div className='form-control'>
                 <label>Titre</label>
@@ -159,21 +162,36 @@ const AddCd = ({onAdd}) => {
             </div>
             <div className='form-control'>
                 <label>Annee de publication</label>
-                <input type='text' placeholder='Annee de publication'
+                <input type='number' placeholder='Annee de publication'
                        value={anneePublication}
                        onChange={(e) => setAnneePublication(e.target.value)}/>
             </div>
             <div className='form-control'>
                 <label>Nombre d'exemplaire</label>
-                <input type='text' placeholder='Nombre exemplaire'
+                <input type='number' placeholder='Nombre exemplaire'
                        value={nbrExemplaire}
                        onChange={(e) => setNbrExemplaire(e.target.value)}/>
             </div>
             <div className='form-control'>
                 <label>Genre de musique</label>
-                <input type='text' placeholder='Genre de musique'
-                       value={genreMusique}
-                       onChange={(e) => setGenreMusique(e.target.value)}/>
+                <select defaultValue={genreMusique}
+                        onChange={(e) => setGenreMusique(e.target.value)}>
+                    <option value="Classique">Classique</option>
+                    <option value="Jazz">Jazz</option>
+                    <option value="Pop">Pop</option>
+                    <option value="Soul">Soul</option>
+                    <option value="Rap">Rap</option>
+                    <option value="Folk">Folk</option>
+                    <option value="Punk">Punk</option>
+                    <option value="Metal">Metal</option>
+                    <option value="hip-hop">hip-hop</option>
+                    <option value="rnb">rnb</option>
+                    <option value="country">country</option>
+                    <option value="Electronique">Electronique</option>
+                    <option value="Flamenco">Flamenco</option>
+                    <option value="Rock">Rock</option>
+                    <option value="reggae">reggae</option>
+                </select>
             </div>
             <div className='form-control'>
                 <label>Compositeur</label>

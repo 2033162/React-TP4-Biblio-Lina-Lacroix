@@ -12,10 +12,10 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 public class DVD extends Document {
-    private int duree;
+    private double duree;
     private String genreFilm;
 
-    public DVD(EtatDocument etatDocument, String genreDocument, String titre, String auteur, String editeur, int anneePublication, int nbrExemplaire, int duree, String genreFilm) {
+    public DVD(EtatDocument etatDocument, String genreDocument, String titre, String auteur, String editeur, int anneePublication, int nbrExemplaire, double duree, String genreFilm) {
         this.setEtatDocument(etatDocument);
         this.setGenreDocument(genreDocument);
         this.setTitre(titre);

@@ -2,13 +2,13 @@ import {useState} from "react";
 
 const AddDvd = ({onAdd}) => {
     const [etatDocument, setEtatDocument] = useState('')
-    const [genreDocument, setGenreDocument] = useState('')
+    const [genreDocument, setGenreDocument] = useState('dvd')
     const [titre, setTitre] = useState('')
     const [auteur, setAuteur] = useState('')
     const [editeur, setEditeur] = useState('')
-    const [anneePublication, setAnneePublication] = useState('')
-    const [nbrExemplaire, setNbrExemplaire] = useState('')
-    const [duree, setDuree] = useState('')
+    const [anneePublication, setAnneePublication] = useState(0)
+    const [nbrExemplaire, setNbrExemplaire] = useState(0)
+    const [duree, setDuree] = useState(0)
     const [genreFilm, setGenreFilm] = useState('')
 
     const onSubmit = (e) => {
@@ -104,29 +104,32 @@ const AddDvd = ({onAdd}) => {
             genreFilm
         })
         setEtatDocument('')
-        setGenreDocument('')
+        setGenreDocument('dvd')
         setTitre('')
         setAuteur('')
         setEditeur('')
-        setAnneePublication('')
-        setNbrExemplaire('')
-        setDuree('')
-        setGenreFilm('')
+        setAnneePublication(0)
+        setNbrExemplaire(0)
+        setDuree(0)
+        setGenreFilm(0)
     }
 
     return (
         <form className='add-form' onSubmit={onSubmit}>
             <div className='form-control'>
                 <label>Etat du document</label>
-                <input type='text' placeholder='DISPONIBLE, RESERVE, EMPRUNTE, ENDOMMAGE'
-                       value={etatDocument}
-                       onChange={(e) => setEtatDocument(e.target.value)}/>
+                <select defaultValue={etatDocument}
+                        onChange={(e) => setEtatDocument(e.target.value)}>
+                    <option value="DISPONIBLE">DISPONIBLE</option>
+                    <option value="RESERVE">RESERVE</option>
+                    <option value="EMPRUNTE">EMPRUNTE</option>
+                    <option value="ENDOMMAGE">ENDOMMAGE</option>
+                </select>
             </div>
             <div className='form-control'>
                 <label>Genre du document</label>
-                <input type='text' placeholder='dvd'
-                       value={genreDocument}
-                       onChange={(e) => setGenreDocument(e.target.value)}/>
+                <input type='text' defaultValue={genreDocument}
+                       disabled="disabled"/>
             </div>
             <div className='form-control'>
                 <label>Titre</label>
@@ -148,27 +151,44 @@ const AddDvd = ({onAdd}) => {
             </div>
             <div className='form-control'>
                 <label>Annee de publication</label>
-                <input type='text' placeholder='Annee de publication'
+                <input type='number' placeholder='Annee de publication'
                        value={anneePublication}
                        onChange={(e) => setAnneePublication(e.target.value)}/>
             </div>
             <div className='form-control'>
                 <label>Nombre d'exemplaire</label>
-                <input type='text' placeholder='Nombre exemplaire'
+                <input type='number' placeholder='Nombre exemplaire'
                        value={nbrExemplaire}
                        onChange={(e) => setNbrExemplaire(e.target.value)}/>
             </div>
             <div className='form-control'>
                 <label>Duree</label>
-                <input type='text' placeholder='Duree'
+                <input type='number' placeholder='Duree'
                        value={duree}
                        onChange={(e) => setDuree(e.target.value)}/>
             </div>
             <div className='form-control'>
                 <label>Genre du film</label>
-                <input type='text' placeholder='Genre du film'
-                       value={genreFilm}
-                       onChange={(e) => setGenreFilm(e.target.value)}/>
+                <select defaultValue={genreFilm}
+                        onChange={(e) => setGenreFilm(e.target.value)}>
+                    <option value="Aventure">Aventure</option>
+                    <option value="Guerre">Guerre</option>
+                    <option value="Histoire">Histoire</option>
+                    <option value="Action">Action</option>
+                    <option value="Comedie">Comedie</option>
+                    <option value="Drame">Drame</option>
+                    <option value="Comedie dramatique">Comedie dramatique</option>
+                    <option value="Fiction jeunesse">Fiction jeunesse</option>
+                    <option value="Anime">Anime</option>
+                    <option value="Film musical">Film musical</option>
+                    <option value="Policier">Policier</option>
+                    <option value="Espionnage">Espionnage</option>
+                    <option value="Science fiction">Science fiction</option>
+                    <option value="Fantastique">Fantastique</option>
+                    <option value="Horreur">Horreur</option>
+                    <option value="Western">Western</option>
+                    <option value="Documentaire">Documentaire</option>
+                </select>
             </div>
             <input type='submit' value='Save document dvd' className='btn btn-block bg-black text-light'/>
         </form>

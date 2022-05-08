@@ -5,7 +5,7 @@ import java.util.stream.Stream;
 
 public enum GenreLivre {
     ROMAN("ROMAN"),
-    MANUEL_SCOLAIRE("MANUEL SCOLAIRE"),
+    MANUEL("MANUEL"),
     ETUDE("ETUDE"),
     MAGAZINE("MAGAZINE");
 

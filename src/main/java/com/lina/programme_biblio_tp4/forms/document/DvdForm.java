@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DvdForm extends DocumentForm {
     private static EtatDocument ETATDOCUMENT;
-    private int duree;
+    private double duree;
     private String genreFilm;
 
     public DvdForm(
@@ -22,7 +22,7 @@ public class DvdForm extends DocumentForm {
             String editeur,
             int anneePublication,
             int nbrExemplaire,
-            int duree,
+            double duree,
             String genreFilm
     ) {
         super(

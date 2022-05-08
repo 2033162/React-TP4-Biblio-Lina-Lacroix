@@ -133,7 +133,7 @@ const AddClient = ({onAdd}) => {
             <div className='form-control'>
                 <label>Numero de telephone</label>
                 <input type='text' placeholder='Numero de telephone'
-                       value={numeroTelephone}
+                       defaultValue="514-"
                        onChange={(e) => setNumeroTelephone(e.target.value)}/>
             </div>
             <div className='form-control'>

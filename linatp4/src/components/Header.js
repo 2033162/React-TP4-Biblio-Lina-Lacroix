@@ -19,13 +19,13 @@ const Header = () => {
             <NavLink to="/" style={navLinkStyles}>Home</NavLink>{" | "}
             <NavLink to="/clients" style={navLinkStyles}>Clients</NavLink> {" | "}
             <DropdownButton id="dropdown-button" title="Documents">
-                <Dropdown.Item href="#/livres">
+                <Dropdown.Item>
                     <NavLink to="/livres" style={navLinkStyles}>Livres</NavLink>
                 </Dropdown.Item>
-                <Dropdown.Item href="#/cds">
+                <Dropdown.Item>
                     <NavLink to="/cds" style={navLinkStyles}>Cds</NavLink>
                 </Dropdown.Item>
-                <Dropdown.Item href="#/dvds">
+                <Dropdown.Item>
                     <NavLink to="/dvds" style={navLinkStyles}>Dvds</NavLink>
                 </Dropdown.Item>
             </DropdownButton>
