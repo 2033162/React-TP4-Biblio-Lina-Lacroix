@@ -33,5 +33,18 @@ public class EmployeControllerReact {
                 HttpStatus.CREATED);
     }
 
+    @PutMapping("/{id}")
+    public EmployeForm updateEmploye(@PathVariable long id,
+                                     @RequestBody EmployeForm employeFormDetail) {
+        EmployeForm employe = serviceEmploye.getEmploye(id).orElseThrow(RuntimeException::new).toEmployeForm();
+
+        employe.setNom(employeFormDetail.getNom());
+        employe.setPrenom(employeFormDetail.getPrenom());
+        employe.setFonction(employeFormDetail.getFonction());
+
+        return serviceEmploye.saveEmploye(employe.toEmploye()).toEmployeForm();
+    }
+
+
 
 }
