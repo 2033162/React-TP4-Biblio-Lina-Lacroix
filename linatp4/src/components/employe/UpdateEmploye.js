@@ -70,7 +70,7 @@ const UpdateEmploye = ({onUpdate}) => {
                     <option value="PREPOSE">PREPOSE</option>
                 </select>
             </div>
-            <input type='submit' value='Save Employe' className='btn btn-block bg-black text-light'/>
+            <input type='submit' value='Update Employe' className='btn btn-block bg-black text-light'/>
         </form>
     )
 }

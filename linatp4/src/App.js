@@ -9,6 +9,10 @@ import PageLivre from "./components/document/livre/PageLivre";
 import PageCd from "./components/document/cd/PageCd";
 import PageDvd from "./components/document/dvd/PageDvd";
 import UpdateClient from "./components/client/UpdateClient";
+import UpdateEmploye from "./components/employe/UpdateEmploye";
+import UpdateLivre from "./components/document/livre/UpdateLivre";
+import UpdateCd from "./components/document/cd/UpdateCd";
+import UpdateDvd from "./components/document/dvd/UpdateDvd";
 
 function App() {
     return (
@@ -21,9 +25,13 @@ function App() {
                 <Route path="/clients" element={<PageClient/>} />
                 <Route path="/clients/:id" element={<UpdateClient/>} />
                 <Route path="/employes" element={<PageEmploye/>} />
+                <Route path="/employes/:id" element={<UpdateEmploye/>} />
                 <Route path="/livres" element={<PageLivre/>} />
+                <Route path="/livres/:id" element={<UpdateLivre/>} />
                 <Route path="/cds" element={<PageCd/>} />
+                <Route path="/cds/:id" element={<UpdateCd/>} />
                 <Route path="/dvds" element={<PageDvd/>} />
+                <Route path="/dvds/:id" element={<UpdateDvd/>} />
                 <Route path="*" element={<PageNotFound/>} />
             </Routes>
         </div>
