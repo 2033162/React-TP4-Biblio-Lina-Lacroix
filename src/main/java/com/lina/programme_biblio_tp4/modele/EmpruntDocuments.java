@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -14,8 +15,8 @@ public class EmpruntDocuments {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private Date dateInitial;
-    private Date dateExpire;
+    private LocalDate dateInitial;
+    private LocalDate dateExpire;
     private int nbrRappel;
 
     @ManyToOne
@@ -28,7 +29,7 @@ public class EmpruntDocuments {
     @ToString.Exclude
     private Document document;
 
-    public EmpruntDocuments(Date dateInitial, Date dateExpire, int nbrRappel, Client client, Document document) {
+    public EmpruntDocuments(LocalDate dateInitial, LocalDate dateExpire, int nbrRappel, Client client, Document document) {
         this.dateInitial = dateInitial;
         this.dateExpire = dateExpire;
         this.nbrRappel = nbrRappel;

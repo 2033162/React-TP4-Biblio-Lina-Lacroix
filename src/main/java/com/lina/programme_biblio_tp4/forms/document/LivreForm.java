@@ -10,10 +10,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class LivreForm extends DocumentForm {
-    private static EtatDocument ETATDOCUMENT;
-    private static GenreLivre GENRELIVRE;
-    private int nbrPages;
-    private String genreLivre;
+    protected static EtatDocument ETATDOCUMENT;
+    protected static GenreLivre GENRELIVRE;
+    protected int nbrPages;
+    protected String genreLivre;
 
     public LivreForm(long id,
                      String etatDocument,

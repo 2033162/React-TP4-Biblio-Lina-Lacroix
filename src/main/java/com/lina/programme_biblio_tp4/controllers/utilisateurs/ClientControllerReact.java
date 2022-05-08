@@ -1,4 +1,4 @@
-package com.lina.programme_biblio_tp4.controllers;
+package com.lina.programme_biblio_tp4.controllers.utilisateurs;
 
 import com.lina.programme_biblio_tp4.forms.utilisateurs.ClientForm;
 import com.lina.programme_biblio_tp4.service.ServiceClient;
