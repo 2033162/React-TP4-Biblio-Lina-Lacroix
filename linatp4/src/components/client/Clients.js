@@ -1,12 +1,13 @@
 import Client from './Client'
-const Clients = ({clients, onDelete, onUpdate}) => {
+const Clients = ({clients, onDelete, onUpdate, showUpdate}) => {
     return (
         <>
             {clients.map((client) => (
                 <Client key={client.id}
                         client={client}
                         onDelete={onDelete}
-                        onUpdate={onUpdate}/>
+                        onUpdate={onUpdate}
+                        showUpdate={showUpdate}/>
             ))}
         </>
     )

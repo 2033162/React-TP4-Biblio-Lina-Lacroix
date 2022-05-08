@@ -98,10 +98,10 @@ const PageClient = () => {
                          onDelete={deleteClient}
                          onUpdate={() =>
                              setShowUpdateClient(!showUpdateClient)}
-                         showUpdateClient={showUpdateClient}
-                         {showUpdateClient && <UpdateClient onUpdate={updateClient} />}
+                         showUpdate={showUpdateClient}
                 />
                 : 'No Clients'}
+            {showUpdateClient && <UpdateClient onUpdate={updateClient} />}
         </div>
     );
 };
