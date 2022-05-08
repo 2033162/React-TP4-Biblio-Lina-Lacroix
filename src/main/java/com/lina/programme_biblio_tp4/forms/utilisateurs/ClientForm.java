@@ -1,4 +1,4 @@
-package com.lina.programme_biblio_tp4.forms;
+package com.lina.programme_biblio_tp4.forms.utilisateurs;
 
 import com.lina.programme_biblio_tp4.modele.Client;
 import lombok.AllArgsConstructor;

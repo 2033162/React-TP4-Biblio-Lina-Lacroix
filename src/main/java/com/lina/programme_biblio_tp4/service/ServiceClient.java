@@ -1,6 +1,6 @@
 package com.lina.programme_biblio_tp4.service;
 
-import com.lina.programme_biblio_tp4.forms.ClientForm;
+import com.lina.programme_biblio_tp4.forms.utilisateurs.ClientForm;
 import com.lina.programme_biblio_tp4.modele.Amende;
 import com.lina.programme_biblio_tp4.modele.Client;
 import com.lina.programme_biblio_tp4.modele.EmpruntDocuments;

@@ -1,6 +1,6 @@
 /*
 import React, {useEffect, useState} from 'react';
-import Header2 from "../Header2";
+import HeaderAdd from "../HeaderAdd";
 import Documents from "./Documents";
 import AddDocument from "./AddDocument";
 
@@ -45,7 +45,7 @@ const PageDocument = () => {
 
     return (
         <div className='container'>
-            <Header2 title='Document'
+            <HeaderAdd title='Document'
                      onAdd={() =>
                          setShowAddDocument(!showAddDocument)}
                      showAdd={showAddDocument}/>

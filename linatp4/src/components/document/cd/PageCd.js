@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import Header2 from "../../Header2";
+import HeaderAdd from "../../HeaderAdd";
 import AddCd from "./AddCd";
 import Cds from "./Cds";
 
@@ -43,10 +43,10 @@ const PageCd = () => {
 
     return (
         <div className='container'>
-            <Header2 title='Document cd'
-                     onAdd={() =>
+            <HeaderAdd title='Document cd'
+                       onAdd={() =>
                      setShowAddCd(!showAddCd)}
-                     showAdd={showAddCd}/>
+                       showAdd={showAddCd}/>
             {showAddCd && <AddCd onAdd={addCd} />}
             {cds.length > 0 ?
             <Cds cds={cds}

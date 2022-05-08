@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import Clients from "./Clients";
 import AddClient from "./AddClient";
-import Header2 from "../Header2";
+import HeaderAdd from "../HeaderAdd";
 import UpdateClient from "./UpdateClient";
-import HeaderUpdate from "../HeaderUpdate";
 
 const PageClient = () => {
 
@@ -88,10 +87,10 @@ const PageClient = () => {
 
     return (
         <div className='container'>
-            <Header2 title='Client'
-                    onAdd={() =>
+            <HeaderAdd title='Client'
+                       onAdd={() =>
                         setShowAddClient(!showAddClient)}
-                    showAdd={showAddClient}/>
+                       showAdd={showAddClient}/>
             {showAddClient && <AddClient onAdd={addClient} />}
             {clients.length > 0 ?
                 <Clients clients={clients}

@@ -1,6 +1,6 @@
 package com.lina.programme_biblio_tp4.modele;
 
-import com.lina.programme_biblio_tp4.forms.ClientForm;
+import com.lina.programme_biblio_tp4.forms.utilisateurs.ClientForm;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

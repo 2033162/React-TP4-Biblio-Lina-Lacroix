@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import Header2 from "../../Header2";
+import HeaderAdd from "../../HeaderAdd";
 import AddDvd from "./AddDvd";
 import Dvds from "./Dvds";
 
@@ -44,10 +44,10 @@ const PageDvd = () => {
 
     return (
         <div className='container'>
-            <Header2 title='Document dvd'
-                     onAdd={() =>
+            <HeaderAdd title='Document dvd'
+                       onAdd={() =>
                      setShowAddDvd(!showAddDvd)}
-                     showAdd={showAddDvd}/>
+                       showAdd={showAddDvd}/>
             {showAddDvd && <AddDvd onAdd={addDvd} />}
             {dvds.length > 0 ?
             <Dvds dvds={dvds}

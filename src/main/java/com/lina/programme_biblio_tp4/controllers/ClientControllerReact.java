@@ -1,6 +1,6 @@
 package com.lina.programme_biblio_tp4.controllers;
 
-import com.lina.programme_biblio_tp4.forms.ClientForm;
+import com.lina.programme_biblio_tp4.forms.utilisateurs.ClientForm;
 import com.lina.programme_biblio_tp4.service.ServiceClient;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

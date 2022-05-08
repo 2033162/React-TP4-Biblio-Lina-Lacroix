@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import Button from './Button'
 
 
-const Header2 = ({title, onAdd, showAdd}) => {
+const HeaderAdd = ({title, onAdd, showAdd}) => {
 
     return (
         <header className='header2'>
@@ -13,12 +13,12 @@ const Header2 = ({title, onAdd, showAdd}) => {
     )
 }
 
-Header2.defaultProps = {
+HeaderAdd.defaultProps = {
     title: 'Trask Tracker',
 }
 
-Header2.propTypes = {
+HeaderAdd.propTypes = {
     title: PropTypes.string.isRequired,
 }
 
-export default Header2
+export default HeaderAdd

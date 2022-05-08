@@ -1,7 +1,9 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import isMatch from 'date-fns/isMatch'
+import {useParams} from "react-router-dom";
 
 const UpdateClient = ({onUpdate}) => {
+    const {id} = useParams()
     const [nom, setNom] = useState('')
     const [prenom, setPrenom] = useState('')
     const [rue, setRue] = useState('')
@@ -96,6 +98,26 @@ const UpdateClient = ({onUpdate}) => {
         setCodePostal('')
         setNumeroTelephone('')
         setDateInscription('')
+    }
+
+    useEffect(() => {
+        fetchClient(id).then(client => {
+            setNom(client.data.nom);
+            setPrenom(client.data.prenom);
+            setRue(client.data.rue);
+            setVille(client.data.ville);
+            setCodePostal(client.data.codePostal);
+            setNumeroTelephone(client.data.numeroTelephone);
+            setDateInscription(client.data.dateInscription);
+        }).catch(error => {
+            console.log('Something went wrong', error)
+        })
+    })
+
+    const fetchClient = async (id) => {
+        const res = await fetch(`http://localhost:8080/clients/${id}`)
+        const data = await res.json()
+        return data
     }
 
     return (
