@@ -64,6 +64,10 @@ public class ServiceEmpruntDocuments {
         return empruntDocumentRepository.getClientEmprunt(clientId);
     }
 
+    public List<EmpruntDocuments> getAllClientsEmprunts() {
+        return empruntDocumentRepository.getAllClientsEmprunts();
+    }
+
     public int getNbrEmpruntExemplaire(long empruntDocumentsId) {
         return empruntDocumentRepository.getNbrEmpruntExemplaire(empruntDocumentsId);
     }

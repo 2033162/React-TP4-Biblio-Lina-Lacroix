@@ -1,9 +1,8 @@
-import {useEffect, useState} from 'react'
+import {useState} from 'react'
 import isMatch from 'date-fns/isMatch'
-import {useParams} from "react-router-dom";
 
 const UpdateClient = ({onUpdate}) => {
-    const {id} = useParams()
+    //const {id} = useParams()
     const [nom, setNom] = useState('')
     const [prenom, setPrenom] = useState('')
     const [rue, setRue] = useState('')
