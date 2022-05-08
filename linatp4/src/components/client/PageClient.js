@@ -19,6 +19,12 @@ const PageClient = () => {
         return data
     }
 
+    const fetchClient = async (id) => {
+        const res = await fetch(`http://localhost:8080/clients/${id}`)
+        const data = await res.json()
+        return data
+    }
+
     const [showAddClient, setShowAddClient] = useState(false)
     const [clients, setClients] = useState([])
 
@@ -33,10 +39,6 @@ const PageClient = () => {
             })
         const data = await res.json()
         setClients([...clients, data])
-
-        /*const id = Math.floor(Math.random() * 10000) + 1
-        const newClient = {id, ...client}
-        setClients([...clients, newClient])*/
     }
 
     const deleteClient = async (id) => {
@@ -44,8 +46,40 @@ const PageClient = () => {
             method: 'DELETE'
         })
         setClients(clients.filter((client) => client.id !== id))
+    }
 
-        //setClients(clients.filter((client) => client.id !== id))
+    const toggleClient = async (id) => {
+        const clientToToggle = await fetchClient(id)
+        const updateClient = await {...clientToToggle,
+            nom: !clientToToggle.nom,
+            prenom: !clientToToggle.prenom,
+            rue: !clientToToggle.rue,
+            ville: !clientToToggle.ville,
+            codePostal: !clientToToggle.codePostal,
+            numeroTelephone: !clientToToggle.numeroTelephone,
+            dateInscription: !clientToToggle.dateInscription}
+
+        const res = await fetch(`http://localhost:8080/clients/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify(updateClient)
+        })
+        const data = await res.json()
+        setClients(
+            clients.map(
+                (client) => client.id === id ?
+                    {...client,
+                        nom: data.nom,
+                        prenom: data.prenom,
+                        rue: data.rue,
+                        ville: data.ville,
+                        codePostal: data.codePostal,
+                        numeroTelephone: data.numeroTelephone,
+                        dateInscription: data.dateInscription} : client
+            )
+        )
     }
 
     return (
@@ -57,7 +91,8 @@ const PageClient = () => {
             {showAddClient && <AddClient onAdd={addClient} />}
             {clients.length > 0 ?
                 <Clients clients={clients}
-                         onDelete={deleteClient}/>
+                         onDelete={deleteClient}
+                         onToggle={toggleClient}/>
                 : 'No Clients'}
         </div>
     );

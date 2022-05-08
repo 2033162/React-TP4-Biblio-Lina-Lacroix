@@ -3,8 +3,8 @@ import {NavLink} from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.css"
 
 const Header = () => {
-    const blue = "#89CFF0"
-    const red = "#F12B2A"
+    const blue = "#b6906a"
+    const red = "#622f2f"
     const navLinkStyles = ({isActive}) => {
         console.log(isActive)
         return {
