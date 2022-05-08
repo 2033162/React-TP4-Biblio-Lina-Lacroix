@@ -1,6 +1,5 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
-import {Dropdown, DropdownButton} from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css"
 
 const Header = () => {
@@ -18,17 +17,9 @@ const Header = () => {
         <div>
             <NavLink to="/" style={navLinkStyles}>Home</NavLink>{" | "}
             <NavLink to="/clients" style={navLinkStyles}>Clients</NavLink> {" | "}
-            <DropdownButton id="dropdown-button" title="Documents">
-                <Dropdown.Item>
-                    <NavLink to="/livres" style={navLinkStyles}>Livres</NavLink>
-                </Dropdown.Item>
-                <Dropdown.Item>
-                    <NavLink to="/cds" style={navLinkStyles}>Cds</NavLink>
-                </Dropdown.Item>
-                <Dropdown.Item>
-                    <NavLink to="/dvds" style={navLinkStyles}>Dvds</NavLink>
-                </Dropdown.Item>
-            </DropdownButton>
+            <NavLink to="/livres" style={navLinkStyles}>Livres</NavLink> {" | "}
+            <NavLink to="/cds" style={navLinkStyles}>Cds</NavLink> {" | "}
+            <NavLink to="/dvds" style={navLinkStyles}>Dvds</NavLink>
         </div>
     )
 }
