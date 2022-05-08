@@ -1,5 +1,6 @@
 package com.lina.programme_biblio_tp4.modele;
 
+import com.lina.programme_biblio_tp4.forms.utilisateurs.EmployeForm;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -32,5 +33,14 @@ public class Employe {
                 ", prenom='" + prenom + '\'' +
                 ", fonction=" + fonction +
                 '}';
+    }
+
+    public EmployeForm toEmployeForm() {
+        return new EmployeForm(
+                id,
+                nom,
+                prenom,
+                fonction.toString()
+        );
     }
 }
