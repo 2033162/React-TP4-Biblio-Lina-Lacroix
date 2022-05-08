@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class DvdForm extends DocumentForm {
-    private static EtatDocument ETATDOCUMENT;
-    private double duree;
-    private String genreFilm;
+    protected static EtatDocument ETATDOCUMENT;
+    protected double duree;
+    protected String genreFilm;
 
     public DvdForm(
             long id,
