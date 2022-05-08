@@ -33,7 +33,7 @@ public class ClientControllerReact {
                 HttpStatus.CREATED);
     }
 
-    @PatchMapping("/{id}")
+    @PutMapping("/{id}")
     public ClientForm updateClient(@PathVariable long id, @RequestBody ClientForm clientFormDetail) {
         ClientForm client = serviceClient.getClient(id).orElseThrow(RuntimeException::new).toClientForm();
 

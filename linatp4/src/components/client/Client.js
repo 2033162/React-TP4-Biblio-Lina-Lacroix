@@ -1,9 +1,9 @@
 import { FaTimes} from 'react-icons/fa'
 
-const Client = ({client, onDelete, onToggle}) => {
+const Client = ({client, onDelete, onUpdate}) => {
     return (
         <div className="client"
-             onDoubleClick={() => onToggle(client.id)}>
+             onDoubleClick={() => onUpdate(client.id)}>
             <h3>{client.prenom} {client.nom} <FaTimes
                 style={{color: 'red', cursor: 'pointer'}}
                 onClick={() => onDelete(client.id)}/></h3>

@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react';
 import Clients from "./Clients";
 import AddClient from "./AddClient";
 import Header2 from "../Header2";
+import UpdateClient from "./UpdateClient";
+import HeaderUpdate from "../HeaderUpdate";
 
 const PageClient = () => {
 
@@ -48,16 +50,18 @@ const PageClient = () => {
         setClients(clients.filter((client) => client.id !== id))
     }
 
-    const toggleClient = async (id) => {
-        const clientToToggle = await fetchClient(id)
-        const updateClient = await {...clientToToggle,
-            nom: !clientToToggle.nom,
-            prenom: !clientToToggle.prenom,
-            rue: !clientToToggle.rue,
-            ville: !clientToToggle.ville,
-            codePostal: !clientToToggle.codePostal,
-            numeroTelephone: !clientToToggle.numeroTelephone,
-            dateInscription: !clientToToggle.dateInscription}
+    const [showUpdateClient, setShowUpdateClient] = useState(false)
+
+    const updateClient = async (id) => {
+        const clientToUpdate = await fetchClient(id)
+        const updateClient = await {...clientToUpdate,
+            nom: !clientToUpdate.nom,
+            prenom: !clientToUpdate.prenom,
+            rue: !clientToUpdate.rue,
+            ville: !clientToUpdate.ville,
+            codePostal: !clientToUpdate.codePostal,
+            numeroTelephone: !clientToUpdate.numeroTelephone,
+            dateInscription: !clientToUpdate.dateInscription}
 
         const res = await fetch(`http://localhost:8080/clients/${id}`, {
             method: 'PUT',
@@ -92,7 +96,11 @@ const PageClient = () => {
             {clients.length > 0 ?
                 <Clients clients={clients}
                          onDelete={deleteClient}
-                         onToggle={toggleClient}/>
+                         onUpdate={() =>
+                             setShowUpdateClient(!showUpdateClient)}
+                         showUpdateClient={showUpdateClient}
+                         {showUpdateClient && <UpdateClient onUpdate={updateClient} />}
+                />
                 : 'No Clients'}
         </div>
     );
