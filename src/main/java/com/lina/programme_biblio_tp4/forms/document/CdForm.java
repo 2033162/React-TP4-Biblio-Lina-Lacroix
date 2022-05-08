@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class CdForm extends DocumentForm {
-    private static EtatDocument ETATDOCUMENT;
-    private String genreMusique;
-    private String compositeur;
-    private String interprete;
+    protected static EtatDocument ETATDOCUMENT;
+    protected String genreMusique;
+    protected String compositeur;
+    protected String interprete;
 
     public CdForm(
             long id,

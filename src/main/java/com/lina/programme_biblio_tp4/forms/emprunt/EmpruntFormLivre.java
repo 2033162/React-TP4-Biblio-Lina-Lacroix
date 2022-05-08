@@ -70,7 +70,7 @@ public class EmpruntFormLivre extends LivreForm {
         this.nbrRappel = nbrRappel;
     }
 
-    public EmpruntDocuments toEmpruntDocuments() {
+    public EmpruntDocuments toEmpruntDocumentsLivre() {
         LocalDate bDateInitial;
         LocalDate bDateExpire;
         EtatDocument bEtatDocument;
