@@ -1,9 +1,9 @@
 import { FaTimes } from 'react-icons/fa'
 
-const Livre = ({livre, onDelete, onToggle}) => {
+const Livre = ({livre, onDelete, onUpdate}) => {
     return (
         <div className="livre"
-             onDoubleClick={() => onToggle(livre.id)}>
+             onDoubleClick={() => onUpdate(livre.id)}>
             <h3>{livre.etatDocument} <FaTimes
                 style={{color: 'red', cursor: 'pointer'}}
                 onClick={() => onDelete(livre.id)}/>

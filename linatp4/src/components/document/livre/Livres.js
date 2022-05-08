@@ -1,13 +1,14 @@
 import Livre from "./Livre";
 
-const Livres = ({livres, onDelete, onToggle}) => {
+const Livres = ({livres, onDelete, onUpdate, showUpdate}) => {
     return (
         <>
             {livres.map((livre) => (
                 <Livre key={livre.id}
                         livre={livre}
                         onDelete={onDelete}
-                        onToggle={onToggle}/>
+                        onUpdate={onUpdate}
+                        showUpdate={showUpdate}/>
             ))}
         </>
     )

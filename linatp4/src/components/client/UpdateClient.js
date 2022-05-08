@@ -100,7 +100,7 @@ const UpdateClient = ({onUpdate}) => {
         setDateInscription('')
     }
 
-    useEffect(() => {
+    /*useEffect(() => {
         fetchClient(id).then(client => {
             setNom(client.data.nom);
             setPrenom(client.data.prenom);
@@ -118,7 +118,7 @@ const UpdateClient = ({onUpdate}) => {
         const res = await fetch(`http://localhost:8080/clients/${id}`)
         const data = await res.json()
         return data
-    }
+    }*/
 
     return (
         <form className='add-form' onSubmit={onSubmit}>
