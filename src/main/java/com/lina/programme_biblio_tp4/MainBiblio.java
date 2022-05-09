@@ -1,8 +1,9 @@
 package com.lina.programme_biblio_tp4;
 
-import com.lina.programme_biblio_tp4.dtos.document.DocumentDto;
-import com.lina.programme_biblio_tp4.dtos.emprunt.EmpruntDtoDocument;
-import com.lina.programme_biblio_tp4.modele.*;
+import com.lina.programme_biblio_tp4.dtos.document.*;
+import com.lina.programme_biblio_tp4.dtos.emprunt.*;
+import com.lina.programme_biblio_tp4.dtos.reservation.ReservationDto;
+import com.lina.programme_biblio_tp4.dtos.utilisateurs.*;
 import com.lina.programme_biblio_tp4.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -37,8 +38,8 @@ public class MainBiblio implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        final CD cd = serviceDocument.saveCD(
-                EtatDocument.DISPONIBLE,
+        final CdDto cd = serviceDocument.saveCD(
+                "DISPONIBLE",
                 "CD",
                 "harry potter",
                 "JK. Rolling",
@@ -47,8 +48,8 @@ public class MainBiblio implements CommandLineRunner {
                 "classique",
                 "JK. Rolling",
                 "michel");
-        final DVD dvd = serviceDocument.saveDVD(
-                EtatDocument.ENDOMMAGE,
+        final DvdDto dvd = serviceDocument.saveDVD(
+                "ENDOMMAGE",
                 "DVD",
                 "bobby bob",
                 "lilo lee",
@@ -56,20 +57,20 @@ public class MainBiblio implements CommandLineRunner {
                 2018,
                 44,
                 "drame");
-        final Livre livre = serviceDocument.saveLivre(
-                EtatDocument.EMPRUNTE,
+        final LivreDto livre = serviceDocument.saveLivre(
+                "EMPRUNTE",
                 "livre",
                 "avengers",
                 "Josh whedon",
                 "marvel",
                 2020,
                 230,
-                GenreLivre.ROMAN);
-        final Employe employe = serviceEmploye.saveEmploye(
+                "ROMAN");
+        final EmployeDto employe = serviceEmploye.saveEmploye(
                 "bernadette",
                 "carmier",
-                Fonction.GESTIONNAIRE);
-        final Client client = serviceClient.saveClient(
+                "GESTIONNAIRE");
+        final ClientDto client = serviceClient.saveClient(
                 "Smith",
                 "John",
                 "Daragon",
@@ -77,7 +78,7 @@ public class MainBiblio implements CommandLineRunner {
                 "H05C42",
                 "514-900-5698",
                 getDateFromLocalDate(2022, 2, 20));
-        final Client client2 = serviceClient.saveClient(
+        final ClientDto client2 = serviceClient.saveClient(
                 "Stewart",
                 "Marvin",
                 "LaSale",
@@ -85,16 +86,16 @@ public class MainBiblio implements CommandLineRunner {
                 "H05C42",
                 "514-900-5698",
                 getDateFromLocalDate(2022, 2, 22));
-        final Reservation reservation = serviceReservation.saveReservation(
-                new SimpleDateFormat("yyyy-MM-dd").parse("2000-10-05"),
-                client,
-                livre);
-        final EmpruntDocuments empruntDocuments = serviceEmpruntDocuments.saveEmpruntDocuments(
+        final ReservationDto reservation = serviceReservation.saveReservation(
+                getDateFromLocalDate(2000,10,5),
+                client.toClient(),
+                livre.toDocument());
+        final EmpruntDtoDocument empruntDocuments = serviceEmpruntDocuments.saveEmpruntDocuments(
                 new SimpleDateFormat("yyyy-MM-dd").parse("2022-04-15"),
                 new SimpleDateFormat("yyyy-MM-dd").parse("2022-04-19"),
                 0,
-                client,
-                livre);
+                client.toClient(),
+                livre.toDocument());
 
 
         System.out.println("\nCRUD - CD");
@@ -108,7 +109,7 @@ public class MainBiblio implements CommandLineRunner {
         System.out.println("\nCRUD - DVD");
         System.out.println(serviceDocument.getDVD(dvd.getId()));
 
-        dvd.setEtatDocument(EtatDocument.DISPONIBLE);
+        dvd.setEtatDocument("DISPONIBLE");
         serviceDocument.saveDVD(dvd);
         System.out.println(serviceDocument.getDVD(dvd.getId()));
 
@@ -124,8 +125,8 @@ public class MainBiblio implements CommandLineRunner {
         System.out.println("\nCRUD - Employe");
         System.out.println(serviceEmploye.getEmploye(employe.getId()));
 
-        employe.setFonction(Fonction.PREPOSE);
-        serviceEmploye.saveEmploye(employe);
+        employe.setFonction("PREPOSE");
+        serviceEmploye.saveEmploye(employe.toEmploye());
         System.out.println(serviceEmploye.getEmploye(employe.getId()));
 
 
@@ -133,15 +134,15 @@ public class MainBiblio implements CommandLineRunner {
         System.out.println(serviceClient.getClient(client.getId()));
 
         client.setRue("Drolet");
-        serviceClient.saveClient(client);
+        serviceClient.saveClient(client.toClient());
         System.out.println(serviceClient.getClient(client.getId()));
 
 
         System.out.println("\nCRUD - Reservation");
         System.out.println(serviceReservation.getReservation(reservation.getId()));
 
-        reservation.setDateReservation(new SimpleDateFormat("yyyy-MM-dd").parse("2022-03-13"));
-        serviceReservation.saveReservation(reservation);
+        reservation.setDateReservation("2022-03-13");
+        serviceReservation.saveReservation(reservation.toReservation());
         System.out.println(serviceReservation.getReservation(reservation.getId()));
 
 
@@ -149,7 +150,7 @@ public class MainBiblio implements CommandLineRunner {
         System.out.println(serviceEmpruntDocuments.getEmpruntDocuments(empruntDocuments.getId()));
 
         empruntDocuments.setNbrRappel(0);
-        serviceEmpruntDocuments.saveEmpruntDocuments(empruntDocuments);
+        serviceEmpruntDocuments.saveEmpruntDocuments(empruntDocuments.toEmpruntDocuments());
         System.out.println(serviceEmpruntDocuments.getEmpruntDocuments(empruntDocuments.getId()));
 
 
@@ -163,7 +164,7 @@ public class MainBiblio implements CommandLineRunner {
 
 
         System.out.println("\nFaire un emprunt");
-        System.out.println(serviceEmpruntDocuments.faireEmprunt(client2, livre));
+        System.out.println(serviceEmpruntDocuments.faireEmprunt(client2.toClient(), livre.toDocument()));
 
 
         System.out.println("\nListe des emprunts du client:");
@@ -183,13 +184,13 @@ public class MainBiblio implements CommandLineRunner {
 
 
         System.out.println("\nRETOUR DOCUMENT EMPRUNTE");
-        System.out.println(serviceEmpruntDocuments.retourDocument(client, livre,
+        System.out.println(serviceEmpruntDocuments.retourDocument(client.toClient(), livre.toDocument(),
                 new SimpleDateFormat("yyyy-MM-dd").parse("2022-04-22")));
         System.out.println();
 
 
         System.out.println("\nLISTE DES FRAIS");
-        System.out.println(serviceClient.listeFrais(client));
+        System.out.println(serviceClient.listeFrais(client.toClient()));
 
 
         /*System.out.println("\nDelete cd");

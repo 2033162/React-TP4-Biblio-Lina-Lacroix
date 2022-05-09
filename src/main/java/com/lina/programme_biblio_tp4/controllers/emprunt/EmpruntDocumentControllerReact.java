@@ -56,7 +56,7 @@ public class EmpruntDocumentControllerReact {
                 new SimpleDateFormat("yyyy-mm-dd").parse(empruntDtoDocuments.getDateExpire()),
                 empruntDtoDocuments.getNbrRappel(),
                 clientDto.toClient(),
-                documents.get(0).toDocument()).toEmpruntFormDocument();
+                documents.get(0).toDocument());
         empruntDtoDocuments.setId(empruntDocuments.getId());
 
         return empruntDocuments;

@@ -19,20 +19,24 @@ public class ServiceEmploye {
         this.employeRepository = employeRepository;
     }
 
-    public Employe saveEmploye(String nom, String prenom, Fonction fonction) {
-        return employeRepository.save(new Employe(nom, prenom, fonction));
+    public EmployeDto saveEmploye(String nom, String prenom, String fonction) {
+        Employe employe = employeRepository.save(new Employe(
+                nom,
+                prenom,
+                fonction == null ? null : Fonction.valueOf(fonction)));
+        return employe.toEmployeForm();
     }
 
-    public Employe saveEmploye(Employe employe) {
-        return employeRepository.save(employe);
+    public EmployeDto saveEmploye(Employe employe) {
+        return employeRepository.save(employe).toEmployeForm();
     }
 
     public void removeEmploye(Employe employe) {
         employeRepository.delete(employe);
     }
 
-    public Optional<Employe> getEmploye(long employeID) {
-        return employeRepository.findById(employeID);
+    public EmployeDto getEmploye(long employeID) {
+        return employeRepository.findById(employeID).orElseThrow(RuntimeException::new).toEmployeForm();
     }
 
     public List<EmployeDto> findAllEmployes() {

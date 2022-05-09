@@ -24,7 +24,7 @@ public class LivreControllerReact {
 
     @GetMapping("/{id}")
     public DocumentDto getLivre(@PathVariable long id) {
-        return serviceDocument.getDocument(id).toDocumentForm();
+        return serviceDocument.getDocument(id);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -36,7 +36,7 @@ public class LivreControllerReact {
     @PatchMapping("/{id}")
     public DocumentDto updateLivre(@PathVariable long id,
                                    @RequestBody LivreDto livreDtoDetail) {
-        LivreDto livre = (LivreDto) serviceDocument.getLivre(id).orElseThrow(RuntimeException::new).toDocumentForm();
+        LivreDto livre = serviceDocument.getLivre(id);
 
         livre.setGenreDocument(livreDtoDetail.getGenreDocument());
         livre.setEtatDocument(livreDtoDetail.getEtatDocument());
@@ -53,7 +53,7 @@ public class LivreControllerReact {
 
     @DeleteMapping("/{id}")
     public void deleteLivre(@PathVariable long id) {
-        LivreDto livre = (LivreDto) serviceDocument.getDocument(id).toDocumentForm();
+        LivreDto livre = (LivreDto) serviceDocument.getDocument(id);
         serviceDocument.removeDocument(livre.toDocument());
     }
 }

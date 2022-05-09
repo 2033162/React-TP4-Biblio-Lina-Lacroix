@@ -50,7 +50,7 @@ public class Client {
         this.dateInscription = dateInscription;
     }
 
-    public ClientDto toClientForm() {
+    public ClientDto toClientDto() {
         return new ClientDto(
                 id,
                 nom,

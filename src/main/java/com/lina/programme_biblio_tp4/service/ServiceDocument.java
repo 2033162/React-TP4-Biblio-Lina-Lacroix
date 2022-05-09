@@ -36,13 +36,13 @@ public class ServiceDocument {
     public DocumentDto saveDocument(Document document) {
         DocumentDto documentResult = null;
         if (document.getGenreDocument().equalsIgnoreCase(Document.C_LIVRE)) {
-            documentResult = saveLivre((Livre) document).toDocumentForm();
+            documentResult = saveLivre((LivreDto) document.toDocumentForm());
         }
         else if (document.getGenreDocument().equalsIgnoreCase(Document.C_CD)) {
-            documentResult = saveCD((CD) document).toDocumentForm();
+            documentResult = saveCD((CdDto) document.toDocumentForm());
         }
         else if (document.getGenreDocument().equalsIgnoreCase(Document.C_DVD)) {
-            documentResult = saveDVD((DVD) document).toDocumentForm();
+            documentResult = saveDVD((DvdDto) document.toDocumentForm());
         }
         return documentResult;
     }
@@ -59,17 +59,17 @@ public class ServiceDocument {
         }
     }
 
-    public Document getDocument(long documentId) {
+    public DocumentDto getDocument(long documentId) {
         Document document = documentRepository.findById(documentId).orElseThrow(RuntimeException::new);
-        Document documentResult = null;
+        DocumentDto documentResult = null;
         if (document.getGenreDocument().equalsIgnoreCase(Document.C_LIVRE)) {
-            documentResult = getLivre(documentId).orElseThrow(RuntimeException::new);
+            documentResult = getLivre(documentId);
         }
         else if (document.getGenreDocument().equalsIgnoreCase(Document.C_CD)) {
-            documentResult = getCD(documentId).orElseThrow(RuntimeException::new);
+            documentResult = getCD(documentId);
         }
         else if (document.getGenreDocument().equalsIgnoreCase(Document.C_DVD)) {
-            documentResult = getDVD(documentId).orElseThrow(RuntimeException::new);
+            documentResult = getDVD(documentId);
         }
         return documentResult;
     }
@@ -85,7 +85,7 @@ public class ServiceDocument {
         return documentDtoList;
     }
 
-    public CD saveCD(EtatDocument etatDocument,
+    public CdDto saveCD(String etatDocument,
                      String genreDocument,
                      String titre,
                      String auteur,
@@ -94,7 +94,8 @@ public class ServiceDocument {
                      String genreMusique,
                      String compositeur,
                      String interprete) {
-        return cdRepository.save(new CD(etatDocument,
+        CD cd =  cdRepository.save(new CD(
+                etatDocument == null ? null : EtatDocument.valueOf(etatDocument),
                 genreDocument,
                 titre,
                 auteur,
@@ -105,18 +106,19 @@ public class ServiceDocument {
                 compositeur,
                 interprete
         ));
+        return (CdDto) cd.toDocumentForm();
     }
 
-    public CD saveCD(CD cd) {
-        return cdRepository.save(cd);
+    public CdDto saveCD(CdDto cd) {
+        return (CdDto) cdRepository.save((CD) cd.toDocument()).toDocumentForm();
     }
 
     public void removeCD(CD cd) {
         cdRepository.delete(cd);
     }
 
-    public Optional<CD> getCD(long cdID) {
-        return cdRepository.findById(cdID);
+    public CdDto getCD(long cdID) {
+        return (CdDto) cdRepository.findById(cdID).orElseThrow(RuntimeException::new).toDocumentForm();
     }
 
     public List<CdDto> findAllCds() {
@@ -130,7 +132,7 @@ public class ServiceDocument {
         return cdDtoList;
     }
 
-    public DVD saveDVD(EtatDocument etatDocument,
+    public DvdDto saveDVD(String etatDocument,
                        String genreDocument,
                        String titre,
                        String auteur,
@@ -138,7 +140,8 @@ public class ServiceDocument {
                        int anneePublication,
                        int duree,
                        String genreFilm) {
-        return dvdRepository.save(new DVD(etatDocument,
+        DVD dvd = dvdRepository.save(new DVD(
+                etatDocument == null ? null : EtatDocument.valueOf(etatDocument),
                 genreDocument,
                 titre,
                 auteur,
@@ -147,18 +150,19 @@ public class ServiceDocument {
                 5,
                 duree,
                 genreFilm));
+        return (DvdDto) dvd.toDocumentForm();
     }
 
-    public DVD saveDVD(DVD dvd) {
-        return dvdRepository.save(dvd);
+    public DvdDto saveDVD(DvdDto dvd) {
+        return (DvdDto) dvdRepository.save((DVD) dvd.toDocument()).toDocumentForm();
     }
 
     public void removeDVD(DVD dvd) {
         dvdRepository.delete(dvd);
     }
 
-    public Optional<DVD> getDVD(long dvdID) {
-        return dvdRepository.findById(dvdID);
+    public DvdDto getDVD(long dvdID) {
+        return (DvdDto) dvdRepository.findById(dvdID).orElseThrow(RuntimeException::new).toDocumentForm();
     }
 
     public List<DvdDto> findAllDvds() {
@@ -172,15 +176,16 @@ public class ServiceDocument {
         return dvdDtoList;
     }
 
-    public Livre saveLivre(EtatDocument etatDocument,
+    public LivreDto saveLivre(String etatDocument,
                            String genreDocument,
                            String titre,
                            String auteur,
                            String editeur,
                            int anneePublication,
                            int nbrPages,
-                           GenreLivre genreLivre) {
-        return livreRepository.save(new Livre(etatDocument,
+                           String genreLivre) {
+        Livre livre = livreRepository.save(new Livre(
+                etatDocument == null ? null : EtatDocument.valueOf(etatDocument),
                 genreDocument,
                 titre,
                 auteur,
@@ -188,19 +193,20 @@ public class ServiceDocument {
                 anneePublication,
                 2,
                 nbrPages,
-                genreLivre));
+                genreLivre == null ? null : GenreLivre.valueOf(genreLivre)));
+        return (LivreDto) livre.toDocumentForm();
     }
 
-    public Livre saveLivre(Livre livre) {
-        return livreRepository.save(livre);
+    public LivreDto saveLivre(LivreDto livre) {
+        return (LivreDto) livreRepository.save((Livre) livre.toDocument()).toDocumentForm();
     }
 
     public void removeLivre(Livre livre) {
         livreRepository.delete(livre);
     }
 
-    public Optional<Livre> getLivre(long livreId) {
-        return livreRepository.findById(livreId);
+    public LivreDto getLivre(long livreId) {
+        return (LivreDto) livreRepository.findById(livreId).orElseThrow(RuntimeException::new).toDocumentForm();
     }
 
     public List<LivreDto> findAllLivres() {

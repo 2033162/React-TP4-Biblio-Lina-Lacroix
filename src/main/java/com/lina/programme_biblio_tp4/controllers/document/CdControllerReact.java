@@ -24,7 +24,7 @@ public class CdControllerReact {
 
     @GetMapping("/{id}")
     public DocumentDto getCd(@PathVariable long id) {
-        return serviceDocument.getDocument(id).toDocumentForm();
+        return serviceDocument.getDocument(id);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -36,7 +36,7 @@ public class CdControllerReact {
     @PatchMapping("/{id}")
     public DocumentDto updateCd(@PathVariable long id,
                                 @RequestBody CdDto cdDtoDetail) {
-        CdDto cd = (CdDto) serviceDocument.getCD(id).orElseThrow(RuntimeException::new).toDocumentForm();
+        CdDto cd = serviceDocument.getCD(id);
 
         cd.setEtatDocument(cdDtoDetail.getEtatDocument());
         cd.setGenreDocument(cdDtoDetail.getGenreDocument());
@@ -54,7 +54,7 @@ public class CdControllerReact {
 
     @DeleteMapping("/{id}")
     public void deleteCd(@PathVariable long id) {
-        CdDto cd = (CdDto) serviceDocument.getDocument(id).toDocumentForm();
+        CdDto cd = (CdDto) serviceDocument.getDocument(id);
         serviceDocument.removeDocument(cd.toDocument());
     }
 }

@@ -1,10 +1,12 @@
 package com.lina.programme_biblio_tp4.modele;
 
+import com.lina.programme_biblio_tp4.dtos.reservation.ReservationDto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -14,7 +16,7 @@ public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private Date dateReservation;
+    private LocalDate dateReservation;
 
     @ManyToOne
     @JoinColumn(name = "client")
@@ -26,7 +28,7 @@ public class Reservation {
     @ToString.Exclude
     private Document document;
 
-    public Reservation(Date dateReservation, Client client, Document document) {
+    public Reservation(LocalDate dateReservation, Client client, Document document) {
         this.dateReservation = dateReservation;
         this.client = client;
         this.document = document;
@@ -40,5 +42,18 @@ public class Reservation {
                 ", client=" + client +
                 ", document=" + document.toStringDocument() +
                 '}';
+    }
+
+    public ReservationDto toReservationDto() {
+        return new ReservationDto(
+                id,
+                dateReservation.toString(),
+                client.getNom(),
+                client.getPrenom(),
+                document.getTitre(),
+                document.getAuteur(),
+                document.getAnneePublication(),
+                document.getGenreDocument()
+        );
     }
 }

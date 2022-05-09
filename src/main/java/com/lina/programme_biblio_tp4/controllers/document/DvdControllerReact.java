@@ -24,7 +24,7 @@ public class DvdControllerReact {
 
     @GetMapping("/{id}")
     public DocumentDto getDvd(@PathVariable long id) {
-        return serviceDocument.getDocument(id).toDocumentForm();
+        return serviceDocument.getDocument(id);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -36,7 +36,7 @@ public class DvdControllerReact {
     @PatchMapping("/{id}")
     public DocumentDto updateDvd(@PathVariable long id,
                                  @RequestBody DvdDto dvdDtoDetail) {
-        DvdDto dvd = (DvdDto) serviceDocument.getDVD(id).orElseThrow(RuntimeException::new).toDocumentForm();
+        DvdDto dvd = serviceDocument.getDVD(id);
 
         dvd.setEtatDocument(dvdDtoDetail.getEtatDocument());
         dvd.setGenreDocument(dvdDtoDetail.getGenreDocument());
@@ -53,7 +53,7 @@ public class DvdControllerReact {
 
     @DeleteMapping("/{id}")
     public void deleteDvd(@PathVariable long id) {
-        DvdDto dvd = (DvdDto) serviceDocument.getDocument(id).toDocumentForm();
+        DvdDto dvd = (DvdDto) serviceDocument.getDocument(id);
         serviceDocument.removeDocument(dvd.toDocument());
     }
 }

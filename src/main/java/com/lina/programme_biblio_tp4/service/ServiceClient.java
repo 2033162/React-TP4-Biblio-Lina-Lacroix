@@ -33,24 +33,25 @@ public class ServiceClient {
         this.serviceEmpruntDocuments = serviceEmpruntDocuments;
     }
 
-    public Client saveClient(String nom,
+    public ClientDto saveClient(String nom,
                              String prenom,
                              String rue,
                              String ville,
                              String codePostal,
                              String numeroTelephone,
                              LocalDate dateInscription) {
-        return clientRepository.save(new Client(nom,
+        Client client = clientRepository.save(new Client(nom,
                 prenom,
                 rue,
                 ville,
                 codePostal,
                 numeroTelephone,
                 dateInscription));
+        return client.toClientDto();
     }
 
-    public Client saveClient(Client client) {
-        return clientRepository.save(client);
+    public ClientDto saveClient(Client client) {
+        return clientRepository.save(client).toClientDto();
     }
 
     public void removeClient(Client client) {
@@ -62,18 +63,18 @@ public class ServiceClient {
         List<ClientDto> clientDtoList = new ArrayList<>();
 
         for (Client client : clientList) {
-            clientDtoList.add(client.toClientForm());
+            clientDtoList.add(client.toClientDto());
         }
 
         return clientDtoList;
     }
 
-    public Optional<Client> getClient(long id) {
-        return clientRepository.findById(id);
+    public ClientDto getClient(long id) {
+        return clientRepository.findById(id).orElseThrow(RuntimeException::new).toClientDto();
     }
 
     public ClientDto findByName(String nom) {
-        return clientRepository.findByName(nom).toClientForm();
+        return clientRepository.findByName(nom).toClientDto();
     }
 
     public String listeFrais(Client client) {

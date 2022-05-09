@@ -1,10 +1,16 @@
 package com.lina.programme_biblio_tp4.dtos.emprunt;
 
+import com.lina.programme_biblio_tp4.modele.Client;
+import com.lina.programme_biblio_tp4.modele.Document;
+import com.lina.programme_biblio_tp4.modele.EmpruntDocuments;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -21,4 +27,32 @@ public class EmpruntDtoDocument {
     private String auteur;
     private int anneePublication;
     private String genreDocument;
+
+    public EmpruntDocuments toEmpruntDocuments() {
+        LocalDate bDateInitial;
+        LocalDate bDateExpire;
+        Client client = null;
+        Document document = null;
+        try {
+            bDateInitial = dateInitial == null ? null : LocalDate.parse(dateInitial, DATETIMEFORMATTER);
+            bDateExpire = dateExpire == null ? null : LocalDate.parse(dateExpire, DATETIMEFORMATTER);
+        } catch (Exception e) {
+            bDateInitial = null;
+            bDateExpire = null;
+        }
+        final EmpruntDocuments empruntDocuments = new EmpruntDocuments(
+                Date.from(bDateInitial.atStartOfDay(ZoneId.systemDefault()).toInstant()),
+                Date.from(bDateExpire.atStartOfDay(ZoneId.systemDefault()).toInstant()),
+                nbrRappel,
+                client,
+                document
+        );
+        long oldId;
+        try {
+            oldId = id;
+            if (oldId > 0)
+                empruntDocuments.setId(oldId);
+        } catch (NumberFormatException ignored) {}
+        return empruntDocuments;
+    }
 }

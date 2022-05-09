@@ -24,18 +24,18 @@ public class ClientControllerReact {
 
     @GetMapping("/{id}")
     public ClientDto getClient(@PathVariable long id) {
-        return serviceClient.getClient(id).orElseThrow(RuntimeException::new).toClientForm();
+        return serviceClient.getClient(id);
     }
 
     @PostMapping
     public ResponseEntity<ClientDto> addClient(@RequestBody ClientDto clientDto) {
-        return new ResponseEntity<>(serviceClient.saveClient(clientDto.toClient()).toClientForm(),
+        return new ResponseEntity<>(serviceClient.saveClient(clientDto.toClient()),
                 HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
     public ClientDto updateClient(@PathVariable long id, @RequestBody ClientDto clientDtoDetail) {
-        ClientDto client = serviceClient.getClient(id).orElseThrow(RuntimeException::new).toClientForm();
+        ClientDto client = serviceClient.getClient(id);
 
         client.setNom(clientDtoDetail.getNom());
         client.setPrenom(clientDtoDetail.getPrenom());
@@ -45,12 +45,12 @@ public class ClientControllerReact {
         client.setNumeroTelephone(clientDtoDetail.getNumeroTelephone());
         client.setDateInscription(clientDtoDetail.getDateInscription());
 
-        return serviceClient.saveClient(client.toClient()).toClientForm();
+        return serviceClient.saveClient(client.toClient());
     }
 
     @DeleteMapping("/{id}")
     public void deleteClient(@PathVariable long id) {
-        ClientDto client = serviceClient.getClient(id).orElseThrow(RuntimeException::new).toClientForm();
+        ClientDto client = serviceClient.getClient(id);
         serviceClient.removeClient(client.toClient());
     }
 }

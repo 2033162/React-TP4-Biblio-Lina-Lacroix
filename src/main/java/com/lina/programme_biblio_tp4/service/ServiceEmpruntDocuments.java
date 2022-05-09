@@ -26,21 +26,21 @@ public class ServiceEmpruntDocuments {
         this.amendeRepository = amendeRepository;
     }
 
-    public EmpruntDocuments saveEmpruntDocuments(Date dateInitial,
+    public EmpruntDtoDocument saveEmpruntDocuments(Date dateInitial,
                                                  Date dateExpire,
                                                  int nbrRappel,
                                                  Client client,
                                                  Document document) {
-        return empruntDocumentRepository.save(new EmpruntDocuments(dateInitial,
+        EmpruntDocuments empruntDocuments = empruntDocumentRepository.save(new EmpruntDocuments(dateInitial,
                 dateExpire,
                 nbrRappel,
                 client,
                 document));
+        return empruntDocuments.toEmpruntFormDocument();
     }
 
-    public EmpruntDocuments saveEmpruntDocuments(EmpruntDocuments empruntDocuments) {
-
-        return empruntDocumentRepository.save(empruntDocuments);
+    public EmpruntDtoDocument saveEmpruntDocuments(EmpruntDocuments empruntDocuments) {
+        return empruntDocumentRepository.save(empruntDocuments).toEmpruntFormDocument();
     }
 
     public void removeEmpruntDocuments(EmpruntDocuments empruntDocuments) {
