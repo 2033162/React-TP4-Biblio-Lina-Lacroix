@@ -1,6 +1,5 @@
 package com.lina.programme_biblio_tp4.dtos.reservation;
 
-import com.lina.programme_biblio_tp4.dtos.document.DocumentDto;
 import com.lina.programme_biblio_tp4.modele.Client;
 import com.lina.programme_biblio_tp4.modele.Document;
 import com.lina.programme_biblio_tp4.modele.Reservation;
