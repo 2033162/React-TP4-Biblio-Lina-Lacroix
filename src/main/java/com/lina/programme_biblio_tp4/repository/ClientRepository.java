@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface ClientRepository extends JpaRepository<Client, Long> {
-    @Query(value = "SELECT * FROM Client c WHERE LOWER(c.nom + ' ' + c.prenom) = LOWER(:nomPrenom)", nativeQuery = true)
-    Client findByName(@Param("nomPrenom") String nomPrenom);
+    @Query(value = "SELECT * FROM Client c WHERE LOWER(c.nom) = LOWER(:nom)", nativeQuery = true)
+    Client findByName(@Param("nom") String nom);
 }

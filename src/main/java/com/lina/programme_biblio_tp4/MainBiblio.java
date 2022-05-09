@@ -85,12 +85,12 @@ public class MainBiblio implements CommandLineRunner {
                 "514-900-5698",
                 getDateFromLocalDate(2022, 2, 22));
         final Reservation reservation = serviceReservation.saveReservation(
-                new SimpleDateFormat("dd/MM/yyyy").parse("05/10/2000"),
+                new SimpleDateFormat("yyyy-MM-dd").parse("2000-10-05"),
                 client,
                 livre);
         final EmpruntDocuments empruntDocuments = serviceEmpruntDocuments.saveEmpruntDocuments(
-                new SimpleDateFormat("dd/MM/yyyy").parse("15/04/2022"),
-                new SimpleDateFormat("dd/MM/yyyy").parse("19/04/2022"),
+                new SimpleDateFormat("yyyy-MM-dd").parse("2022-04-15"),
+                new SimpleDateFormat("yyyy-MM-dd").parse("2022-04-19"),
                 0,
                 client,
                 livre);
@@ -139,7 +139,7 @@ public class MainBiblio implements CommandLineRunner {
         System.out.println("\nCRUD - Reservation");
         System.out.println(serviceReservation.getReservation(reservation.getId()));
 
-        reservation.setDateReservation(new SimpleDateFormat("dd/MM/yyyy").parse("13/03/2022"));
+        reservation.setDateReservation(new SimpleDateFormat("yyyy-MM-dd").parse("2022-03-13"));
         serviceReservation.saveReservation(reservation);
         System.out.println(serviceReservation.getReservation(reservation.getId()));
 
@@ -183,7 +183,7 @@ public class MainBiblio implements CommandLineRunner {
 
         System.out.println("\nRETOUR DOCUMENT EMPRUNTE");
         System.out.println(serviceEmpruntDocuments.retourDocument(client, livre,
-                new SimpleDateFormat("dd/MM/yyyy").parse("22/04/2022")));
+                new SimpleDateFormat("yyyy-MM-dd").parse("2022-04-22")));
         System.out.println();
 
 

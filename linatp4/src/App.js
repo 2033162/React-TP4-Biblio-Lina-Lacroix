@@ -13,6 +13,7 @@ import UpdateEmploye from "./components/employe/UpdateEmploye";
 import UpdateLivre from "./components/document/livre/UpdateLivre";
 import UpdateCd from "./components/document/cd/UpdateCd";
 import UpdateDvd from "./components/document/dvd/UpdateDvd";
+import PageEmprunt from "./components/emprunt/PageEmprunt";
 
 function App() {
     return (
@@ -32,6 +33,7 @@ function App() {
                 <Route path="/cds/:id" element={<UpdateCd/>} />
                 <Route path="/dvds" element={<PageDvd/>} />
                 <Route path="/dvds/:id" element={<UpdateDvd/>} />
+                <Route path="/empruntDocuments" element={<PageEmprunt/>} />
                 <Route path="*" element={<PageNotFound/>} />
             </Routes>
         </div>

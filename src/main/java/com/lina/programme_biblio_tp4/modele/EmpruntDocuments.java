@@ -54,8 +54,8 @@ public class EmpruntDocuments {
     public EmpruntFormDocument toEmpruntFormDocument() {
         return new EmpruntFormDocument(
                 id,
-                dateInitial == null ? null : DateTimeFormatter.ofPattern("yyyy-MM-dd").format((TemporalAccessor) dateInitial),
-                dateExpire == null ? null : DateTimeFormatter.ofPattern("yyyy-MM-dd").format((TemporalAccessor) dateExpire),
+                dateInitial.toString(),
+                dateExpire.toString(),
                 nbrRappel,
                 client.getNom(),
                 client.getPrenom(),

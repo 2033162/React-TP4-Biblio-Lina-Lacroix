@@ -1,9 +1,10 @@
 const Emprunt = ({emprunt}) => {
     return (
         <div className="emprunt">
-            <h3>{emprunt.dateInitial}</h3>
-            <h3>{emprunt.dateExpire}</h3>
-
+            <h3>{emprunt.prenom} {emprunt.nom}</h3>
+            <p>{emprunt.titre}</p>
         </div>
     )
 }
+
+export default Emprunt

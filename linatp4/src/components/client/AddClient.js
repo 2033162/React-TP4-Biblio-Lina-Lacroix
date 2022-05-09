@@ -22,7 +22,7 @@ const AddClient = ({onAdd}) => {
             !numeroTelephone &&
             !dateInscription
         ) {
-            alert('Please add client')
+            alert('Please fill fields of client')
             return
         }
 
