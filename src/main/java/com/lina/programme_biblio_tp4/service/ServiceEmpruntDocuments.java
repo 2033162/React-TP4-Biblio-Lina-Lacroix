@@ -66,8 +66,14 @@ public class ServiceEmpruntDocuments {
         return empruntDtoDocuments;
     }
 
-    public List<EmpruntDocuments> getClientEmprunt(long clientId) {
-        return empruntDocumentRepository.getClientEmprunt(clientId);
+    public List<EmpruntDtoDocument> getClientEmprunt(long clientId) {
+        List<EmpruntDocuments> clientEmprunts = empruntDocumentRepository.getClientEmprunt(clientId);
+        List<EmpruntDtoDocument> clientEmpruntsDto = new ArrayList<>();
+
+        for (EmpruntDocuments clientEmprunt : clientEmprunts) {
+            clientEmpruntsDto.add(clientEmprunt.toEmpruntFormDocument());
+        }
+        return clientEmpruntsDto;
     }
 
     public List<EmpruntDtoDocument> getAllClientsEmprunts() {

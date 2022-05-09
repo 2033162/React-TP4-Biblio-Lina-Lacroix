@@ -33,9 +33,14 @@ public class EmpruntDocumentControllerReact {
         return serviceEmpruntDocuments.getEmpruntDocuments(id);
     }
 
-    @GetMapping
+    @GetMapping("/clients")
     public List<EmpruntDtoDocument> getAllClientEmprunt() {
         return serviceEmpruntDocuments.getAllClientsEmprunts();
+    }
+
+    @GetMapping("/clients/{id}")
+    public List<EmpruntDtoDocument> getClientAllEmprunts(@PathVariable long id) {
+        return serviceEmpruntDocuments.getClientEmprunt(id);
     }
 
     @PostMapping

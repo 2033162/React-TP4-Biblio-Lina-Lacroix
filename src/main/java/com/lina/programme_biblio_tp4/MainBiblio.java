@@ -1,6 +1,7 @@
 package com.lina.programme_biblio_tp4;
 
 import com.lina.programme_biblio_tp4.dtos.document.DocumentDto;
+import com.lina.programme_biblio_tp4.dtos.emprunt.EmpruntDtoDocument;
 import com.lina.programme_biblio_tp4.modele.*;
 import com.lina.programme_biblio_tp4.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -167,7 +168,7 @@ public class MainBiblio implements CommandLineRunner {
 
         System.out.println("\nListe des emprunts du client:");
         var clientEmprunt = serviceEmpruntDocuments.getClientEmprunt(client.getId());
-        for (EmpruntDocuments empruntDocument: clientEmprunt) {
+        for (EmpruntDtoDocument empruntDocument: clientEmprunt) {
             System.out.println(empruntDocument);
         }
         System.out.println();
