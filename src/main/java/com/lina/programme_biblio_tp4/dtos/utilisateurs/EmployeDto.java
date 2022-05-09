@@ -1,4 +1,4 @@
-package com.lina.programme_biblio_tp4.forms.utilisateurs;
+package com.lina.programme_biblio_tp4.dtos.utilisateurs;
 
 import com.lina.programme_biblio_tp4.modele.Employe;
 import com.lina.programme_biblio_tp4.modele.Fonction;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class EmployeForm {
+public class EmployeDto {
     private static Fonction FONCTION;
     private long id;
     private String nom;

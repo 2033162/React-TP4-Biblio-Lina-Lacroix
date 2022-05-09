@@ -1,7 +1,7 @@
 package com.lina.programme_biblio_tp4.controllers.document;
 
-import com.lina.programme_biblio_tp4.forms.document.DocumentForm;
-import com.lina.programme_biblio_tp4.forms.document.DvdForm;
+import com.lina.programme_biblio_tp4.dtos.document.DocumentDto;
+import com.lina.programme_biblio_tp4.dtos.document.DvdDto;
 import com.lina.programme_biblio_tp4.service.ServiceDocument;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,42 +18,42 @@ public class DvdControllerReact {
     private ServiceDocument serviceDocument;
 
     @GetMapping
-    public List<DvdForm> getAllDvds() {
+    public List<DvdDto> getAllDvds() {
         return serviceDocument.findAllDvds();
     }
 
     @GetMapping("/{id}")
-    public DocumentForm getDvd(@PathVariable long id) {
+    public DocumentDto getDvd(@PathVariable long id) {
         return serviceDocument.getDocument(id).toDocumentForm();
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public DocumentForm addDvd(@RequestBody DvdForm dvdForm) {
-        return serviceDocument.saveDocument(dvdForm.toDocument());
+    public DocumentDto addDvd(@RequestBody DvdDto dvdDto) {
+        return serviceDocument.saveDocument(dvdDto.toDocument());
     }
 
     @PatchMapping("/{id}")
-    public DocumentForm updateDvd(@PathVariable long id,
-                                  @RequestBody DvdForm dvdFormDetail) {
-        DvdForm dvd = (DvdForm) serviceDocument.getDVD(id).orElseThrow(RuntimeException::new).toDocumentForm();
+    public DocumentDto updateDvd(@PathVariable long id,
+                                 @RequestBody DvdDto dvdDtoDetail) {
+        DvdDto dvd = (DvdDto) serviceDocument.getDVD(id).orElseThrow(RuntimeException::new).toDocumentForm();
 
-        dvd.setEtatDocument(dvdFormDetail.getEtatDocument());
-        dvd.setGenreDocument(dvdFormDetail.getGenreDocument());
-        dvd.setTitre(dvdFormDetail.getTitre());
-        dvd.setAuteur(dvdFormDetail.getAuteur());
-        dvd.setEditeur(dvdFormDetail.getEditeur());
-        dvd.setAnneePublication(dvdFormDetail.getAnneePublication());
-        dvd.setNbrExemplaire(dvdFormDetail.getNbrExemplaire());
-        dvd.setDuree(dvdFormDetail.getDuree());
-        dvd.setGenreFilm(dvdFormDetail.getGenreFilm());
+        dvd.setEtatDocument(dvdDtoDetail.getEtatDocument());
+        dvd.setGenreDocument(dvdDtoDetail.getGenreDocument());
+        dvd.setTitre(dvdDtoDetail.getTitre());
+        dvd.setAuteur(dvdDtoDetail.getAuteur());
+        dvd.setEditeur(dvdDtoDetail.getEditeur());
+        dvd.setAnneePublication(dvdDtoDetail.getAnneePublication());
+        dvd.setNbrExemplaire(dvdDtoDetail.getNbrExemplaire());
+        dvd.setDuree(dvdDtoDetail.getDuree());
+        dvd.setGenreFilm(dvdDtoDetail.getGenreFilm());
 
         return serviceDocument.saveDocument(dvd.toDocument());
     }
 
     @DeleteMapping("/{id}")
     public void deleteDvd(@PathVariable long id) {
-        DvdForm dvd = (DvdForm) serviceDocument.getDocument(id).toDocumentForm();
+        DvdDto dvd = (DvdDto) serviceDocument.getDocument(id).toDocumentForm();
         serviceDocument.removeDocument(dvd.toDocument());
     }
 }

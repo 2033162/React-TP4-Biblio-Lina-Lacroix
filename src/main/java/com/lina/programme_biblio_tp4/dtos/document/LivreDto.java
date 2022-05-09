@@ -1,4 +1,4 @@
-package com.lina.programme_biblio_tp4.forms.document;
+package com.lina.programme_biblio_tp4.dtos.document;
 
 import com.lina.programme_biblio_tp4.modele.Document;
 import com.lina.programme_biblio_tp4.modele.EtatDocument;
@@ -9,22 +9,22 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class LivreForm extends DocumentForm {
+public class LivreDto extends DocumentDto {
     protected static EtatDocument ETATDOCUMENT;
     protected static GenreLivre GENRELIVRE;
     protected int nbrPages;
     protected String genreLivre;
 
-    public LivreForm(long id,
-                     String etatDocument,
-                     String genreDocument,
-                     String titre,
-                     String auteur,
-                     String editeur,
-                     int anneePublication,
-                     int nbrExemplaire,
-                     int nbrPages,
-                     String genreLivre) {
+    public LivreDto(long id,
+                    String etatDocument,
+                    String genreDocument,
+                    String titre,
+                    String auteur,
+                    String editeur,
+                    int anneePublication,
+                    int nbrExemplaire,
+                    int nbrPages,
+                    String genreLivre) {
         super(
                 id,
                 etatDocument,

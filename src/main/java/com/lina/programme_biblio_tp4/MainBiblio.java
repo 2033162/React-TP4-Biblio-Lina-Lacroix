@@ -1,6 +1,6 @@
 package com.lina.programme_biblio_tp4;
 
-import com.lina.programme_biblio_tp4.forms.document.DocumentForm;
+import com.lina.programme_biblio_tp4.dtos.document.DocumentDto;
 import com.lina.programme_biblio_tp4.modele.*;
 import com.lina.programme_biblio_tp4.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -153,7 +153,7 @@ public class MainBiblio implements CommandLineRunner {
 
 
         System.out.println("\nRESULTAT RECHERCHE DOCUMENTS :");
-        List<DocumentForm> listeDocuments = serviceDocument.searchDocument("avengers",
+        List<DocumentDto> listeDocuments = serviceDocument.searchDocument("avengers",
                 "Josh whedon",
                 2020,
                 "livre");

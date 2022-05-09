@@ -1,4 +1,4 @@
-package com.lina.programme_biblio_tp4.forms.document;
+package com.lina.programme_biblio_tp4.dtos.document;
 
 import com.lina.programme_biblio_tp4.modele.DVD;
 import com.lina.programme_biblio_tp4.modele.Document;
@@ -8,12 +8,12 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class DvdForm extends DocumentForm {
+public class DvdDto extends DocumentDto {
     protected static EtatDocument ETATDOCUMENT;
     protected double duree;
     protected String genreFilm;
 
-    public DvdForm(
+    public DvdDto(
             long id,
             String etatDocument,
             String genreDocument,

@@ -1,4 +1,4 @@
-package com.lina.programme_biblio_tp4.forms.document;
+package com.lina.programme_biblio_tp4.dtos.document;
 
 import com.lina.programme_biblio_tp4.modele.CD;
 import com.lina.programme_biblio_tp4.modele.Document;
@@ -8,13 +8,13 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class CdForm extends DocumentForm {
+public class CdDto extends DocumentDto {
     protected static EtatDocument ETATDOCUMENT;
     protected String genreMusique;
     protected String compositeur;
     protected String interprete;
 
-    public CdForm(
+    public CdDto(
             long id,
             String etatDocument,
             String genreDocument,

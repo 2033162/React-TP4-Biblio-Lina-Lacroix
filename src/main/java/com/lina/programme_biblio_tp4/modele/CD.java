@@ -1,7 +1,7 @@
 package com.lina.programme_biblio_tp4.modele;
 
-import com.lina.programme_biblio_tp4.forms.document.CdForm;
-import com.lina.programme_biblio_tp4.forms.document.DocumentForm;
+import com.lina.programme_biblio_tp4.dtos.document.CdDto;
+import com.lina.programme_biblio_tp4.dtos.document.DocumentDto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -40,8 +40,8 @@ public class CD extends Document {
     }
 
     @Override
-    public DocumentForm toDocumentForm() {
-        return new CdForm(
+    public DocumentDto toDocumentForm() {
+        return new CdDto(
                 id,
                 etatDocument.toString(),
                 genreDocument,

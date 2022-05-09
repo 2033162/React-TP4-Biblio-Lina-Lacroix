@@ -1,6 +1,6 @@
 package com.lina.programme_biblio_tp4.service;
 
-import com.lina.programme_biblio_tp4.forms.utilisateurs.ClientForm;
+import com.lina.programme_biblio_tp4.dtos.utilisateurs.ClientDto;
 import com.lina.programme_biblio_tp4.modele.Amende;
 import com.lina.programme_biblio_tp4.modele.Client;
 import com.lina.programme_biblio_tp4.modele.EmpruntDocuments;
@@ -57,22 +57,22 @@ public class ServiceClient {
         clientRepository.delete(client);
     }
 
-    public List<ClientForm> findAllClients() {
+    public List<ClientDto> findAllClients() {
         List<Client> clientList = clientRepository.findAll();
-        List<ClientForm> clientFormList = new ArrayList<>();
+        List<ClientDto> clientDtoList = new ArrayList<>();
 
         for (Client client : clientList) {
-            clientFormList.add(client.toClientForm());
+            clientDtoList.add(client.toClientForm());
         }
 
-        return clientFormList;
+        return clientDtoList;
     }
 
     public Optional<Client> getClient(long id) {
         return clientRepository.findById(id);
     }
 
-    public ClientForm findByName(String nom) {
+    public ClientDto findByName(String nom) {
         return clientRepository.findByName(nom).toClientForm();
     }
 

@@ -1,6 +1,6 @@
 package com.lina.programme_biblio_tp4.service;
 
-import com.lina.programme_biblio_tp4.forms.utilisateurs.EmployeForm;
+import com.lina.programme_biblio_tp4.dtos.utilisateurs.EmployeDto;
 import com.lina.programme_biblio_tp4.modele.Employe;
 import com.lina.programme_biblio_tp4.modele.Fonction;
 import com.lina.programme_biblio_tp4.repository.EmployeRepository;
@@ -35,14 +35,14 @@ public class ServiceEmploye {
         return employeRepository.findById(employeID);
     }
 
-    public List<EmployeForm> findAllEmployes() {
+    public List<EmployeDto> findAllEmployes() {
         List<Employe> employeList = employeRepository.findAll();
-        List<EmployeForm> employeFormList = new ArrayList<>();
+        List<EmployeDto> employeDtoList = new ArrayList<>();
 
         for (Employe employe : employeList) {
-            employeFormList.add(employe.toEmployeForm());
+            employeDtoList.add(employe.toEmployeForm());
         }
 
-        return employeFormList;
+        return employeDtoList;
     }
 }

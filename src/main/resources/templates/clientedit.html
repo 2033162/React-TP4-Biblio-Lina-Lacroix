@@ -5,7 +5,7 @@
     <title>CRUD Client</title>
 </head>
 <body>
-<form action="#" th:action="@{/clientcreate}" th:object="${clientForm}" method="post">
+<form action="#" th:action="@{/clientcreate}" th:object="${clientDto}" method="post">
     <input type="hidden" th:field="*{id}"/>
     <table border="1">
         <tr>

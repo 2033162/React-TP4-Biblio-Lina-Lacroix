@@ -1,7 +1,7 @@
 package com.lina.programme_biblio_tp4.controllers.document;
 
-import com.lina.programme_biblio_tp4.forms.document.CdForm;
-import com.lina.programme_biblio_tp4.forms.document.DocumentForm;
+import com.lina.programme_biblio_tp4.dtos.document.CdDto;
+import com.lina.programme_biblio_tp4.dtos.document.DocumentDto;
 import com.lina.programme_biblio_tp4.service.ServiceDocument;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,43 +18,43 @@ public class CdControllerReact {
     private ServiceDocument serviceDocument;
 
     @GetMapping
-    public List<CdForm> getAllCds() {
+    public List<CdDto> getAllCds() {
         return serviceDocument.findAllCds();
     }
 
     @GetMapping("/{id}")
-    public DocumentForm getCd(@PathVariable long id) {
+    public DocumentDto getCd(@PathVariable long id) {
         return serviceDocument.getDocument(id).toDocumentForm();
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public DocumentForm addCd(@RequestBody CdForm cdForm) {
-        return serviceDocument.saveDocument(cdForm.toDocument());
+    public DocumentDto addCd(@RequestBody CdDto cdDto) {
+        return serviceDocument.saveDocument(cdDto.toDocument());
     }
 
     @PatchMapping("/{id}")
-    public DocumentForm updateCd(@PathVariable long id,
-                                 @RequestBody CdForm cdFormDetail) {
-        CdForm cd = (CdForm) serviceDocument.getCD(id).orElseThrow(RuntimeException::new).toDocumentForm();
+    public DocumentDto updateCd(@PathVariable long id,
+                                @RequestBody CdDto cdDtoDetail) {
+        CdDto cd = (CdDto) serviceDocument.getCD(id).orElseThrow(RuntimeException::new).toDocumentForm();
 
-        cd.setEtatDocument(cdFormDetail.getEtatDocument());
-        cd.setGenreDocument(cdFormDetail.getGenreDocument());
-        cd.setTitre(cdFormDetail.getTitre());
-        cd.setEditeur(cdFormDetail.getEditeur());
-        cd.setAuteur(cdFormDetail.getAuteur());
-        cd.setAnneePublication(cdFormDetail.getAnneePublication());
-        cd.setNbrExemplaire(cdFormDetail.getNbrExemplaire());
-        cd.setGenreMusique(cdFormDetail.getGenreMusique());
-        cd.setCompositeur(cdFormDetail.getCompositeur());
-        cd.setInterprete(cdFormDetail.getInterprete());
+        cd.setEtatDocument(cdDtoDetail.getEtatDocument());
+        cd.setGenreDocument(cdDtoDetail.getGenreDocument());
+        cd.setTitre(cdDtoDetail.getTitre());
+        cd.setEditeur(cdDtoDetail.getEditeur());
+        cd.setAuteur(cdDtoDetail.getAuteur());
+        cd.setAnneePublication(cdDtoDetail.getAnneePublication());
+        cd.setNbrExemplaire(cdDtoDetail.getNbrExemplaire());
+        cd.setGenreMusique(cdDtoDetail.getGenreMusique());
+        cd.setCompositeur(cdDtoDetail.getCompositeur());
+        cd.setInterprete(cdDtoDetail.getInterprete());
 
         return serviceDocument.saveDocument(cd.toDocument());
     }
 
     @DeleteMapping("/{id}")
     public void deleteCd(@PathVariable long id) {
-        CdForm cd = (CdForm) serviceDocument.getDocument(id).toDocumentForm();
+        CdDto cd = (CdDto) serviceDocument.getDocument(id).toDocumentForm();
         serviceDocument.removeDocument(cd.toDocument());
     }
 }

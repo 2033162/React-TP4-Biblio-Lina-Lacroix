@@ -1,6 +1,6 @@
 package com.lina.programme_biblio_tp4.modele;
 
-import com.lina.programme_biblio_tp4.forms.utilisateurs.ClientForm;
+import com.lina.programme_biblio_tp4.dtos.utilisateurs.ClientDto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -50,8 +50,8 @@ public class Client {
         this.dateInscription = dateInscription;
     }
 
-    public ClientForm toClientForm() {
-        return new ClientForm(
+    public ClientDto toClientForm() {
+        return new ClientDto(
                 id,
                 nom,
                 prenom,

@@ -1,4 +1,4 @@
-package com.lina.programme_biblio_tp4.forms.utilisateurs;
+package com.lina.programme_biblio_tp4.dtos.utilisateurs;
 
 import com.lina.programme_biblio_tp4.modele.Client;
 import lombok.AllArgsConstructor;
@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ClientForm {
+public class ClientDto {
     private static DateTimeFormatter DATETIMEFORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private long id;
     private String nom;

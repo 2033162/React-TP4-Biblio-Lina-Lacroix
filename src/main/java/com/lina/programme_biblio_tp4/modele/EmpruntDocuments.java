@@ -1,13 +1,11 @@
 package com.lina.programme_biblio_tp4.modele;
 
-import com.lina.programme_biblio_tp4.forms.emprunt.EmpruntFormDocument;
+import com.lina.programme_biblio_tp4.dtos.emprunt.EmpruntDtoDocument;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAccessor;
 import java.util.Date;
 
 @Entity
@@ -51,8 +49,8 @@ public class EmpruntDocuments {
                 '}';
     }
 
-    public EmpruntFormDocument toEmpruntFormDocument() {
-        return new EmpruntFormDocument(
+    public EmpruntDtoDocument toEmpruntFormDocument() {
+        return new EmpruntDtoDocument(
                 id,
                 dateInitial.toString(),
                 dateExpire.toString(),

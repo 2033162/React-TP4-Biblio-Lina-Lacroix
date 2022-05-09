@@ -1,7 +1,7 @@
 package com.lina.programme_biblio_tp4.modele;
 
-import com.lina.programme_biblio_tp4.forms.document.DocumentForm;
-import com.lina.programme_biblio_tp4.forms.document.DvdForm;
+import com.lina.programme_biblio_tp4.dtos.document.DocumentDto;
+import com.lina.programme_biblio_tp4.dtos.document.DvdDto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -37,8 +37,8 @@ public class DVD extends Document {
     }
 
     @Override
-    public DocumentForm toDocumentForm() {
-        return new DvdForm(
+    public DocumentDto toDocumentForm() {
+        return new DvdDto(
                 id,
                 etatDocument.toString(),
                 genreDocument,

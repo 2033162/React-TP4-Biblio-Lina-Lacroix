@@ -1,9 +1,9 @@
-package com.lina.programme_biblio_tp4.forms;
+package com.lina.programme_biblio_tp4.dtos.retour;
 
 import lombok.Data;
 
 @Data
-public class RetourForm {
+public class RetourDto {
     /*private String client;
     private String document;
 

@@ -1,8 +1,8 @@
 package com.lina.programme_biblio_tp4.controllers.emprunt;
 
-import com.lina.programme_biblio_tp4.forms.document.DocumentForm;
-import com.lina.programme_biblio_tp4.forms.emprunt.EmpruntFormDocument;
-import com.lina.programme_biblio_tp4.forms.utilisateurs.ClientForm;
+import com.lina.programme_biblio_tp4.dtos.document.DocumentDto;
+import com.lina.programme_biblio_tp4.dtos.emprunt.EmpruntDtoDocument;
+import com.lina.programme_biblio_tp4.dtos.utilisateurs.ClientDto;
 import com.lina.programme_biblio_tp4.service.ServiceClient;
 import com.lina.programme_biblio_tp4.service.ServiceDocument;
 import com.lina.programme_biblio_tp4.service.ServiceEmpruntDocuments;
@@ -24,35 +24,35 @@ public class EmpruntDocumentControllerReact {
     private ServiceDocument serviceDocument;
 
     @GetMapping
-    public List<EmpruntFormDocument> getAllEmpruntDocuments() {
+    public List<EmpruntDtoDocument> getAllEmpruntDocuments() {
         return serviceEmpruntDocuments.findAllEmpruntDocuments();
     }
 
     @GetMapping("/{id}")
-    public EmpruntFormDocument getEmpruntDocument(@PathVariable long id) {
+    public EmpruntDtoDocument getEmpruntDocument(@PathVariable long id) {
         return serviceEmpruntDocuments.getEmpruntDocuments(id);
     }
 
     @GetMapping
-    public List<EmpruntFormDocument> getAllClientEmprunt() {
+    public List<EmpruntDtoDocument> getAllClientEmprunt() {
         return serviceEmpruntDocuments.getAllClientsEmprunts();
     }
 
     @PostMapping
-    public EmpruntFormDocument addEmprunt(@RequestBody EmpruntFormDocument empruntFormDocuments) throws ParseException {
-        ClientForm clientForm = serviceClient.findByName(empruntFormDocuments.getNom());
-        List<DocumentForm> documents = serviceDocument.searchDocument(empruntFormDocuments.getTitre(),
-                empruntFormDocuments.getAuteur(),
-                Integer.valueOf(empruntFormDocuments.getAnneePublication()),
-                empruntFormDocuments.getGenreDocument());
+    public EmpruntDtoDocument addEmprunt(@RequestBody EmpruntDtoDocument empruntDtoDocuments) throws ParseException {
+        ClientDto clientDto = serviceClient.findByName(empruntDtoDocuments.getNom());
+        List<DocumentDto> documents = serviceDocument.searchDocument(empruntDtoDocuments.getTitre(),
+                empruntDtoDocuments.getAuteur(),
+                Integer.valueOf(empruntDtoDocuments.getAnneePublication()),
+                empruntDtoDocuments.getGenreDocument());
 
-        final EmpruntFormDocument empruntDocuments = serviceEmpruntDocuments.saveEmpruntDocuments(
-                new SimpleDateFormat("yyyy-mm-dd").parse(empruntFormDocuments.getDateInitial()),
-                new SimpleDateFormat("yyyy-mm-dd").parse(empruntFormDocuments.getDateExpire()),
-                empruntFormDocuments.getNbrRappel(),
-                clientForm.toClient(),
+        final EmpruntDtoDocument empruntDocuments = serviceEmpruntDocuments.saveEmpruntDocuments(
+                new SimpleDateFormat("yyyy-mm-dd").parse(empruntDtoDocuments.getDateInitial()),
+                new SimpleDateFormat("yyyy-mm-dd").parse(empruntDtoDocuments.getDateExpire()),
+                empruntDtoDocuments.getNbrRappel(),
+                clientDto.toClient(),
                 documents.get(0).toDocument()).toEmpruntFormDocument();
-        empruntFormDocuments.setId(empruntDocuments.getId());
+        empruntDtoDocuments.setId(empruntDocuments.getId());
 
         return empruntDocuments;
     }

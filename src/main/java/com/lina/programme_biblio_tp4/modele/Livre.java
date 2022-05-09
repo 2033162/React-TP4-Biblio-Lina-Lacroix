@@ -1,7 +1,7 @@
 package com.lina.programme_biblio_tp4.modele;
 
-import com.lina.programme_biblio_tp4.forms.document.DocumentForm;
-import com.lina.programme_biblio_tp4.forms.document.LivreForm;
+import com.lina.programme_biblio_tp4.dtos.document.DocumentDto;
+import com.lina.programme_biblio_tp4.dtos.document.LivreDto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -37,8 +37,8 @@ public class Livre extends Document {
     }
 
     @Override
-    public DocumentForm toDocumentForm() {
-        return new LivreForm(
+    public DocumentDto toDocumentForm() {
+        return new LivreDto(
                 id,
                 etatDocument.toString(),
                 genreDocument,

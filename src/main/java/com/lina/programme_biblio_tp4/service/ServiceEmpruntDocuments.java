@@ -1,6 +1,6 @@
 package com.lina.programme_biblio_tp4.service;
 
-import com.lina.programme_biblio_tp4.forms.emprunt.EmpruntFormDocument;
+import com.lina.programme_biblio_tp4.dtos.emprunt.EmpruntDtoDocument;
 import com.lina.programme_biblio_tp4.modele.Amende;
 import com.lina.programme_biblio_tp4.modele.Client;
 import com.lina.programme_biblio_tp4.modele.Document;
@@ -51,33 +51,33 @@ public class ServiceEmpruntDocuments {
         empruntDocumentRepository.deleteAll();
     }
 
-    public EmpruntFormDocument getEmpruntDocuments(long empruntDocumentsId) {
+    public EmpruntDtoDocument getEmpruntDocuments(long empruntDocumentsId) {
         return empruntDocumentRepository.findById(empruntDocumentsId)
                 .orElseThrow(RuntimeException::new).toEmpruntFormDocument();
     }
 
-    public List<EmpruntFormDocument> findAllEmpruntDocuments() {
+    public List<EmpruntDtoDocument> findAllEmpruntDocuments() {
         List<EmpruntDocuments> empruntDocuments = empruntDocumentRepository.findAll();
-        List<EmpruntFormDocument> empruntFormDocuments = new ArrayList<>();
+        List<EmpruntDtoDocument> empruntDtoDocuments = new ArrayList<>();
 
         for (EmpruntDocuments empruntDocument : empruntDocuments) {
-            empruntFormDocuments.add(empruntDocument.toEmpruntFormDocument());
+            empruntDtoDocuments.add(empruntDocument.toEmpruntFormDocument());
         }
-        return empruntFormDocuments;
+        return empruntDtoDocuments;
     }
 
     public List<EmpruntDocuments> getClientEmprunt(long clientId) {
         return empruntDocumentRepository.getClientEmprunt(clientId);
     }
 
-    public List<EmpruntFormDocument> getAllClientsEmprunts() {
+    public List<EmpruntDtoDocument> getAllClientsEmprunts() {
         List<EmpruntDocuments> empruntDocuments = empruntDocumentRepository.getAllClientsEmprunts();
-        List<EmpruntFormDocument> empruntFormDocuments = new ArrayList<>();
+        List<EmpruntDtoDocument> empruntDtoDocuments = new ArrayList<>();
 
         for (EmpruntDocuments empruntDocument : empruntDocuments) {
-            empruntFormDocuments.add(empruntDocument.toEmpruntFormDocument());
+            empruntDtoDocuments.add(empruntDocument.toEmpruntFormDocument());
         }
-        return empruntFormDocuments;
+        return empruntDtoDocuments;
     }
 
     public int getNbrEmpruntExemplaire(long empruntDocumentsId) {

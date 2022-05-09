@@ -1,6 +1,6 @@
 package com.lina.programme_biblio_tp4.controllers.utilisateurs;
 
-import com.lina.programme_biblio_tp4.forms.utilisateurs.EmployeForm;
+import com.lina.programme_biblio_tp4.dtos.utilisateurs.EmployeDto;
 import com.lina.programme_biblio_tp4.service.ServiceEmploye;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,29 +18,29 @@ public class EmployeControllerReact {
     private ServiceEmploye serviceEmploye;
 
     @GetMapping
-    public List<EmployeForm> getAllEmployes() {
+    public List<EmployeDto> getAllEmployes() {
         return serviceEmploye.findAllEmployes();
     }
 
     @GetMapping("/{id}")
-    public EmployeForm getEmploye(@PathVariable long id) {
+    public EmployeDto getEmploye(@PathVariable long id) {
         return serviceEmploye.getEmploye(id).orElseThrow(RuntimeException::new).toEmployeForm();
     }
 
     @PostMapping
-    public ResponseEntity<EmployeForm> addEmploye(@RequestBody EmployeForm employeForm) {
-        return new ResponseEntity<>(serviceEmploye.saveEmploye(employeForm.toEmploye()).toEmployeForm(),
+    public ResponseEntity<EmployeDto> addEmploye(@RequestBody EmployeDto employeDto) {
+        return new ResponseEntity<>(serviceEmploye.saveEmploye(employeDto.toEmploye()).toEmployeForm(),
                 HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public EmployeForm updateEmploye(@PathVariable long id,
-                                     @RequestBody EmployeForm employeFormDetail) {
-        EmployeForm employe = serviceEmploye.getEmploye(id).orElseThrow(RuntimeException::new).toEmployeForm();
+    public EmployeDto updateEmploye(@PathVariable long id,
+                                    @RequestBody EmployeDto employeDtoDetail) {
+        EmployeDto employe = serviceEmploye.getEmploye(id).orElseThrow(RuntimeException::new).toEmployeForm();
 
-        employe.setNom(employeFormDetail.getNom());
-        employe.setPrenom(employeFormDetail.getPrenom());
-        employe.setFonction(employeFormDetail.getFonction());
+        employe.setNom(employeDtoDetail.getNom());
+        employe.setPrenom(employeDtoDetail.getPrenom());
+        employe.setFonction(employeDtoDetail.getFonction());
 
         return serviceEmploye.saveEmploye(employe.toEmploye()).toEmployeForm();
     }
@@ -48,7 +48,7 @@ public class EmployeControllerReact {
 
     @DeleteMapping("/{id}")
     public void deleteEmploye(@PathVariable long id) {
-        EmployeForm employe = serviceEmploye.getEmploye(id).orElseThrow(RuntimeException::new).toEmployeForm();
+        EmployeDto employe = serviceEmploye.getEmploye(id).orElseThrow(RuntimeException::new).toEmployeForm();
         serviceEmploye.removeEmploye(employe.toEmploye());
     }
 }

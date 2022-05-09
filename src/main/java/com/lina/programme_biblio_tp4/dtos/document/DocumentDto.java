@@ -1,4 +1,4 @@
-package com.lina.programme_biblio_tp4.forms.document;
+package com.lina.programme_biblio_tp4.dtos.document;
 
 import com.lina.programme_biblio_tp4.modele.Document;
 import lombok.AllArgsConstructor;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public abstract class DocumentForm {
+public abstract class DocumentDto {
     protected long id;
     protected String etatDocument;
     protected String genreDocument;

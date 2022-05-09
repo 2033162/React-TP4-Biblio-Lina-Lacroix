@@ -1,9 +1,9 @@
 package com.lina.programme_biblio_tp4.service;
 
-import com.lina.programme_biblio_tp4.forms.document.CdForm;
-import com.lina.programme_biblio_tp4.forms.document.DocumentForm;
-import com.lina.programme_biblio_tp4.forms.document.DvdForm;
-import com.lina.programme_biblio_tp4.forms.document.LivreForm;
+import com.lina.programme_biblio_tp4.dtos.document.CdDto;
+import com.lina.programme_biblio_tp4.dtos.document.DocumentDto;
+import com.lina.programme_biblio_tp4.dtos.document.DvdDto;
+import com.lina.programme_biblio_tp4.dtos.document.LivreDto;
 import com.lina.programme_biblio_tp4.modele.*;
 import com.lina.programme_biblio_tp4.repository.CdRepository;
 import com.lina.programme_biblio_tp4.repository.DocumentRepository;
@@ -33,8 +33,8 @@ public class ServiceDocument {
         this.livreRepository = livreRepository;
     }
 
-    public DocumentForm saveDocument(Document document) {
-        DocumentForm documentResult = null;
+    public DocumentDto saveDocument(Document document) {
+        DocumentDto documentResult = null;
         if (document.getGenreDocument().equalsIgnoreCase(Document.C_LIVRE)) {
             documentResult = saveLivre((Livre) document).toDocumentForm();
         }
@@ -74,15 +74,15 @@ public class ServiceDocument {
         return documentResult;
     }
 
-    public List<DocumentForm> findAllDocuments() {
+    public List<DocumentDto> findAllDocuments() {
         List<Document> documentList = documentRepository.findAll();
-        List<DocumentForm> documentFormList = new ArrayList<>();
+        List<DocumentDto> documentDtoList = new ArrayList<>();
 
         for (Document document : documentList) {
-            documentFormList.add(document.toDocumentForm());
+            documentDtoList.add(document.toDocumentForm());
         }
 
-        return documentFormList;
+        return documentDtoList;
     }
 
     public CD saveCD(EtatDocument etatDocument,
@@ -119,15 +119,15 @@ public class ServiceDocument {
         return cdRepository.findById(cdID);
     }
 
-    public List<CdForm> findAllCds() {
+    public List<CdDto> findAllCds() {
         List<CD> cdList = cdRepository.findAll();
-        List<CdForm> cdFormList = new ArrayList<>();
+        List<CdDto> cdDtoList = new ArrayList<>();
 
         for (CD cd : cdList) {
-            cdFormList.add((CdForm) cd.toDocumentForm());
+            cdDtoList.add((CdDto) cd.toDocumentForm());
         }
 
-        return cdFormList;
+        return cdDtoList;
     }
 
     public DVD saveDVD(EtatDocument etatDocument,
@@ -161,15 +161,15 @@ public class ServiceDocument {
         return dvdRepository.findById(dvdID);
     }
 
-    public List<DvdForm> findAllDvds() {
+    public List<DvdDto> findAllDvds() {
         List<DVD> dvdList = dvdRepository.findAll();
-        List<DvdForm> dvdFormList = new ArrayList<>();
+        List<DvdDto> dvdDtoList = new ArrayList<>();
 
         for (DVD dvd : dvdList) {
-            dvdFormList.add((DvdForm) dvd.toDocumentForm());
+            dvdDtoList.add((DvdDto) dvd.toDocumentForm());
         }
 
-        return dvdFormList;
+        return dvdDtoList;
     }
 
     public Livre saveLivre(EtatDocument etatDocument,
@@ -203,31 +203,31 @@ public class ServiceDocument {
         return livreRepository.findById(livreId);
     }
 
-    public List<LivreForm> findAllLivres() {
+    public List<LivreDto> findAllLivres() {
         List<Livre> livreList = livreRepository.findAll();
-        List<LivreForm> livreFormList = new ArrayList<>();
+        List<LivreDto> livreDtoList = new ArrayList<>();
 
         for (Livre livre : livreList) {
-            livreFormList.add((LivreForm) livre.toDocumentForm());
+            livreDtoList.add((LivreDto) livre.toDocumentForm());
         }
 
-        return livreFormList;
+        return livreDtoList;
     }
 
-    public List<DocumentForm> searchDocument(String titre,
-                                         String auteur,
-                                         int anneePublication,
-                                         String genreDocument) {
+    public List<DocumentDto> searchDocument(String titre,
+                                            String auteur,
+                                            int anneePublication,
+                                            String genreDocument) {
         List<Document> documents = documentRepository.searchDocument(titre,
                 auteur,
                 anneePublication,
                 genreDocument);
-        List<DocumentForm> documentForms = new ArrayList<>();
+        List<DocumentDto> documentDtos = new ArrayList<>();
 
         for (Document document : documents) {
-            documentForms.add(document.toDocumentForm());
+            documentDtos.add(document.toDocumentForm());
         }
 
-        return documentForms;
+        return documentDtos;
     }
 }

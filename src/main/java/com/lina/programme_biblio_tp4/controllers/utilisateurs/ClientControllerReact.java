@@ -1,6 +1,6 @@
 package com.lina.programme_biblio_tp4.controllers.utilisateurs;
 
-import com.lina.programme_biblio_tp4.forms.utilisateurs.ClientForm;
+import com.lina.programme_biblio_tp4.dtos.utilisateurs.ClientDto;
 import com.lina.programme_biblio_tp4.service.ServiceClient;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,39 +18,39 @@ public class ClientControllerReact {
     private ServiceClient serviceClient;
 
     @GetMapping
-    public List<ClientForm> getAllClients() {
+    public List<ClientDto> getAllClients() {
         return serviceClient.findAllClients();
     }
 
     @GetMapping("/{id}")
-    public ClientForm getClient(@PathVariable long id) {
+    public ClientDto getClient(@PathVariable long id) {
         return serviceClient.getClient(id).orElseThrow(RuntimeException::new).toClientForm();
     }
 
     @PostMapping
-    public ResponseEntity<ClientForm> addClient(@RequestBody ClientForm clientForm) {
-        return new ResponseEntity<>(serviceClient.saveClient(clientForm.toClient()).toClientForm(),
+    public ResponseEntity<ClientDto> addClient(@RequestBody ClientDto clientDto) {
+        return new ResponseEntity<>(serviceClient.saveClient(clientDto.toClient()).toClientForm(),
                 HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ClientForm updateClient(@PathVariable long id, @RequestBody ClientForm clientFormDetail) {
-        ClientForm client = serviceClient.getClient(id).orElseThrow(RuntimeException::new).toClientForm();
+    public ClientDto updateClient(@PathVariable long id, @RequestBody ClientDto clientDtoDetail) {
+        ClientDto client = serviceClient.getClient(id).orElseThrow(RuntimeException::new).toClientForm();
 
-        client.setNom(clientFormDetail.getNom());
-        client.setPrenom(clientFormDetail.getPrenom());
-        client.setRue(clientFormDetail.getRue());
-        client.setVille(clientFormDetail.getVille());
-        client.setCodePostal(clientFormDetail.getCodePostal());
-        client.setNumeroTelephone(clientFormDetail.getNumeroTelephone());
-        client.setDateInscription(clientFormDetail.getDateInscription());
+        client.setNom(clientDtoDetail.getNom());
+        client.setPrenom(clientDtoDetail.getPrenom());
+        client.setRue(clientDtoDetail.getRue());
+        client.setVille(clientDtoDetail.getVille());
+        client.setCodePostal(clientDtoDetail.getCodePostal());
+        client.setNumeroTelephone(clientDtoDetail.getNumeroTelephone());
+        client.setDateInscription(clientDtoDetail.getDateInscription());
 
         return serviceClient.saveClient(client.toClient()).toClientForm();
     }
 
     @DeleteMapping("/{id}")
     public void deleteClient(@PathVariable long id) {
-        ClientForm client = serviceClient.getClient(id).orElseThrow(RuntimeException::new).toClientForm();
+        ClientDto client = serviceClient.getClient(id).orElseThrow(RuntimeException::new).toClientForm();
         serviceClient.removeClient(client.toClient());
     }
 }
