@@ -72,8 +72,8 @@ public class ServiceClient {
         return clientRepository.findById(id);
     }
 
-    public Client findByName(String nomPrenom) {
-        return clientRepository.findByName(nomPrenom);
+    public ClientForm findByName(String nomPrenom) {
+        return clientRepository.findByName(nomPrenom).toClientForm();
     }
 
     public String listeFrais(Client client) {

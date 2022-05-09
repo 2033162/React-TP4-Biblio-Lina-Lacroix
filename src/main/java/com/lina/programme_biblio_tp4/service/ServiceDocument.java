@@ -214,13 +214,20 @@ public class ServiceDocument {
         return livreFormList;
     }
 
-    public List<Document> searchDocument(String titre,
+    public List<DocumentForm> searchDocument(String titre,
                                          String auteur,
                                          int anneePublication,
                                          String genreDocument) {
-        return documentRepository.searchDocument(titre,
+        List<Document> documents = documentRepository.searchDocument(titre,
                 auteur,
                 anneePublication,
                 genreDocument);
+        List<DocumentForm> documentForms = new ArrayList<>();
+
+        for (Document document : documents) {
+            documentForms.add(document.toDocumentForm());
+        }
+
+        return documentForms;
     }
 }

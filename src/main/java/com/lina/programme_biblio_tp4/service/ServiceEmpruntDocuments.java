@@ -1,5 +1,6 @@
 package com.lina.programme_biblio_tp4.service;
 
+import com.lina.programme_biblio_tp4.forms.emprunt.EmpruntFormDocument;
 import com.lina.programme_biblio_tp4.modele.Amende;
 import com.lina.programme_biblio_tp4.modele.Client;
 import com.lina.programme_biblio_tp4.modele.Document;
@@ -9,10 +10,7 @@ import com.lina.programme_biblio_tp4.repository.EmpruntDocumentRepository;
 import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @Component
@@ -41,6 +39,7 @@ public class ServiceEmpruntDocuments {
     }
 
     public EmpruntDocuments saveEmpruntDocuments(EmpruntDocuments empruntDocuments) {
+
         return empruntDocumentRepository.save(empruntDocuments);
     }
 
@@ -52,12 +51,19 @@ public class ServiceEmpruntDocuments {
         empruntDocumentRepository.deleteAll();
     }
 
-    public Optional<EmpruntDocuments> getEmpruntDocuments(long empruntDocumentsId) {
-        return empruntDocumentRepository.findById(empruntDocumentsId);
+    public EmpruntFormDocument getEmpruntDocuments(long empruntDocumentsId) {
+        return empruntDocumentRepository.findById(empruntDocumentsId)
+                .orElseThrow(RuntimeException::new).toEmpruntFormDocument();
     }
 
-    public List<EmpruntDocuments> findAllEmpruntDocuments() {
-        return empruntDocumentRepository.findAll();
+    public List<EmpruntFormDocument> findAllEmpruntDocuments() {
+        List<EmpruntDocuments> empruntDocuments = empruntDocumentRepository.findAll();
+        List<EmpruntFormDocument> empruntFormDocuments = new ArrayList<>();
+
+        for (EmpruntDocuments empruntDocument : empruntDocuments) {
+            empruntFormDocuments.add(empruntDocument.toEmpruntFormDocument());
+        }
+        return empruntFormDocuments;
     }
 
     public List<EmpruntDocuments> getClientEmprunt(long clientId) {
@@ -72,7 +78,7 @@ public class ServiceEmpruntDocuments {
         return empruntDocumentRepository.getNbrEmpruntExemplaire(empruntDocumentsId);
     }
 
-    public EmpruntDocuments getEmpruntDocuments(long clientId, long documentId) {
+    public EmpruntDocuments getEmpruntsDocuments(long clientId, long documentId) {
         return empruntDocumentRepository.getEmpruntDocuments(clientId, documentId);
     }
 
@@ -188,7 +194,7 @@ public class ServiceEmpruntDocuments {
         Calendar today = Calendar.getInstance();
         today.setTime(dateRetour);
 
-        EmpruntDocuments empruntDocuments = getEmpruntDocuments(client.getId(), document.getId());
+        EmpruntDocuments empruntDocuments = getEmpruntsDocuments(client.getId(), document.getId());
         if (empruntDocuments.getDateExpire().before(dateRetour)) {
             double sommeAmende = calculAmende(today, empruntDocuments.getDateExpire());
 
