@@ -33,6 +33,11 @@ public class EmpruntDocumentControllerReact {
         return serviceEmpruntDocuments.getEmpruntDocuments(id);
     }
 
+    @GetMapping
+    public List<EmpruntFormDocument> getAllClientEmprunt() {
+        return serviceEmpruntDocuments.getAllClientsEmprunts();
+    }
+
     @PostMapping
     public EmpruntFormDocument addEmprunt(@RequestBody EmpruntFormDocument empruntFormDocuments) throws ParseException {
         ClientForm clientForm = serviceClient.findByName(empruntFormDocuments.getNom());

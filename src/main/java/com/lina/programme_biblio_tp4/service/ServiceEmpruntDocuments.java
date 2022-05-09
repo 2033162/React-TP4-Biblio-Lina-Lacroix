@@ -70,8 +70,14 @@ public class ServiceEmpruntDocuments {
         return empruntDocumentRepository.getClientEmprunt(clientId);
     }
 
-    public List<EmpruntDocuments> getAllClientsEmprunts() {
-        return empruntDocumentRepository.getAllClientsEmprunts();
+    public List<EmpruntFormDocument> getAllClientsEmprunts() {
+        List<EmpruntDocuments> empruntDocuments = empruntDocumentRepository.getAllClientsEmprunts();
+        List<EmpruntFormDocument> empruntFormDocuments = new ArrayList<>();
+
+        for (EmpruntDocuments empruntDocument : empruntDocuments) {
+            empruntFormDocuments.add(empruntDocument.toEmpruntFormDocument());
+        }
+        return empruntFormDocuments;
     }
 
     public int getNbrEmpruntExemplaire(long empruntDocumentsId) {

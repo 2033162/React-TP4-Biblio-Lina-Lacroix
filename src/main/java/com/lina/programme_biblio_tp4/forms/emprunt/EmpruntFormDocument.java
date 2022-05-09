@@ -21,35 +21,4 @@ public class EmpruntFormDocument {
     private String auteur;
     private int anneePublication;
     private String genreDocument;
-
-    /*private ServiceDocument serviceDocument;
-    private ServiceClient serviceClient;*/
-
-    /*public EmpruntDocuments toEmpruntDocument() {
-        LocalDate bDateInitial;
-        LocalDate bDateExpire;
-        try {
-            bDateInitial = dateInitial == null ? null : LocalDate.parse(dateInitial, DATETIMEFORMATTER);
-            bDateExpire = dateExpire == null ? null : LocalDate.parse(dateExpire, DATETIMEFORMATTER);
-        } catch (Exception e) {
-            bDateInitial = null;
-            bDateExpire = null;
-        }
-        assert bDateInitial != null;
-        Date dateI = Date.from(bDateInitial.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        assert bDateExpire != null;
-        Date dateE = Date.from(bDateExpire.atStartOfDay(ZoneId.systemDefault()).toInstant());
-
-        final EmpruntDocuments empruntDocuments = new EmpruntDocuments(
-                dateI,
-                dateE,
-                nbrRappel,
-                serviceClient.findByName(nom),
-                serviceDocument.searchDocument(titre, auteur,
-                        Integer.valueOf(anneePublication), genreDocument)
-        );
-
-        return empruntDocuments;
-    }*/
-
 }

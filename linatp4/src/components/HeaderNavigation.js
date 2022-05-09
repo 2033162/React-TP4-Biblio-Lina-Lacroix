@@ -30,7 +30,8 @@ const HeaderNavigation = () => {
             <NavLink to="/employes" style={navLinkStyles}>Employes</NavLink> {" | "}
             <NavLink to="/livres" style={navLinkStyles}>Livres</NavLink> {" | "}
             <NavLink to="/cds" style={navLinkStyles}>Cds</NavLink> {" | "}
-            <NavLink to="/dvds" style={navLinkStyles}>Dvds</NavLink>
+            <NavLink to="/dvds" style={navLinkStyles}>Dvds</NavLink> {" | "}
+            <NavLink to="/empruntDocuments" style={navLinkStyles}>Emprunt de document</NavLink>
         </div>
     )
 }
