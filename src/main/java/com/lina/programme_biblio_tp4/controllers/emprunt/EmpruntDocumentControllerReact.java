@@ -46,14 +46,20 @@ public class EmpruntDocumentControllerReact {
     @PostMapping
     public EmpruntDtoDocument addEmprunt(@RequestBody EmpruntDtoDocument empruntDtoDocuments) throws ParseException {
         ClientDto clientDto = serviceClient.findByName(empruntDtoDocuments.getNom());
+        if (clientDto == null) {
+            throw new IllegalArgumentException("Client non trouvé");
+        }
         List<DocumentDto> documents = serviceDocument.searchDocument(empruntDtoDocuments.getTitre(),
                 empruntDtoDocuments.getAuteur(),
                 Integer.valueOf(empruntDtoDocuments.getAnneePublication()),
                 empruntDtoDocuments.getGenreDocument());
+        if (documents.size() != 1) {
+            throw new IllegalArgumentException("Document non trouvé ou résultat non unique");
+        }
 
         final EmpruntDtoDocument empruntDocuments = serviceEmpruntDocuments.saveEmpruntDocuments(
-                new SimpleDateFormat("yyyy-mm-dd").parse(empruntDtoDocuments.getDateInitial()),
-                new SimpleDateFormat("yyyy-mm-dd").parse(empruntDtoDocuments.getDateExpire()),
+                new SimpleDateFormat("yyyy-MM-dd").parse(empruntDtoDocuments.getDateInitial()),
+                new SimpleDateFormat("yyyy-MM-dd").parse(empruntDtoDocuments.getDateExpire()),
                 empruntDtoDocuments.getNbrRappel(),
                 clientDto.toClient(),
                 documents.get(0).toDocument());

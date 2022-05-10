@@ -73,7 +73,11 @@ public class ServiceClient {
     }
 
     public ClientDto findByName(String nom) {
-        return clientRepository.findByName(nom).toClientDto();
+        Client client = clientRepository.findByName(nom);
+        if (client != null) {
+            return client.toClientDto();
+        }
+        return null;
     }
 
     public String listeFrais(Client client) {
