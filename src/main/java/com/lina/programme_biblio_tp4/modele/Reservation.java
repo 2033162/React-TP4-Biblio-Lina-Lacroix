@@ -47,12 +47,8 @@ public class Reservation {
         return new ReservationDto(
                 id,
                 dateReservation.toString(),
-                client.getNom(),
-                client.getPrenom(),
-                document.getTitre(),
-                document.getAuteur(),
-                document.getAnneePublication(),
-                document.getGenreDocument()
+                client.toClientDto(),
+                document.toDocumentForm()
         );
     }
 }

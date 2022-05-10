@@ -52,7 +52,7 @@ public class Client {
 
     public ClientDto toClientDto() {
         return new ClientDto(
-                id,
+                String.valueOf(id),
                 nom,
                 prenom,
                 rue,

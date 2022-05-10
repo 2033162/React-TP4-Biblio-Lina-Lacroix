@@ -2,6 +2,7 @@ package com.lina.programme_biblio_tp4.controllers.emprunt;
 
 import com.lina.programme_biblio_tp4.dtos.document.DocumentDto;
 import com.lina.programme_biblio_tp4.dtos.emprunt.EmpruntDtoDocument;
+import com.lina.programme_biblio_tp4.dtos.emprunt.EmpruntFormDocument;
 import com.lina.programme_biblio_tp4.dtos.utilisateurs.ClientDto;
 import com.lina.programme_biblio_tp4.service.ServiceClient;
 import com.lina.programme_biblio_tp4.service.ServiceDocument;
@@ -28,42 +29,27 @@ public class EmpruntDocumentControllerReact {
         return serviceEmpruntDocuments.findAllEmpruntDocuments();
     }
 
-    @GetMapping("/{id}")
-    public EmpruntDtoDocument getEmpruntDocument(@PathVariable long id) {
-        return serviceEmpruntDocuments.getEmpruntDocuments(id);
-    }
-
-    @GetMapping("/clients")
-    public List<EmpruntDtoDocument> getAllClientEmprunt() {
-        return serviceEmpruntDocuments.getAllClientsEmprunts();
-    }
-
-    @GetMapping("/clients/{id}")
-    public List<EmpruntDtoDocument> getClientAllEmprunts(@PathVariable long id) {
-        return serviceEmpruntDocuments.getClientEmprunt(id);
-    }
-
     @PostMapping
-    public EmpruntDtoDocument addEmprunt(@RequestBody EmpruntDtoDocument empruntDtoDocuments) throws ParseException {
-        ClientDto clientDto = serviceClient.findByName(empruntDtoDocuments.getNom());
+    public EmpruntDtoDocument addEmprunt(@RequestBody EmpruntFormDocument empruntFormDocuments) throws ParseException {
+        ClientDto clientDto = serviceClient.findByName(empruntFormDocuments.getNom());
         if (clientDto == null) {
             throw new IllegalArgumentException("Client non trouvé");
         }
-        List<DocumentDto> documents = serviceDocument.searchDocument(empruntDtoDocuments.getTitre(),
-                empruntDtoDocuments.getAuteur(),
-                Integer.valueOf(empruntDtoDocuments.getAnneePublication()),
-                empruntDtoDocuments.getGenreDocument());
+        List<DocumentDto> documents = serviceDocument.searchDocument(empruntFormDocuments.getTitre(),
+                empruntFormDocuments.getAuteur(),
+                empruntFormDocuments.getAnneePublication(),
+                empruntFormDocuments.getGenreDocument());
         if (documents.size() != 1) {
             throw new IllegalArgumentException("Document non trouvé ou résultat non unique");
         }
 
         final EmpruntDtoDocument empruntDocuments = serviceEmpruntDocuments.saveEmpruntDocuments(
-                new SimpleDateFormat("yyyy-MM-dd").parse(empruntDtoDocuments.getDateInitial()),
-                new SimpleDateFormat("yyyy-MM-dd").parse(empruntDtoDocuments.getDateExpire()),
-                empruntDtoDocuments.getNbrRappel(),
+                new SimpleDateFormat("yyyy-MM-dd").parse(empruntFormDocuments.getDateInitial()),
+                new SimpleDateFormat("yyyy-MM-dd").parse(empruntFormDocuments.getDateExpire()),
+                empruntFormDocuments.getNbrRappel(),
                 clientDto.toClient(),
                 documents.get(0).toDocument());
-        empruntDtoDocuments.setId(empruntDocuments.getId());
+        empruntFormDocuments.setId(empruntDocuments.getId());
 
         return empruntDocuments;
     }

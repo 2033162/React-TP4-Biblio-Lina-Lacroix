@@ -131,11 +131,11 @@ public class MainBiblio implements CommandLineRunner {
 
 
         System.out.println("\nCRUD - Client");
-        System.out.println(serviceClient.getClient(client.getId()));
+        System.out.println(serviceClient.getClient(Integer.parseInt(client.getId())));
 
         client.setRue("Drolet");
         serviceClient.saveClient(client.toClient());
-        System.out.println(serviceClient.getClient(client.getId()));
+        System.out.println(serviceClient.getClient(Integer.parseInt(client.getId())));
 
 
         System.out.println("\nCRUD - Reservation");
@@ -168,7 +168,7 @@ public class MainBiblio implements CommandLineRunner {
 
 
         System.out.println("\nListe des emprunts du client:");
-        var clientEmprunt = serviceEmpruntDocuments.getClientEmprunt(client.getId());
+        var clientEmprunt = serviceEmpruntDocuments.getClientEmprunt(Integer.parseInt(client.getId()));
         for (EmpruntDtoDocument empruntDocument: clientEmprunt) {
             System.out.println(empruntDocument);
         }

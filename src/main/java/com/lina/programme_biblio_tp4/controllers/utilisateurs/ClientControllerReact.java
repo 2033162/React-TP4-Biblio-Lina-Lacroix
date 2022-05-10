@@ -34,8 +34,8 @@ public class ClientControllerReact {
     }
 
     @PutMapping("/{id}")
-    public ClientDto updateClient(@PathVariable long id, @RequestBody ClientDto clientDtoDetail) {
-        ClientDto client = serviceClient.getClient(id);
+    public ClientDto updateClient(@PathVariable String id, @RequestBody ClientDto clientDtoDetail) {
+        ClientDto client = serviceClient.getClient(Integer.parseInt(id));
 
         client.setNom(clientDtoDetail.getNom());
         client.setPrenom(clientDtoDetail.getPrenom());

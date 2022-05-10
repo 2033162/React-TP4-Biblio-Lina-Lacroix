@@ -1,8 +1,8 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import isMatch from 'date-fns/isMatch'
 
-const UpdateClient = ({onUpdate}) => {
-    //const {id} = useParams()
+const UpdateClient = ({client, onUpdate}) => {
+    const [id, setId] = useState(0)
     const [nom, setNom] = useState('')
     const [prenom, setPrenom] = useState('')
     const [rue, setRue] = useState('')
@@ -10,6 +10,17 @@ const UpdateClient = ({onUpdate}) => {
     const [codePostal, setCodePostal] = useState('')
     const [numeroTelephone, setNumeroTelephone] = useState('')
     const [dateInscription, setDateInscription] = useState('')
+
+    useEffect(() => {
+        setId(client.id)
+        setNom(client.nom)
+        setPrenom(client.prenom)
+        setRue(client.rue)
+        setVille(client.ville)
+        setCodePostal(client.codePostal)
+        setNumeroTelephone(client.numeroTelephone)
+        setDateInscription(client.dateInscription)
+    }, [])
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -82,6 +93,7 @@ const UpdateClient = ({onUpdate}) => {
         }
 
         onUpdate({
+            id,
             nom,
             prenom,
             rue,
@@ -98,26 +110,6 @@ const UpdateClient = ({onUpdate}) => {
         setNumeroTelephone('')
         setDateInscription('')
     }
-
-    /*useEffect(() => {
-        fetchClient(id).then(client => {
-            setNom(client.data.nom);
-            setPrenom(client.data.prenom);
-            setRue(client.data.rue);
-            setVille(client.data.ville);
-            setCodePostal(client.data.codePostal);
-            setNumeroTelephone(client.data.numeroTelephone);
-            setDateInscription(client.data.dateInscription);
-        }).catch(error => {
-            console.log('Something went wrong', error)
-        })
-    })
-
-    const fetchClient = async (id) => {
-        const res = await fetch(`http://localhost:8080/clients/${id}`)
-        const data = await res.json()
-        return data
-    }*/
 
     return (
         <form className='add-form' onSubmit={onSubmit}>
@@ -154,7 +146,7 @@ const UpdateClient = ({onUpdate}) => {
             <div className='form-control'>
                 <label>Numero de telephone</label>
                 <input type='text' placeholder='Numero de telephone'
-                       defaultValue="514-"
+                       value={numeroTelephone}
                        onChange={(e) => setNumeroTelephone(e.target.value)}/>
             </div>
             <div className='form-control'>

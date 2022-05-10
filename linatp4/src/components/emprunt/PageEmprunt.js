@@ -19,34 +19,6 @@ const PageEmprunt = () => {
         return data
     }
 
-    const fetchEmpruntsClients = async () => {
-        const res = await fetch('http://localhost:8080/empruntDocuments/clients')
-        const data = await res.json()
-        return data
-    }
-
-    const getEmpruntsClients = async () => {
-        const empruntsFromServer = await fetchEmpruntsClients()
-        setEmprunts(empruntsFromServer)
-    }
-
-    const fetchClientEmprunts = async (id) => {
-        const res = await fetch(`http://localhost:8080/empruntDocuments/clients/${id}`)
-        const data = await res.json()
-        return data
-    }
-
-    const getClientEmprunts = async (id) => {
-        const empruntsFromServer = await fetchClientEmprunts(id)
-        setEmprunts(empruntsFromServer)
-    }
-
-    const fetchEmprunt = async (id) => {
-        const res = await fetch(`http://localhost:8080/empruntDocuments/${id}`)
-        const data = await res.json()
-        return data
-    }
-
     const [showAddEmprunt, setShowAddEmprunt] = useState(false)
     const [emprunts, setEmprunts] = useState([])
 
@@ -72,9 +44,6 @@ const PageEmprunt = () => {
             {emprunts.length > 0 ?
                 <Emprunts emprunts={emprunts}/>
             : 'No Emprunts'}
-            <div>
-                <input type="button" value="Liste des emprunts d'un client" className="btn btn-block bg-black text-light"/>
-            </div>
         </div>
     )
 }

@@ -10,6 +10,8 @@ import com.lina.programme_biblio_tp4.repository.EmpruntDocumentRepository;
 import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -31,8 +33,9 @@ public class ServiceEmpruntDocuments {
                                                  int nbrRappel,
                                                  Client client,
                                                  Document document) {
-        EmpruntDocuments empruntDocuments = empruntDocumentRepository.save(new EmpruntDocuments(dateInitial,
-                dateExpire,
+        EmpruntDocuments empruntDocuments = empruntDocumentRepository.save(new EmpruntDocuments(
+                dateInitial.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
+                dateExpire.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
                 nbrRappel,
                 client,
                 document));
@@ -94,8 +97,8 @@ public class ServiceEmpruntDocuments {
         return empruntDocumentRepository.getEmpruntDocuments(clientId, documentId);
     }
 
-    public double calculAmende(Calendar today, Date dateExpire) {
-        long diffInMillies = Math.abs(today.getTime().getTime() - dateExpire.getTime());
+    public double calculAmende(Calendar today, LocalDate dateExpire) {
+        long diffInMillies = Math.abs(today.getTime().getTime() - dateExpire.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli());
         long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
         return amende * diff;
     }
@@ -165,8 +168,8 @@ public class ServiceEmpruntDocuments {
             dateExpire.add(Calendar.WEEK_OF_YEAR, periodeEmprunt);
 
             var empruntDocument = new EmpruntDocuments(
-                    today.getTime(),
-                    dateExpire.getTime(),
+                    today.getTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
+                    dateExpire.getTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
                     0,
                     client,
                     document);
@@ -207,7 +210,7 @@ public class ServiceEmpruntDocuments {
         today.setTime(dateRetour);
 
         EmpruntDocuments empruntDocuments = getEmpruntsDocuments(client.getId(), document.getId());
-        if (empruntDocuments.getDateExpire().before(dateRetour)) {
+        if (empruntDocuments.getDateExpire().isBefore(dateRetour.toInstant().atZone(ZoneId.systemDefault()).toLocalDate())) {
             double sommeAmende = calculAmende(today, empruntDocuments.getDateExpire());
 
             Amende amende = new Amende(empruntDocuments.getDateInitial(),

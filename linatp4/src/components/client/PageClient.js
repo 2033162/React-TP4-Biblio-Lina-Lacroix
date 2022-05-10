@@ -6,6 +6,11 @@ import UpdateClient from "./UpdateClient";
 
 const PageClient = () => {
 
+    const [showAddClient, setShowAddClient] = useState(false)
+    const [showUpdateClient, setShowUpdateClient] = useState(false)
+    const [clients, setClients] = useState([])
+    const [client, setClient] = useState({})
+
     useEffect(() => {
         const getClients = async () => {
             const clientsFromServer = await fetchClients()
@@ -25,9 +30,6 @@ const PageClient = () => {
         const data = await res.json()
         return data
     }
-
-    const [showAddClient, setShowAddClient] = useState(false)
-    const [clients, setClients] = useState([])
 
     const addClient = async (client) => {
         const res = await fetch('http://localhost:8080/clients',
@@ -49,30 +51,19 @@ const PageClient = () => {
         setClients(clients.filter((client) => client.id !== id))
     }
 
-    const [showUpdateClient, setShowUpdateClient] = useState(false)
-
-    const updateClient = async (id) => {
-        const clientToUpdate = await fetchClient(id)
-        const updateClient = await {...clientToUpdate,
-            nom: !clientToUpdate.nom,
-            prenom: !clientToUpdate.prenom,
-            rue: !clientToUpdate.rue,
-            ville: !clientToUpdate.ville,
-            codePostal: !clientToUpdate.codePostal,
-            numeroTelephone: !clientToUpdate.numeroTelephone,
-            dateInscription: !clientToUpdate.dateInscription}
-
-        const res = await fetch(`http://localhost:8080/clients/${id}`, {
+    const updateClient = async (client) => {
+        console.log(client)
+        const res = await fetch(`http://localhost:8080/clients/${client.id}`, {
             method: 'PUT',
             headers: {
                 'Content-type': 'application/json',
             },
-            body: JSON.stringify(updateClient)
+            body: JSON.stringify(client)
         })
         const data = await res.json()
         setClients(
             clients.map(
-                (client) => client.id === id ?
+                (cli) => cli.id === client.id ?
                     {...client,
                         nom: data.nom,
                         prenom: data.prenom,
@@ -80,7 +71,7 @@ const PageClient = () => {
                         ville: data.ville,
                         codePostal: data.codePostal,
                         numeroTelephone: data.numeroTelephone,
-                        dateInscription: data.dateInscription} : client
+                        dateInscription: data.dateInscription} : cli
             )
         )
     }
@@ -95,12 +86,15 @@ const PageClient = () => {
             {clients.length > 0 ?
                 <Clients clients={clients}
                          onDelete={deleteClient}
-                         onUpdate={() =>
-                             setShowUpdateClient(!showUpdateClient)}
+                         onUpdate={(client) => {
+                             setShowUpdateClient(!showUpdateClient)
+                            setClient(client)
+                         }
+                         }
                          showUpdate={showUpdateClient}
                 />
                 : 'No Clients'}
-            {showUpdateClient && <UpdateClient onUpdate={updateClient} />}
+            {showUpdateClient && <UpdateClient client={client} onUpdate={updateClient} />}
         </div>
     );
 };

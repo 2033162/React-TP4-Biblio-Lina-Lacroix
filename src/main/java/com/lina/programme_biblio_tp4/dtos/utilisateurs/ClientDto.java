@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 @AllArgsConstructor
 public class ClientDto {
     private static DateTimeFormatter DATETIMEFORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    private long id;
+    private String id;
     private String nom;
     private String prenom;
     private String rue;
@@ -38,7 +38,7 @@ public class ClientDto {
                 bDate);
         long oldId;
         try {
-            oldId = id;
+            oldId = Integer.parseInt(id);
             if (oldId > 0)
                 client.setId(oldId);
         } catch (NumberFormatException ignored) {}
