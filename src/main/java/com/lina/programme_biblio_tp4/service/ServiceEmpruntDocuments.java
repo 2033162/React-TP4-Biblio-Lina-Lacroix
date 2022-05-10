@@ -36,11 +36,11 @@ public class ServiceEmpruntDocuments {
                 nbrRappel,
                 client,
                 document));
-        return empruntDocuments.toEmpruntFormDocument();
+        return empruntDocuments.toEmpruntDtoDocument();
     }
 
     public EmpruntDtoDocument saveEmpruntDocuments(EmpruntDocuments empruntDocuments) {
-        return empruntDocumentRepository.save(empruntDocuments).toEmpruntFormDocument();
+        return empruntDocumentRepository.save(empruntDocuments).toEmpruntDtoDocument();
     }
 
     public void removeEmpruntDocuments(EmpruntDocuments empruntDocuments) {
@@ -53,7 +53,7 @@ public class ServiceEmpruntDocuments {
 
     public EmpruntDtoDocument getEmpruntDocuments(long empruntDocumentsId) {
         return empruntDocumentRepository.findById(empruntDocumentsId)
-                .orElseThrow(RuntimeException::new).toEmpruntFormDocument();
+                .orElseThrow(RuntimeException::new).toEmpruntDtoDocument();
     }
 
     public List<EmpruntDtoDocument> findAllEmpruntDocuments() {
@@ -61,7 +61,7 @@ public class ServiceEmpruntDocuments {
         List<EmpruntDtoDocument> empruntDtoDocuments = new ArrayList<>();
 
         for (EmpruntDocuments empruntDocument : empruntDocuments) {
-            empruntDtoDocuments.add(empruntDocument.toEmpruntFormDocument());
+            empruntDtoDocuments.add(empruntDocument.toEmpruntDtoDocument());
         }
         return empruntDtoDocuments;
     }
@@ -71,7 +71,7 @@ public class ServiceEmpruntDocuments {
         List<EmpruntDtoDocument> clientEmpruntsDto = new ArrayList<>();
 
         for (EmpruntDocuments clientEmprunt : clientEmprunts) {
-            clientEmpruntsDto.add(clientEmprunt.toEmpruntFormDocument());
+            clientEmpruntsDto.add(clientEmprunt.toEmpruntDtoDocument());
         }
         return clientEmpruntsDto;
     }
@@ -81,7 +81,7 @@ public class ServiceEmpruntDocuments {
         List<EmpruntDtoDocument> empruntDtoDocuments = new ArrayList<>();
 
         for (EmpruntDocuments empruntDocument : empruntDocuments) {
-            empruntDtoDocuments.add(empruntDocument.toEmpruntFormDocument());
+            empruntDtoDocuments.add(empruntDocument.toEmpruntDtoDocument());
         }
         return empruntDtoDocuments;
     }

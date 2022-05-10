@@ -49,7 +49,7 @@ public class EmpruntDocuments {
                 '}';
     }
 
-    public EmpruntDtoDocument toEmpruntFormDocument() {
+    public EmpruntDtoDocument toEmpruntDtoDocument() {
         return new EmpruntDtoDocument(
                 id,
                 dateInitial.toString(),

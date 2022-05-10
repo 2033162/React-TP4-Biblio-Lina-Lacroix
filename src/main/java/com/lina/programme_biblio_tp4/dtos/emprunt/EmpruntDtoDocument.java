@@ -3,6 +3,8 @@ package com.lina.programme_biblio_tp4.dtos.emprunt;
 import com.lina.programme_biblio_tp4.modele.Client;
 import com.lina.programme_biblio_tp4.modele.Document;
 import com.lina.programme_biblio_tp4.modele.EmpruntDocuments;
+import com.lina.programme_biblio_tp4.service.ServiceClient;
+import com.lina.programme_biblio_tp4.service.ServiceDocument;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +18,8 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EmpruntDtoDocument {
+    private static ServiceClient serviceClient;
+    private static ServiceDocument serviceDocument;
     private static DateTimeFormatter DATETIMEFORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private long id;
     private String dateInitial;
@@ -31,14 +35,18 @@ public class EmpruntDtoDocument {
     public EmpruntDocuments toEmpruntDocuments() {
         LocalDate bDateInitial;
         LocalDate bDateExpire;
-        Client client = null;
-        Document document = null;
+        Client client;
+        Document document;
         try {
             bDateInitial = dateInitial == null ? null : LocalDate.parse(dateInitial, DATETIMEFORMATTER);
             bDateExpire = dateExpire == null ? null : LocalDate.parse(dateExpire, DATETIMEFORMATTER);
+            client = serviceClient.findByName(nom).toClient();
+            document = serviceDocument.searchDocument(titre, auteur, anneePublication, genreDocument).get(0).toDocument();
         } catch (Exception e) {
             bDateInitial = null;
             bDateExpire = null;
+            client = null;
+            document = null;
         }
         final EmpruntDocuments empruntDocuments = new EmpruntDocuments(
                 Date.from(bDateInitial.atStartOfDay(ZoneId.systemDefault()).toInstant()),
