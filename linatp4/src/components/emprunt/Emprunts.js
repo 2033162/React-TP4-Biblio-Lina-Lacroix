@@ -1,11 +1,13 @@
 import Emprunt from "./Emprunt";
 
-const Emprunts = ({emprunts}) => {
+const Emprunts = ({emprunts, onRetour}) => {
     return (
         <>
             {emprunts.map((emprunt) => (
                 <Emprunt key={emprunt.id}
-                        emprunt={emprunt}/>
+                         emprunt={emprunt}
+                         onRetour={onRetour}
+                />
             ))}
         </>
     )

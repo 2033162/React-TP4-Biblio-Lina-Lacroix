@@ -6,7 +6,7 @@ const Emprunt = ({emprunt, onRetour}) => {
             <h3>{emprunt.clientDto.prenom} {emprunt.clientDto.nom}
                 <AiOutlineRollback
                 style={{color: 'blue', cursor: 'pointer'}}
-                onClick={() => onRetour(emprunt)}/>
+                onClick={() => onRetour(emprunt.id)}/>
             </h3>
             <p>{emprunt.documentDto.genreDocument} {emprunt.documentDto.titre}</p>
         </div>

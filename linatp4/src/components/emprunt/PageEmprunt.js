@@ -34,8 +34,8 @@ const PageEmprunt = () => {
         setEmprunts([...emprunts, data])
     }
 
-    const onRetour = async (emprunt) => {
-        await fetch(`http://localhost:8080/empruntDocuments/${emprunt.id}`, {
+    const onRetour = async (id) => {
+        await fetch(`http://localhost:8080/empruntDocuments/${id}`, {
             method: 'DELETE'
         })
         setEmprunts(emprunts.filter((emprunt) => emprunt.id !== id))
