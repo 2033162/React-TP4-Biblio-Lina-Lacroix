@@ -1,9 +1,17 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 
-const UpdateEmploye = ({onUpdate}) => {
+const UpdateEmploye = ({employe, onUpdate}) => {
+    const [id, setId] = useState(0)
     const [nom, setNom] = useState('')
     const [prenom, setPrenom] = useState('')
     const [fonction, setFonction] = useState('')
+
+    useEffect(() => {
+        setId(employe.id)
+        setNom(employe.nom)
+        setPrenom(employe.prenom)
+        setFonction(employe.fonction)
+    }, [])
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -39,6 +47,7 @@ const UpdateEmploye = ({onUpdate}) => {
         }
 
         onUpdate({
+            id,
             nom,
             prenom,
             fonction

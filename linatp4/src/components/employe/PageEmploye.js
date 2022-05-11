@@ -5,6 +5,12 @@ import AddEmploye from "./AddEmploye";
 import UpdateEmploye from "./UpdateEmploye";
 
 const PageEmploye = () => {
+
+    const [showAddEmploye, setShowAddEmploye] = useState(false)
+    const [showUpdateEmploye, setShowUpdateEmploye] = useState(false)
+    const [employes, setEmployes] = useState([])
+    const [employe, setEmploye] = useState({})
+
     useEffect(() => {
         const getEmployes = async () => {
             const employesFromServer = await fetchEmployes()
@@ -25,9 +31,6 @@ const PageEmploye = () => {
         return data
     }
 
-    const [showAddEmploye, setShowAddEmploye] = useState(false)
-    const [employes, setEmployes] = useState([])
-
     const addEmploye = async (employe) => {
         const res = await fetch('http://localhost:8080/employes', {
             method: 'POST',
@@ -47,31 +50,23 @@ const PageEmploye = () => {
         setEmployes(employes.filter((employe) => employe.id !== id))
     }
 
-    const [showUpdateEmploye, setShowUpdateEmploye] = useState(false)
-
-    const updateEmploye = async (id) => {
-        const employeToUpdate = await fetchEmploye(id)
-        const updateEmploye = await {...employeToUpdate,
-            nom: !employeToUpdate.nom,
-            prenom: !employeToUpdate.prenom,
-            fonction: !employeToUpdate.fonction
-        }
-
-        const res = await fetch(`http://localhost:8080/employes/${id}`, {
+    const updateEmploye = async (employe) => {
+        console.log(employe)
+        const res = await fetch(`http://localhost:8080/employes/${employe.id}`, {
             method: 'PUT',
             headers: {
                 'Content-type' : 'application/json',
             },
-            body: JSON.stringify(updateEmploye)
+            body: JSON.stringify(employe)
         })
         const data = await res.json()
         setEmployes(
             employes.map(
-                (employe) => employe.id === id ?
+                (empl) => empl.id === employe.id ?
                     {...employe,
                     nom: data.nom,
                     prenom: data.prenom,
-                    fonction: data.fonction} : employe
+                    fonction: data.fonction} : empl
             )
         )
     }
@@ -86,13 +81,14 @@ const PageEmploye = () => {
             {employes.length > 0 ?
                 <Employes employes={employes}
                           onDelete={deleteEmploye}
-                          onUpdate={() =>
-                              setShowUpdateEmploye(!showUpdateEmploye)}
+                          onUpdate={(employe) => {
+                              setShowUpdateEmploye(!showUpdateEmploye)
+                              setEmploye(employe)
+                          }}
                           showUpdate={showUpdateEmploye}
                 />
-                : 'No Employes'
-            }
-            {showUpdateEmploye && <UpdateEmploye onUpdate={updateEmploye}/>}
+                : 'No Employes'}
+            {showUpdateEmploye && <UpdateEmploye employe={employe} onUpdate={updateEmploye}/>}
         </div>
     )
 }

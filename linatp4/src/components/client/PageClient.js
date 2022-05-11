@@ -88,9 +88,8 @@ const PageClient = () => {
                          onDelete={deleteClient}
                          onUpdate={(client) => {
                              setShowUpdateClient(!showUpdateClient)
-                            setClient(client)
-                         }
-                         }
+                             setClient(client)
+                         }}
                          showUpdate={showUpdateClient}
                 />
                 : 'No Clients'}
