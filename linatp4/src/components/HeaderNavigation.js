@@ -31,7 +31,8 @@ const HeaderNavigation = () => {
             <NavLink to="/livres" style={navLinkStyles}>Livres</NavLink> {" | "}
             <NavLink to="/cds" style={navLinkStyles}>Cds</NavLink> {" | "}
             <NavLink to="/dvds" style={navLinkStyles}>Dvds</NavLink> {" | "}
-            <NavLink to="/empruntDocuments" style={navLinkStyles}>Emprunt de document</NavLink>
+            <NavLink to="/empruntDocuments" style={navLinkStyles}>Emprunt de document</NavLink> {" | "}
+            <NavLink to="/retourDocuments" style={navLinkStyles}>Retour de document</NavLink>
         </div>
     )
 }
