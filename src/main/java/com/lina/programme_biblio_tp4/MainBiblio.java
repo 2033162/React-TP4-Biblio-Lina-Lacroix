@@ -29,8 +29,6 @@ public class MainBiblio implements CommandLineRunner {
     private ServiceEmpruntDocuments serviceEmpruntDocuments;
     @Autowired
     private ServiceReservation serviceReservation;
-    @Autowired
-    private ServiceAmende serviceAmende;
 
     public static void main(String[] args) {
         SpringApplication.run(MainBiblio.class, args);
@@ -191,42 +189,6 @@ public class MainBiblio implements CommandLineRunner {
 
         System.out.println("\nLISTE DES FRAIS");
         System.out.println(serviceClient.listeFrais(client.toClient()));
-
-
-        /*System.out.println("\nDelete cd");
-        System.out.println(cd);
-        serviceDocument.removeCD(cd);
-
-        System.out.println("\nDelete dvd");
-        System.out.println(dvd);
-        serviceDocument.removeDVD(dvd);
-
-        System.out.println("\nDelete empruntDocument");
-        System.out.println(empruntDocuments);
-        serviceEmpruntDocuments.removeEmpruntDocuments(empruntDocuments);
-
-        System.out.println("\nDelete reservation");
-        System.out.println(reservation);
-        serviceReservation.removeReservation(reservation);
-
-        System.out.println("\nDelete amende");
-        serviceAmende.deleteAllAmende();
-
-        System.out.println("\nDelete empruntDocument");
-        serviceEmpruntDocuments.deleteAllEmpruntDocuments();
-
-        System.out.println("\nDelete client");
-        System.out.println(client);
-        serviceClient.removeClient(client);
-        serviceClient.removeClient(client2);
-
-        System.out.println("\nDelete livre");
-        System.out.println(livre);
-        serviceDocument.removeLivre(livre);
-
-        System.out.println("\nDelete employe");
-        System.out.println(employe);
-        serviceEmploye.removeEmploye(employe);*/
     }
 
     private LocalDate getDateFromLocalDate(int year, int month, int day) {

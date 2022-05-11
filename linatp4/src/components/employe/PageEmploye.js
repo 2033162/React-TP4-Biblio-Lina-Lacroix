@@ -25,12 +25,6 @@ const PageEmploye = () => {
         return data
     }
 
-    const fetchEmploye = async (id) => {
-        const res = await fetch(`http://localhost:8080/employes/${id}`)
-        const data = await res.json()
-        return data
-    }
-
     const addEmploye = async (employe) => {
         const res = await fetch('http://localhost:8080/employes', {
             method: 'POST',

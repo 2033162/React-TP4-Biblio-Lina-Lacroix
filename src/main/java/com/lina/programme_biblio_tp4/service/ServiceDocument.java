@@ -1,14 +1,8 @@
 package com.lina.programme_biblio_tp4.service;
 
-import com.lina.programme_biblio_tp4.dtos.document.CdDto;
-import com.lina.programme_biblio_tp4.dtos.document.DocumentDto;
-import com.lina.programme_biblio_tp4.dtos.document.DvdDto;
-import com.lina.programme_biblio_tp4.dtos.document.LivreDto;
+import com.lina.programme_biblio_tp4.dtos.document.*;
 import com.lina.programme_biblio_tp4.modele.*;
-import com.lina.programme_biblio_tp4.repository.CdRepository;
-import com.lina.programme_biblio_tp4.repository.DocumentRepository;
-import com.lina.programme_biblio_tp4.repository.DvdRepository;
-import com.lina.programme_biblio_tp4.repository.LivreRepository;
+import com.lina.programme_biblio_tp4.repository.*;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

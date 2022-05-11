@@ -25,12 +25,6 @@ const PageClient = () => {
         return data
     }
 
-    const fetchClient = async (id) => {
-        const res = await fetch(`http://localhost:8080/clients/${id}`)
-        const data = await res.json()
-        return data
-    }
-
     const addClient = async (client) => {
         const res = await fetch('http://localhost:8080/clients',
             {

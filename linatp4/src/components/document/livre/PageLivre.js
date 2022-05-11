@@ -25,12 +25,6 @@ const PageLivre = () => {
         return data
     }
 
-    const fetchLivre = async (id) => {
-        const res = await fetch(`http://localhost:8080/livres/${id}`)
-        const data = await res.json()
-        return data
-    }
-
     const addLivre = async (livre) => {
         const res = await fetch('http://localhost:8080/livres',
             {

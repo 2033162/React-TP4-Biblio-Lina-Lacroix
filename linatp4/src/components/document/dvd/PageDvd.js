@@ -25,12 +25,6 @@ const PageDvd = () => {
         return data
     }
 
-    const fetchDvd = async (id) => {
-        const res = await fetch(`http://localhost:8080/dvds/${id}`)
-        const data = await res.json()
-        return data
-    }
-
     const addDvd = async (dvd) => {
         const res = await fetch('http://localhost:8080/dvds',
             {

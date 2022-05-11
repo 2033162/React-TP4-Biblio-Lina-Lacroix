@@ -1,12 +1,8 @@
 package com.lina.programme_biblio_tp4.service;
 
 import com.lina.programme_biblio_tp4.dtos.utilisateurs.ClientDto;
-import com.lina.programme_biblio_tp4.modele.Amende;
-import com.lina.programme_biblio_tp4.modele.Client;
-import com.lina.programme_biblio_tp4.modele.EmpruntDocuments;
-import com.lina.programme_biblio_tp4.repository.AmendeRepository;
-import com.lina.programme_biblio_tp4.repository.ClientRepository;
-import com.lina.programme_biblio_tp4.repository.EmpruntDocumentRepository;
+import com.lina.programme_biblio_tp4.modele.*;
+import com.lina.programme_biblio_tp4.repository.*;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;

@@ -1,6 +1,5 @@
 package com.lina.programme_biblio_tp4.dtos.document;
 
-import com.lina.programme_biblio_tp4.modele.Document;
 import com.lina.programme_biblio_tp4.modele.EtatDocument;
 import com.lina.programme_biblio_tp4.modele.GenreLivre;
 import com.lina.programme_biblio_tp4.modele.Livre;

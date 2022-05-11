@@ -25,12 +25,6 @@ const PageCd = () => {
         return data
     }
 
-    const fetchCd = async (id) => {
-        const res = await fetch(`http://localhost:8080/cds/${id}`)
-        const data = await res.json()
-        return data
-    }
-
     const addCd = async (cd) => {
         const res = await fetch('http://localhost:8080/cds',
             {
