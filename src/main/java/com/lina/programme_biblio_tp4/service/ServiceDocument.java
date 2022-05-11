@@ -109,7 +109,7 @@ public class ServiceDocument {
     }
 
     public CdDto saveCD(CdDto cd) {
-        return (CdDto) cdRepository.save((CD) cd.toDocument()).toDocumentForm();
+        return (CdDto) cdRepository.save(cd.toDocument()).toDocumentForm();
     }
 
     public void removeCD(CD cd) {

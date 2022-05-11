@@ -33,8 +33,8 @@ public class CdControllerReact {
         return serviceDocument.saveDocument(cdDto.toDocument());
     }
 
-    @PatchMapping("/{id}")
-    public DocumentDto updateCd(@PathVariable long id,
+    @PutMapping("/{id}")
+    public CdDto updateCd(@PathVariable long id,
                                 @RequestBody CdDto cdDtoDetail) {
         CdDto cd = serviceDocument.getCD(id);
 
@@ -49,7 +49,7 @@ public class CdControllerReact {
         cd.setCompositeur(cdDtoDetail.getCompositeur());
         cd.setInterprete(cdDtoDetail.getInterprete());
 
-        return serviceDocument.saveDocument(cd.toDocument());
+        return serviceDocument.saveCD(cd);
     }
 
     @DeleteMapping("/{id}")

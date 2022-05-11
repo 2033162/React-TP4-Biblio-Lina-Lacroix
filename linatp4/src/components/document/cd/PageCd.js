@@ -6,6 +6,11 @@ import UpdateCd from "./UpdateCd";
 
 const PageCd = () => {
 
+    const [showAddCd, setShowAddCd] = useState(false)
+    const [showUpdateCd, setShowUpdateCd] = useState(false)
+    const [cds, setCds] = useState([])
+    const [cd, setCd] = useState({})
+
     useEffect(() => {
         const getCds = async () => {
             const cdsFromServer = await fetchCds()
@@ -25,9 +30,6 @@ const PageCd = () => {
         const data = await res.json()
         return data
     }
-
-    const [showAddCd, setShowAddCd] = useState(false)
-    const [cds, setCds] = useState([])
 
     const addCd = async (cd) => {
         const res = await fetch('http://localhost:8080/cds',
@@ -49,34 +51,19 @@ const PageCd = () => {
         setCds(cds.filter((cd) => cd.id !== id))
     }
 
-    const [showUpdateCd, setShowUpdateCd] = useState(false)
-
-    const updateCd = async (id) => {
-        const cdToUpdate = await fetchCd(id)
-        const updateCd = await {...cdToUpdate,
-            etatDocument: !cdToUpdate.etatDocument,
-            genreDocument: !cdToUpdate.genreDocument,
-            titre: !cdToUpdate.titre,
-            auteur: !cdToUpdate.auteur,
-            editeur: !cdToUpdate.editeur,
-            anneePublication: !cdToUpdate.anneePublication,
-            nbrExemplaire: !cdToUpdate.nbrExemplaire,
-            genreMusique: !cdToUpdate.genreMusique,
-            compositeur: !cdToUpdate.compositeur,
-            interprete: !cdToUpdate.interprete
-        }
-
-        const res = await fetch(`http://localhost:8080/cds/${id}`, {
+    const updateCd = async (cd) => {
+        console.log(cd)
+        const res = await fetch(`http://localhost:8080/cds/${cd.id}`, {
             method: 'PUT',
             headers: {
                 'Content-type': 'application/json',
             },
-            body: JSON.stringify(updateCd)
+            body: JSON.stringify(cd)
         })
         const data = await res.json()
         setCds(
             cds.map(
-                (cd) => cd.id === id ?
+                (cdDocument) => cdDocument.id === cd.id ?
                     {...cd,
                         etatDocument: data.etatDocument,
                         genreDocument: data.genreDocument,
@@ -87,8 +74,7 @@ const PageCd = () => {
                         nbrExemplaire: data.nbrExemplaire,
                         genreMusique: data.genreMusique,
                         compositeur: data.compositeur,
-                        interprete: data.interprete
-                    } : cd
+                        interprete: data.interprete} : cdDocument
             )
         )
     }
@@ -103,11 +89,14 @@ const PageCd = () => {
             {cds.length > 0 ?
             <Cds cds={cds}
                 onDelete={deleteCd}
-                onUpdate={() =>
-                    setShowUpdateCd(!showUpdateCd)}
-                showUpdate={showUpdateCd}/>
+                onUpdate={(cd) => {
+                    setShowUpdateCd(!showUpdateCd)
+                    setCd(cd)
+                }}
+                showUpdate={showUpdateCd}
+            />
             : 'No Documents cds'}
-            {showUpdateCd && <UpdateCd onUpdate={updateCd} />}
+            {showUpdateCd && <UpdateCd cd={cd} onUpdate={updateCd} />}
         </div>
     );
 }

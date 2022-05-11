@@ -40,7 +40,7 @@ public class DvdDto extends DocumentDto {
     }
 
     @Override
-    public Document toDocument() {
+    public DVD toDocument() {
         EtatDocument bEtatDocument;
         try {
             bEtatDocument = etatDocument == null ? null : EtatDocument.valueOf(etatDocument);

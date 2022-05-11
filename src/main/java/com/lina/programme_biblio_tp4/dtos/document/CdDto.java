@@ -1,7 +1,6 @@
 package com.lina.programme_biblio_tp4.dtos.document;
 
 import com.lina.programme_biblio_tp4.modele.CD;
-import com.lina.programme_biblio_tp4.modele.Document;
 import com.lina.programme_biblio_tp4.modele.EtatDocument;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,23 +26,21 @@ public class CdDto extends DocumentDto {
             String compositeur,
             String interprete
     ) {
-        super(
-                id,
-                etatDocument,
-                genreDocument,
-                titre,
-                auteur,
-                editeur,
-                anneePublication,
-                nbrExemplaire
-        );
+        this.id = id;
+        this.etatDocument = etatDocument;
+        this.genreDocument = genreDocument;
+        this.titre = titre;
+        this.auteur = auteur;
+        this.editeur = editeur;
+        this.anneePublication = anneePublication;
+        this.nbrExemplaire = nbrExemplaire;
         this.genreMusique = genreMusique;
         this.compositeur = compositeur;
         this.interprete = interprete;
     }
 
     @Override
-    public Document toDocument() {
+    public CD toDocument() {
         EtatDocument bEtatDocument;
         try {
             bEtatDocument = etatDocument == null ? null : EtatDocument.valueOf(etatDocument);

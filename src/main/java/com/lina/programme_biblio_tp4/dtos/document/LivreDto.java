@@ -40,7 +40,7 @@ public class LivreDto extends DocumentDto {
     }
 
     @Override
-    public Document toDocument() {
+    public Livre toDocument() {
         EtatDocument bEtatDocument;
         GenreLivre bGenreLivre;
         try {
