@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.ZoneId;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @AllArgsConstructor
@@ -52,5 +55,18 @@ public class EmpruntDocumentControllerReact {
         empruntFormDocuments.setId(empruntDocuments.getId());
 
         return empruntDocuments;
+    }
+
+    @DeleteMapping("/{id}")
+    public void retourEmprunt(@PathVariable long id) {
+        Calendar today = Calendar.getInstance();
+        today.set(Calendar.HOUR_OF_DAY, 0);
+        today.set(Calendar.MINUTE, 0);
+        today.set(Calendar.SECOND, 0);
+
+        EmpruntDtoDocument empruntDtoDocument = serviceEmpruntDocuments.getEmpruntDocuments(id);
+
+        serviceEmpruntDocuments.retourDocument(empruntDtoDocument.toEmpruntDocuments().getClient(),
+                empruntDtoDocument.toEmpruntDocuments().getDocument(), today.getTime());
     }
 }

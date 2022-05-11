@@ -34,6 +34,13 @@ const PageEmprunt = () => {
         setEmprunts([...emprunts, data])
     }
 
+    const onRetour = async (emprunt) => {
+        await fetch(`http://localhost:8080/empruntDocuments/${emprunt.id}`, {
+            method: 'DELETE'
+        })
+        setEmprunts(emprunts.filter((emprunt) => emprunt.id !== id))
+    }
+
     return (
         <div className='container'>
             <HeaderAdd title='Emprunt'
@@ -42,7 +49,8 @@ const PageEmprunt = () => {
                        showAdd={showAddEmprunt}/>
             {showAddEmprunt && <AddEmprunt onAdd={addEmprunt} />}
             {emprunts.length > 0 ?
-                <Emprunts emprunts={emprunts}/>
+                <Emprunts emprunts={emprunts}
+                          onRetour={onRetour}/>
             : 'No Emprunts'}
         </div>
     )
