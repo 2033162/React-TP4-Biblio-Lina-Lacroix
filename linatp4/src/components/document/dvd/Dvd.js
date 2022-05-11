@@ -3,7 +3,7 @@ import { FaTimes } from 'react-icons/fa'
 const Dvd = ({dvd, onDelete, onUpdate}) => {
     return (
         <div className="dvd"
-             onDoubleClick={() => onUpdate(dvd.id)}>
+             onDoubleClick={() => onUpdate(dvd)}>
             <h3>{dvd.etatDocument} <FaTimes
                 style={{color: 'red', cursor: 'pointer'}}
                 onClick={() => onDelete(dvd.id)}/>

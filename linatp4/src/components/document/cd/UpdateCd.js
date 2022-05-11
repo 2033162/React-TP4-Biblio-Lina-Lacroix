@@ -157,6 +157,7 @@ const UpdateCd = ({cd, onUpdate}) => {
                 <label>Genre du document</label>
                 <input type='text'
                        value={genreDocument}
+                       disabled="disabled"
                        onChange={(e) => setGenreDocument(e.target.value)}
                 />
             </div>

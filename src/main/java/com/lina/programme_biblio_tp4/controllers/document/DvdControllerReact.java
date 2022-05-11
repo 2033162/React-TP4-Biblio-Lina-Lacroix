@@ -33,8 +33,8 @@ public class DvdControllerReact {
         return serviceDocument.saveDocument(dvdDto.toDocument());
     }
 
-    @PatchMapping("/{id}")
-    public DocumentDto updateDvd(@PathVariable long id,
+    @PutMapping("/{id}")
+    public DvdDto updateDvd(@PathVariable long id,
                                  @RequestBody DvdDto dvdDtoDetail) {
         DvdDto dvd = serviceDocument.getDVD(id);
 
@@ -48,7 +48,7 @@ public class DvdControllerReact {
         dvd.setDuree(dvdDtoDetail.getDuree());
         dvd.setGenreFilm(dvdDtoDetail.getGenreFilm());
 
-        return serviceDocument.saveDocument(dvd.toDocument());
+        return serviceDocument.saveDVD(dvd);
     }
 
     @DeleteMapping("/{id}")

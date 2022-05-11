@@ -1,8 +1,9 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
-const UpdateDvd = ({onUpdate}) => {
+const UpdateDvd = ({dvd, onUpdate}) => {
+    const [id, setId] = useState(0)
     const [etatDocument, setEtatDocument] = useState('')
-    const [genreDocument, setGenreDocument] = useState('dvd')
+    const [genreDocument, setGenreDocument] = useState('')
     const [titre, setTitre] = useState('')
     const [auteur, setAuteur] = useState('')
     const [editeur, setEditeur] = useState('')
@@ -10,6 +11,19 @@ const UpdateDvd = ({onUpdate}) => {
     const [nbrExemplaire, setNbrExemplaire] = useState(0)
     const [duree, setDuree] = useState(0)
     const [genreFilm, setGenreFilm] = useState('')
+
+    useEffect(() => {
+        setId(dvd.id)
+        setEtatDocument(dvd.etatDocument)
+        setGenreDocument(dvd.genreDocument)
+        setTitre(dvd.titre)
+        setAuteur(dvd.auteur)
+        setEditeur(dvd.editeur)
+        setAnneePublication(dvd.anneePublication)
+        setNbrExemplaire(dvd.nbrExemplaire)
+        setDuree(dvd.duree)
+        setGenreFilm(dvd.genreFilm)
+    }, [])
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -93,6 +107,7 @@ const UpdateDvd = ({onUpdate}) => {
         }
 
         onUpdate({
+            id,
             etatDocument,
             genreDocument,
             titre,
@@ -104,14 +119,14 @@ const UpdateDvd = ({onUpdate}) => {
             genreFilm
         })
         setEtatDocument('')
-        setGenreDocument('dvd')
+        setGenreDocument('')
         setTitre('')
         setAuteur('')
         setEditeur('')
         setAnneePublication(0)
         setNbrExemplaire(0)
         setDuree(0)
-        setGenreFilm(0)
+        setGenreFilm('')
     }
 
     return (
@@ -128,8 +143,11 @@ const UpdateDvd = ({onUpdate}) => {
             </div>
             <div className='form-control'>
                 <label>Genre du document</label>
-                <input type='text' defaultValue={genreDocument}
-                       disabled="disabled"/>
+                <input type='text'
+                       value={genreDocument}
+                       disabled="disabled"
+                       onChange={(e) => setGenreDocument(e.target.value)}
+                />
             </div>
             <div className='form-control'>
                 <label>Titre</label>

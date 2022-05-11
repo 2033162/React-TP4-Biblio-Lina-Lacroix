@@ -25,16 +25,14 @@ public class DvdDto extends DocumentDto {
             double duree,
             String genreFilm
     ) {
-        super(
-                id,
-                etatDocument,
-                genreDocument,
-                titre,
-                auteur,
-                editeur,
-                anneePublication,
-                nbrExemplaire
-        );
+        this.id = id;
+        this.etatDocument = etatDocument;
+        this.genreDocument = genreDocument;
+        this.titre = titre;
+        this.auteur = auteur;
+        this.editeur = editeur;
+        this.anneePublication = anneePublication;
+        this.nbrExemplaire = nbrExemplaire;
         this.duree = duree;
         this.genreFilm = genreFilm;
     }

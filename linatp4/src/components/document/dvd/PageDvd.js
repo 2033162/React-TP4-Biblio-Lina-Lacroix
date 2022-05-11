@@ -6,6 +6,11 @@ import UpdateDvd from "./UpdateDvd";
 
 const PageDvd = () => {
 
+    const [showAddDvd, setShowAddDvd] = useState(false)
+    const [showUpdateDvd, setShowUpdateDvd] = useState(false)
+    const [dvds, setDvds] = useState([])
+    const [dvd, setDvd] = useState({})
+
     useEffect(() => {
         const getDvds = async () => {
             const dvdsFromServer = await fetchDvds()
@@ -25,9 +30,6 @@ const PageDvd = () => {
         const data = await res.json()
         return data
     }
-
-    const [showAddDvd, setShowAddDvd] = useState(false)
-    const [dvds, setDvds] = useState([])
 
     const addDvd = async (dvd) => {
         const res = await fetch('http://localhost:8080/dvds',
@@ -49,33 +51,19 @@ const PageDvd = () => {
         setDvds(dvds.filter((dvd) => dvd.id !== id))
     }
 
-    const [showUpdateDvd, setShowUpdateDvd] = useState(false)
-
-    const updateDvd = async (id) => {
-        const dvdToUpdate = await fetchDvd(id)
-        const updateDvd = await {...dvdToUpdate,
-            etatDocument: !dvdToUpdate.etatDocument,
-            genreDocument: !dvdToUpdate.genreDocument,
-            titre: !dvdToUpdate.titre,
-            auteur: !dvdToUpdate.auteur,
-            editeur: !dvdToUpdate.editeur,
-            anneePublication: !dvdToUpdate.anneePublication,
-            nbrExemplaire: !dvdToUpdate.nbrExemplaire,
-            duree: !dvdToUpdate.duree,
-            genreFilm: !dvdToUpdate.genreFilm
-        }
-
-        const res = await fetch(`http://localhost:8080/dvds/${id}`, {
+    const updateDvd = async (dvd) => {
+        console.log(dvd)
+        const res = await fetch(`http://localhost:8080/dvds/${dvd.id}`, {
             method: 'PUT',
             headers: {
                 'Content-type': 'application/json',
             },
-            body: JSON.stringify(updateDvd)
+            body: JSON.stringify(dvd)
         })
         const data = await res.json()
         setDvds(
             dvds.map(
-                (dvd) => dvd.id === id ?
+                (dvdDocument) => dvdDocument.id === dvd.id ?
                     {...dvd,
                         etatDocument: data.etatDocument,
                         genreDocument: data.genreDocument,
@@ -85,8 +73,7 @@ const PageDvd = () => {
                         anneePublication: data.anneePublication,
                         nbrExemplaire: data.nbrExemplaire,
                         duree: data.duree,
-                        genreFilm: data.genreFilm
-                    } : dvd
+                        genreFilm: data.genreFilm} : dvdDocument
             )
         )
     }
@@ -101,12 +88,14 @@ const PageDvd = () => {
             {dvds.length > 0 ?
             <Dvds dvds={dvds}
                 onDelete={deleteDvd}
-                onUpdate={() =>
-                    setShowUpdateDvd(!showUpdateDvd)}
+                onUpdate={(dvd) => {
+                    setShowUpdateDvd(!showUpdateDvd)
+                    setDvd(dvd)
+                }}
                 showUpdate={showUpdateDvd}
             />
             : 'No Documents dvds'}
-            {showUpdateDvd && <UpdateDvd onUpdate={updateDvd} />}
+            {showUpdateDvd && <UpdateDvd dvd={dvd} onUpdate={updateDvd} />}
         </div>
     );
 }
