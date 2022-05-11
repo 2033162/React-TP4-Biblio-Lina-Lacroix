@@ -33,8 +33,8 @@ public class LivreControllerReact {
         return serviceDocument.saveDocument(livreDto.toDocument());
     }
 
-    @PatchMapping("/{id}")
-    public DocumentDto updateLivre(@PathVariable long id,
+    @PutMapping("/{id}")
+    public LivreDto updateLivre(@PathVariable long id,
                                    @RequestBody LivreDto livreDtoDetail) {
         LivreDto livre = serviceDocument.getLivre(id);
 
@@ -48,7 +48,7 @@ public class LivreControllerReact {
         livre.setNbrPages(livreDtoDetail.getNbrPages());
         livre.setGenreLivre(livreDtoDetail.getGenreLivre());
 
-        return serviceDocument.saveDocument(livre.toDocument());
+        return serviceDocument.saveLivre(livre);
     }
 
     @DeleteMapping("/{id}")

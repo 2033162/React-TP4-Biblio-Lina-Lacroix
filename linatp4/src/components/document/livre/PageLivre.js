@@ -6,6 +6,11 @@ import UpdateLivre from "./UpdateLivre";
 
 const PageLivre = () => {
 
+    const [showAddLivre, setShowAddLivre] = useState(false)
+    const [showUpdateLivre, setShowUpdateLivre] = useState(false)
+    const [livres, setLivres] = useState([])
+    const [livre, setLivre] = useState({})
+
     useEffect(() => {
         const getLivres = async () => {
             const livresFromServer = await fetchLivres()
@@ -25,9 +30,6 @@ const PageLivre = () => {
         const data = await res.json()
         return data
     }
-
-    const [showAddLivre, setShowAddLivre] = useState(false)
-    const [livres, setLivres] = useState([])
 
     const addLivre = async (livre) => {
         const res = await fetch('http://localhost:8080/livres',
@@ -49,33 +51,19 @@ const PageLivre = () => {
         setLivres(livres.filter((livre) => livre.id !== id))
     }
 
-    const [showUpdateLivre, setShowUpdateLivre] = useState(false)
-
-    const updateLivre = async (id) => {
-        const livreToUpdate = await fetchLivre(id)
-        const updateLivre = await {...livreToUpdate,
-            etatDocument: !livreToUpdate.etatDocument,
-            genreDocument: !livreToUpdate.genreDocument,
-            titre: !livreToUpdate.titre,
-            auteur: !livreToUpdate.auteur,
-            editeur: !livreToUpdate.editeur,
-            anneePublication: !livreToUpdate.anneePublication,
-            nbrExemplaire: !livreToUpdate.nbrExemplaire,
-            nbrPages: !livreToUpdate.nbrPages,
-            genreLivre: !livreToUpdate.genreLivre
-        }
-
-        const res = await fetch(`http://localhost:8080/livres/${id}`, {
+    const updateLivre = async (livre) => {
+        console.log(livre)
+        const res = await fetch(`http://localhost:8080/livres/${livre.id}`, {
             method: 'PUT',
             headers: {
                 'Content-type': 'application/json',
             },
-            body: JSON.stringify(updateLivre)
+            body: JSON.stringify(livre)
         })
         const data = await res.json()
         setLivres(
             livres.map(
-                (livre) => livre.id === id ?
+                (livreDocument) => livreDocument.id === livre.id ?
                     {...livre,
                         etatDocument: data.etatDocument,
                         genreDocument: data.genreDocument,
@@ -85,8 +73,7 @@ const PageLivre = () => {
                         anneePublication: data.anneePublication,
                         nbrExemplaire: data.nbrExemplaire,
                         nbrPages: data.nbrPages,
-                        genreLivre: data.genreLivre
-                    } : livre
+                        genreLivre: data.genreLivre} : livreDocument
             )
         )
     }
@@ -101,12 +88,14 @@ const PageLivre = () => {
             {livres.length > 0 ?
             <Livres livres={livres}
                 onDelete={deleteLivre}
-                onUpdate={() =>
-                    setShowUpdateLivre(!showUpdateLivre)}
+                onUpdate={(livre) => {
+                    setShowUpdateLivre(!showUpdateLivre)
+                    setLivre(livre)
+                }}
                 showUpdate={showUpdateLivre}
             />
             : 'No Documents livres'}
-            {showUpdateLivre && <UpdateLivre onUpdate={updateLivre} />}
+            {showUpdateLivre && <UpdateLivre livre={livre} onUpdate={updateLivre} />}
         </div>
     );
 }
